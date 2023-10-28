@@ -1,5 +1,3 @@
-import React from "react";
-
 import BreadcrumbNavigation from "../subComponents/BreadcrumbNavigation";
 import AddQuestionCard from "../subComponents/AddQuestionCard";
 
