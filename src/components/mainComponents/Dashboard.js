@@ -7,6 +7,7 @@ const Dashboard = () => {
         <WelcomeBanner />
 
         <BreadcrumbNavigation />
+
       </>
   );
 }

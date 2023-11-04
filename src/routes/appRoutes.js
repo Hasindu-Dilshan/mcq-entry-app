@@ -4,7 +4,6 @@ import AddQuestions from "../components/mainComponents/AddQuestions";
 import Login from "../components/auth/Login";
 import ForgetPassword from "../components/auth/ForgetPassword";
 import Register from "../components/auth/Register";
-import React from "react";
 
 const appRoutes = [
   {
