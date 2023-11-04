@@ -2,7 +2,7 @@ import React from "react";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import AnswerComponent from "./AnswerComponent";
 
-const AnswersCard = () => {
+const AnswersCard = ({ numAnswers }) => {
   return (
     <div class="col-xl-12 col-sm-12 col-12 mt-5">
       <div class="card">
@@ -21,8 +21,11 @@ const AnswersCard = () => {
               </tr>
             </thead>
             <tbody>
-              <AnswerComponent />
-              <AnswerComponent />
+              {
+                  [...Array(numAnswers)].map((element, index) => (
+                    <AnswerComponent id={index + 1}/>
+                  ))
+              }
             </tbody>
           </table>
         </div>

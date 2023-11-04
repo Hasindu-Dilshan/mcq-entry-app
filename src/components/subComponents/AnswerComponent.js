@@ -1,11 +1,11 @@
 import React from "react";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 
-const AnswerComponent = () => {
+const AnswerComponent = ({ id }) => {
   return (
     <tr>
       <td>
-        <label>1 </label>
+        <label>{id} </label>
       </td>
       <td>
         <textarea rows="3" cols="50" class="form-control"></textarea>
@@ -29,9 +29,11 @@ const AnswerComponent = () => {
         <div class="actionset">
           <label>
             <a
+              href="#"
               class="action_label4 trash"
               data-toggle="modal"
               data-target="#delete"
+              onClick={e => e.preventDefault()}
             >
               <FeatherIcon icon="trash-2" />
             </a>

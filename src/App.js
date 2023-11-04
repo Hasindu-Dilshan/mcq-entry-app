@@ -9,6 +9,7 @@ import { routes } from "./routes";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomeLayout from "./layout/HomeLayout";
+import Table from "./components/test/Table";
 
 const mapStateToProps = (state) => {
   return {
@@ -32,6 +33,7 @@ function App() {
         <Route path="/" element={<HomeLayout />}>
           {routes}
         </Route>
+        {/* <Route path="/" element={<Table />} /> */}
       </Routes>
     </BrowserRouter>
   );
