@@ -6,11 +6,11 @@ import { useEffect, useState } from "react";
 // const AddQuestionCard = ( ) => {
 const AddQuestionCard = () => {
 
-  const [idCount, setIdCount] = useState(0);
+  const [keyCount, setkeyCount] = useState(0);
 
-  const [answerRows, setAnswerRows] = useState([{answer: undefined, key: idCount}]);
+  const [answerRows, setAnswerRows] = useState([{answer: undefined, key: keyCount}]);
 
-  // Do the initial idCount increment
+  // Do the initial keyCount increment
   useEffect(() => {
     incrementAndGetId()
   }, [])
@@ -21,8 +21,8 @@ const AddQuestionCard = () => {
   }
 
   function incrementAndGetId() {
-    setIdCount((prevIdCount) => prevIdCount + 1);
-    return idCount;
+    setkeyCount((prevkeyCount) => prevkeyCount + 1);
+    return keyCount;
   }
 
   function handleDeleteAnswerRow(key) {

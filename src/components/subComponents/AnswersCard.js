@@ -26,15 +26,9 @@ const AnswersCard = ({ answerRows, handleDeleteAnswerRow, handleAnswerFieldChang
             </thead>
             <tbody>
               {
-                  // [...Array(numAnswers)].map((element, index) => (
-                  //   <AnswerComponent id={index + 1}/>
-                  // ))
-
                   answerRows.map((answerRow, index) => {
                     return <AnswerComponent key={ answerRow.key } id={index} answerRow={answerRow} handleDeleteAnswerRow={handleDeleteAnswerRow} handleAnswerFieldChange={handleAnswerFieldChange} />
                   })
-
-                  // <AnswerComponent id={1} answerRow={undefined} />
               }
             </tbody>
           </table>
