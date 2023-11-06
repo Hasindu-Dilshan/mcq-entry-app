@@ -1,14 +1,23 @@
 import React from "react";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 
-const AnswerComponent = ({ id }) => {
+const AnswerComponent = ({ answerRow, handleDeleteAnswerRow, handleAnswerFieldChange }) => {
+
+  function handleDeleteAnswer(event) {
+    handleDeleteAnswerRow(answerRow.id);
+  }
+
+  function handleKeyUp(text) {
+    handleAnswerFieldChange(answerRow.id, text);
+  }
+
   return (
     <tr>
       <td>
-        <label>{id} </label>
+        <label>{answerRow.id + 1} </label>
       </td>
       <td>
-        <textarea rows="3" cols="50" class="form-control"></textarea>
+        <textarea rows="3" cols="50" class="form-control" defaultValue={typeof answerRow === "String" ? answerRow : ''} onKeyUp={(event) => handleKeyUp(event.target.value)}></textarea>
       </td>
       <td>
         <label class="customcheck ml-4 mb-3">
@@ -33,7 +42,7 @@ const AnswerComponent = ({ id }) => {
               class="action_label4 trash"
               data-toggle="modal"
               data-target="#delete"
-              onClick={e => e.preventDefault()}
+              onClick={handleDeleteAnswer}
             >
               <FeatherIcon icon="trash-2" />
             </a>

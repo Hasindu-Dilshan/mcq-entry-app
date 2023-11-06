@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import AnswerComponent from "./AnswerComponent";
 
-const AnswersCard = ({ numAnswers }) => {
+const AnswersCard = ({ answerRows, handleDeleteAnswerRow, handleAnswerFieldChange }) => {
+
   return (
     <div class="col-xl-12 col-sm-12 col-12 mt-5">
       <div class="card">
@@ -22,9 +23,15 @@ const AnswersCard = ({ numAnswers }) => {
             </thead>
             <tbody>
               {
-                  [...Array(numAnswers)].map((element, index) => (
-                    <AnswerComponent id={index + 1}/>
-                  ))
+                  // [...Array(numAnswers)].map((element, index) => (
+                  //   <AnswerComponent id={index + 1}/>
+                  // ))
+
+                  answerRows.map((answerRow) => {
+                    return <AnswerComponent key={answerRow.id} id={answerRow.id} answerRow={answerRow} handleDeleteAnswerRow={handleDeleteAnswerRow} handleAnswerFieldChange={handleAnswerFieldChange} />
+                  })
+
+                  // <AnswerComponent id={1} answerRow={undefined} />
               }
             </tbody>
           </table>

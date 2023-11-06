@@ -1,12 +1,44 @@
 import AnswersCard from "./AnswersCard";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import ExplanationCard from "./ExplanationCard";
+import { useEffect, useState } from "react";
 
 // const AddQuestionCard = ( ) => {
-const AddQuestionCard = ({ numAnswers, setNumAnswers }) => {
+const AddQuestionCard = () => {
+
+  const [idCount, setIdCount] = useState(0);
+
+  const [answerRows, setAnswerRows] = useState([{answer: undefined, id: idCount}]);
+
+  // Do the initial idCount increment
+  useEffect(() => {
+    incrementAndGetId()
+  }, [])
+
   function handleAddAnswer(event) {
     event.preventDefault();
-    setNumAnswers(numAnswers + 1);
+    setAnswerRows([...answerRows, {answer: undefined, id: incrementAndGetId()}]);
+    console.log(idCount);
+  }
+
+  function incrementAndGetId() {
+    setIdCount((prevIdCount) => prevIdCount + 1);
+    return idCount;
+  }
+
+  function handleDeleteAnswerRow(id) {
+    setAnswerRows(answerRows.filter((answerRow) => answerRow.id !== id));
+  }
+
+  function handleAnswerFieldChange(answerId, answerText) {
+    let newAnswerRows = [...answerRows];
+
+    for(let i = 0; i < answerRows.length; i++) {
+      if(newAnswerRows[i].id === answerId) {
+        newAnswerRows[i].answer = answerText;
+      }
+    }
+    setAnswerRows(newAnswerRows);
   }
 
   return (
@@ -58,7 +90,7 @@ const AddQuestionCard = ({ numAnswers, setNumAnswers }) => {
             </div>
           </div>
 
-          <AnswersCard numAnswers={numAnswers} />
+          <AnswersCard answerRows={answerRows} handleDeleteAnswerRow={handleDeleteAnswerRow} handleAnswerFieldChange={handleAnswerFieldChange} />
 
           <div class="col-xl-12 col-sm-12 col-12">
             <div class="form-group">
