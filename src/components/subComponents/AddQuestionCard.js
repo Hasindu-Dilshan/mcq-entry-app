@@ -8,7 +8,7 @@ const AddQuestionCard = () => {
 
   const [idCount, setIdCount] = useState(0);
 
-  const [answerRows, setAnswerRows] = useState([{answer: undefined, id: idCount}]);
+  const [answerRows, setAnswerRows] = useState([{answer: undefined, key: idCount}]);
 
   // Do the initial idCount increment
   useEffect(() => {
@@ -17,8 +17,7 @@ const AddQuestionCard = () => {
 
   function handleAddAnswer(event) {
     event.preventDefault();
-    setAnswerRows([...answerRows, {answer: undefined, id: incrementAndGetId()}]);
-    console.log(idCount);
+    setAnswerRows([...answerRows, {answer: undefined, key: incrementAndGetId()}]);
   }
 
   function incrementAndGetId() {
@@ -26,15 +25,15 @@ const AddQuestionCard = () => {
     return idCount;
   }
 
-  function handleDeleteAnswerRow(id) {
-    setAnswerRows(answerRows.filter((answerRow) => answerRow.id !== id));
+  function handleDeleteAnswerRow(key) {
+    setAnswerRows(answerRows.filter((answerRow) => answerRow.key !== key));
   }
 
-  function handleAnswerFieldChange(answerId, answerText) {
+  function handleAnswerFieldChange(answerKey, answerText) {
     let newAnswerRows = [...answerRows];
 
     for(let i = 0; i < answerRows.length; i++) {
-      if(newAnswerRows[i].id === answerId) {
+      if(newAnswerRows[i].key === answerKey) {
         newAnswerRows[i].answer = answerText;
       }
     }

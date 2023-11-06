@@ -1,20 +1,20 @@
 import React from "react";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 
-const AnswerComponent = ({ answerRow, handleDeleteAnswerRow, handleAnswerFieldChange }) => {
+const AnswerComponent = ({ id, answerRow, handleDeleteAnswerRow, handleAnswerFieldChange }) => {
 
   function handleDeleteAnswer(event) {
-    handleDeleteAnswerRow(answerRow.id);
+    handleDeleteAnswerRow(answerRow.key);
   }
 
   function handleKeyUp(text) {
-    handleAnswerFieldChange(answerRow.id, text);
+    handleAnswerFieldChange(answerRow.key, text);
   }
 
   return (
     <tr>
       <td>
-        <label>{answerRow.id + 1} </label>
+        <label>{id + 1} </label>
       </td>
       <td>
         <textarea rows="3" cols="50" class="form-control" defaultValue={typeof answerRow === "String" ? answerRow : ''} onKeyUp={(event) => handleKeyUp(event.target.value)}></textarea>
