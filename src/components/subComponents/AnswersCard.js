@@ -1,10 +1,4 @@
-import React, { useEffect } from "react";
-import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import AnswerComponent from "./AnswerComponent";
-
-const generateKey = (pre) => {
-  return `${ pre }_${ new Date().getTime() }`;
-}
 
 const AnswersCard = ({ answerRows, handleDeleteAnswerRow, handleAnswerFieldChange }) => {
   return (
