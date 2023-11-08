@@ -1,3 +1,4 @@
+import { connect } from "react-redux";
 import Header from "../components/subComponents/Header";
 import SideNavigation from "../components/subComponents/SideNavigation";
 import { Outlet } from "react-router-dom";

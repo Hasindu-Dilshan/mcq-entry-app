@@ -1,21 +1,15 @@
 export { fakeBackend };
 
-function fakeBackend() {
-    // let users = [{ id: 1, email: 'test', password: 'test', firstName: 'Test', lastName: 'User' }];
+const { users } = require('./data');
 
-    let users = {
-        users: [
-            {_id: 1, name: 'David Jones', email: 'davidjones13@gmail.com', password: 'david123', role: 'admin'},
-            {_id: 2, name: 'Jach Priboi', email: 'pribio10@gmail.com', password: '123', role: 'user'},
-            {_id: 3, name: 'Rebecca Anya', email: 'anya10@gmail.com', password: '123', role: 'user'},
-        ]
-    };
+async function fakeBackend() {
+    console.log('====Starting fake-backend====');
 
     let realFetch = window.fetch;
     window.fetch = function (url, opts) {
         return new Promise((resolve, reject) => {
-            // wrap in timeout to simulate server api call
-            setTimeout(handleRoute, 500);
+            const serverResponseTime = 1000;
+            setTimeout(handleRoute, serverResponseTime);
 
             function handleRoute() {
                 switch (true) {

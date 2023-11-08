@@ -9,7 +9,6 @@ import { routes } from "./routes";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomeLayout from "./layout/HomeLayout";
-import Table from "./components/test/Table";
 
 const mapStateToProps = (state) => {
   return {

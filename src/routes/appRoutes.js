@@ -1,9 +1,7 @@
 import Dashboard from "../components/mainComponents/Dashboard";
 import ChooseSyllabus from "../components/mainComponents/ChooseSyllabus";
 import AddQuestions from "../components/mainComponents/AddQuestions";
-import Login from "../components/auth/Login";
-import ForgetPassword from "../components/auth/ForgetPassword";
-import Register from "../components/auth/Register";
+import TestAPIs from "../components/test/TestAPIs";
 
 const appRoutes = [
   {
@@ -37,9 +35,15 @@ const appRoutes = [
       alt: "sidebar_img"
     },
   },
+
+
+
+  {
+    path: "/test",
+    element: <TestAPIs />,
+    // state: "TestAPIs",
+  },
+  
 ];
 
 export default appRoutes;
-
-
-

@@ -51,6 +51,7 @@ const SideNavigation = () => {
             <ul>
               {appRoutes.map((route, index) => {
                 return (
+                  route.sidebarProps &&
                   <li key={index}>
                     <Link to={route.path}>
                       <img
