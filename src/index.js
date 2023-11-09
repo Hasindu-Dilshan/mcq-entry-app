@@ -10,13 +10,16 @@ import reportWebVitals from "./reportWebVitals";
 
 // setup fake backend
 import { fakeBackend } from './helpers';
+import { BrowserRouter } from "react-router-dom";
 fakeBackend();
 
 const root = createRoot(document.getElementById("root"));
 
 root.render(
   <Provider store={store}>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </Provider>
 );
 

@@ -7,8 +7,11 @@ import { routes } from "./routes";
 
 // import logo from './logo.svg';
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import HomeLayout from "./layout/HomeLayout";
+import Login from "./components/auth/Login";
+import { history } from "./helpers";
+import TestAPIs from "./components/test/TestAPIs";
 
 const mapStateToProps = (state) => {
   return {
@@ -26,15 +29,18 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 function App() {
+  history.navigate = useNavigate();
+  history.location = useLocation();
+  
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<HomeLayout />}>
-          {routes}
-        </Route>
-        {/* <Route path="/" element={<Table />} /> */}
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/test" element={<TestAPIs />} />
+      {/* <Route path="/" element={<HomeLayout />}>
+        {routes}
+      </Route> */}
+      
+    </Routes>
   );
 }
 

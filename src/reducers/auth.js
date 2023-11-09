@@ -7,28 +7,37 @@ import {
     UPDATE_FIELD_AUTH
 } from '../constants/actionTypes';
 
+// export default (state = {}, action) => {
+//     switch (action.type) {
+//         case LOGIN:
+//         case REGISTER:
+//             return {
+//                 ...state,
+//                 inProgress: false,
+//                 errors: action.error ? action.payload.erros : null
+//             };
+//         case LOGIN_PAGE_UNLOADED:
+//         case REGISTER_PAGE_UNLOADED:
+//             return {};
+//         case ASYNC_START:
+//             if (action.subtype === LOGIN || action.subtype === REGISTER) {
+//                 return { ...state, inProgress: true };
+//             }
+//             break;
+//         case UPDATE_FIELD_AUTH:
+//             return { ...state, [action.key]: action.value };
+//         default:
+//             return state;
+//     }
+
+//     return state;
+// }
+
 export default (state = {}, action) => {
-    switch (action.type) {
-        case LOGIN:
-        case REGISTER:
-            return {
-                ...state,
-                inProgress: false,
-                errors: action.error ? action.payload.erros : null
-            };
-        case LOGIN_PAGE_UNLOADED:
-        case REGISTER_PAGE_UNLOADED:
-            return {};
-        case ASYNC_START:
-            if (action.subtype === LOGIN || action.subtype === REGISTER) {
-                return { ...state, inProgress: true };
-            }
-            break;
-        case UPDATE_FIELD_AUTH:
-            return { ...state, [action.key]: action.value };
+    switch(action.type) {
+        case "LOGIN":
+            return {...state, email: action.payload.user.email};
         default:
             return state;
     }
-
-    return state;
 }
