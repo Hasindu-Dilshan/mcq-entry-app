@@ -25,7 +25,7 @@ function Login(props) {
     if (props.auth?.email) {
       history.navigate("/test");
     }
-  });
+  }, []);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -41,7 +41,7 @@ function Login(props) {
   return (
     <>
       { !props.auth.email &&
-      
+
         <div class="main-wrapper login-body">
         <div class="login-wrapper">
           <div class="container">

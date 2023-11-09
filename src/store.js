@@ -4,6 +4,16 @@ import { createLogger } from 'redux-logger';
 import { promiseMiddleware, localStorageMiddleware } from './middleware';
 import reducer from './reducer'
 
+import storageSession from 'redux-persist/lib/storage/session';
+import { persistReducer, persistStore } from 'redux-persist';
+
+const persistConfig = {
+    key: 'root',
+    storage: storageSession,
+}
+  
+const persistedReducer = persistReducer(persistConfig, reducer);
+
 const getMiddleware = () => {
     if (process.env.NODE_ENV === 'production') {
         return [promiseMiddleware, localStorageMiddleware];
@@ -25,14 +35,13 @@ const getOtherEnhancers = () => {
 const composedEnhancers = compose(applyMiddleware(...getMiddleware()), ...getOtherEnhancers());
 
 export const store = createStore(
-  reducer,
-  composedEnhancers
+    persistedReducer,
+    composedEnhancers
 )
 
-
-
-
+export const persistor = persistStore(store);
 
 // export const store = createStore(
-//     reducer, compose(applyMiddleware(getMiddleware()), ...getEnhancers())
-// );
+//     reducer,
+//     composedEnhancers
+//   )

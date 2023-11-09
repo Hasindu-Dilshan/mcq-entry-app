@@ -4,22 +4,25 @@ import { Provider } from "react-redux";
 
 import "./index.css";
 import App from "./App";
-import { store } from "./store";
+import { persistor, store } from "./store";
 
 import reportWebVitals from "./reportWebVitals";
 
 // setup fake backend
 import { fakeBackend } from './helpers';
 import { BrowserRouter } from "react-router-dom";
+import { PersistGate } from "redux-persist/integration/react";
 fakeBackend();
 
 const root = createRoot(document.getElementById("root"));
 
 root.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <PersistGate loading={null} persistor={persistor}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </PersistGate>
   </Provider>
 );
 
