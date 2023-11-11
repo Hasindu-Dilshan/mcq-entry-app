@@ -1,6 +1,6 @@
 export { fakeBackend };
 
-const { users, syllabi } = require('./data');
+const { users, syllabi, syllabus_topics } = require('./data');
 
 
 async function fakeBackend() {
@@ -20,6 +20,8 @@ async function fakeBackend() {
                         return getUsers();
                     case url.endsWith('/syllabi') && opts.method === 'GET':
                         return getSyllabi();
+                    case url.endsWith('/topics') && opts.method === 'POST':
+                        return getTopics(opts.body);
                     default:
                         // pass through any requests not handled above
                         return realFetch(url, opts)
@@ -52,6 +54,14 @@ async function fakeBackend() {
 
             function getSyllabi() {
                 return ok(syllabi);
+            }
+
+            function getTopics(body) {
+                const {subjectId, syllabusUpdatedYear} = JSON.parse(body);
+
+                const topics = syllabus_topics.filter(syllabus_topic => syllabus_topic.subjectID === subjectId && syllabus_topic.syllabusUpdatedYear === syllabusUpdatedYear)[0].topics;
+                
+                return ok(topics);
             }
 
             // helper functions

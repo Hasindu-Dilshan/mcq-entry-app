@@ -1,14 +1,21 @@
 import { store } from '../store';
 
-export const getAllSyllabi = async () => {
-    const subjectYearContainer = await fetchWrapper.get(`${process.env.REACT_APP_API_URL}/syllabi`);
+const baseUrl = process.env.REACT_APP_API_URL;
 
-    const subjectYearCombinations = subjectYearContainer.subject_years.map(subject_year => subject_year.years.map(year => `${subject_year.subjectName} ${year} ${subjectYearContainer.endsWith}`));
+export const getAllSyllabi = async () => {
+    const subjectYearContainer = await fetchWrapper.get(`${baseUrl}/syllabi`);
+
+    const subjectYearCombinations = subjectYearContainer.subject_years.map(subject_year => subject_year.syllabusUpdatedYears.map(syllabusUpdatedYear => `${subject_year.subjectName} ${syllabusUpdatedYear} ${subjectYearContainer.endsWith}`));
     const syllabiArray = subjectYearCombinations.flat();
 
     return syllabiArray;
 }
 
+export const getTopics = async (subjectId, syllabusUpdatedYear) => {
+    const topics = await fetchWrapper.post(`${baseUrl}/topics`, {subjectId, syllabusUpdatedYear});
+
+    return topics;
+}
 
 const fetchWrapper = {
     get: request('GET'),
@@ -19,6 +26,9 @@ const fetchWrapper = {
 
 function request(method) {
     return (url, body) => {
+        // console.log('========body=====');
+        // console.log(body);
+        // console.log('========body=====');
         const requestOptions = {
             method,
             headers: authHeader(url)
