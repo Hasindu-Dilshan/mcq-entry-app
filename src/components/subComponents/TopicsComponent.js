@@ -17,9 +17,9 @@ const TopicsComponent = () => {
     <div className="form-group">
       <div className="dropdown">
 
-        <select className="select" disabled={topics.length === 0}  >
+        <select className="select" disabled={topics.length === 0} defaultValue={ "default" } >
 
-          <option value="default" disabled selected>
+          <option value="default" disabled>
             { topics.length > 0 ? 'Choose Topic' : 'Fetching Data ...' }
           </option>
 

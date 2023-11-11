@@ -5,10 +5,9 @@ const baseUrl = process.env.REACT_APP_API_URL;
 export const getAllSyllabi = async () => {
     const subjectYearContainer = await fetchWrapper.get(`${baseUrl}/syllabi`);
 
-    const subjectYearCombinations = subjectYearContainer.subject_years.map(subject_year => subject_year.syllabusUpdatedYears.map(syllabusUpdatedYear => `${subject_year.subjectName} ${syllabusUpdatedYear} ${subjectYearContainer.endsWith}`));
-    const syllabiArray = subjectYearCombinations.flat();
+    
 
-    return syllabiArray;
+    return subjectYearContainer;
 }
 
 export const getTopics = async (subjectId, syllabusUpdatedYear) => {
