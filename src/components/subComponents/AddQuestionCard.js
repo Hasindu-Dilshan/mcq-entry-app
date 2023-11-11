@@ -41,63 +41,63 @@ const AddQuestionCard = () => {
   }
 
   return (
-    <div class="card">
-      <div class="card-header">
-        <h3 class="card-titles">භෞතික විද්‍යාව 2019 නව නිර්දේෂය</h3>
+    <div className="card">
+      <div className="card-header">
+        <h3 className="card-titles">භෞතික විද්‍යාව 2019 නව නිර්දේෂය</h3>
       </div>
-      <div class="card-header">
-        <h3 class="card-sub-titles text-muted">යාන්ත්‍ර විද්‍යාව</h3>
+      <div className="card-header">
+        <h3 className="card-sub-titles text-muted">යාන්ත්‍ර විද්‍යාව</h3>
       </div>
 
-      <div class="card-body">
-        <div class="form-creation">
-          <div class="col-xl-6 col-sm-6 col-12">
-            <div class="form-group">
+      <div className="card-body">
+        <div className="form-creation">
+          <div className="col-xl-6 col-sm-6 col-12">
+            <div className="form-group">
               <label style={{ fontSize: 18, fontWeight: 600 }}>
-                Year <span class="mandatory">*</span>
+                Year <span className="mandatory">*</span>
               </label>
               <input
                 min="2019"
                 max="2023"
                 type="number"
                 id="typeNumber"
-                class="form-control"
+                className="form-control"
               />
             </div>
           </div>
 
-          <div class="col-xl-6 col-sm-6 col-12">
-            <div class="form-group">
+          <div className="col-xl-6 col-sm-6 col-12">
+            <div className="form-group">
               <label style={{ fontSize: 18, fontWeight: 600 }}>
-                Question ID <span class="mandatory">*</span>
+                Question ID <span className="mandatory">*</span>
               </label>
               <input
                 min="1"
                 type="number"
                 id="typeNumber"
-                class="form-control"
+                className="form-control"
               />
             </div>
           </div>
 
-          <div class="col-xl-12 col-sm-12 col-12">
-            <div class="form-group">
+          <div className="col-xl-12 col-sm-12 col-12">
+            <div className="form-group">
               <label style={{ fontSize: 18, fontWeight: 600 }}>
-                Question <span class="mandatory">*</span>
+                Question <span className="mandatory">*</span>
               </label>
-              <textarea rows="2" cols="50" class="form-control"></textarea>
+              <textarea rows="2" cols="50" className="form-control"></textarea>
             </div>
           </div>
 
           <AnswersCard answerRows={answerRows} handleDeleteAnswerRow={handleDeleteAnswerRow} handleAnswerFieldChange={handleAnswerFieldChange} />
 
-          <div class="col-xl-12 col-sm-12 col-12">
-            <div class="form-group">
-              <div class="form-btn">
-                <a onClick={handleAddAnswer} href="#" class="btn btn-apply">
+          <div className="col-xl-12 col-sm-12 col-12">
+            <div className="form-group">
+              <div className="form-btn">
+                <a onClick={handleAddAnswer} href="#" className="btn btn-apply">
                   <FeatherIcon icon="plus" /> Add Answer
                 </a>
-                {/* <a href="#" class="btn btn-apply">
+                {/* <a href="#" className="btn btn-apply">
                   <FeatherIcon icon="plus" /> Add Answer
                 </a> */}
               </div>
@@ -106,10 +106,10 @@ const AddQuestionCard = () => {
 
           <ExplanationCard />
 
-          <div class="col-xl-12 col-sm-12 col-12">
-            <div class="form-group">
-              <div class="form-btn">
-                <a href="#" class="btn btn-addmembers">
+          <div className="col-xl-12 col-sm-12 col-12">
+            <div className="form-group">
+              <div className="form-btn">
+                <a href="#" className="btn btn-addmembers">
                   <FeatherIcon icon="send" /> Submit
                 </a>
               </div>

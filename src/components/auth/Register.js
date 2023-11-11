@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Register extends React.Component {
+const Register = () => {
 
 }
 

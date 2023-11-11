@@ -17,29 +17,29 @@ const AnswerComponent = ({ id, answerRow, handleDeleteAnswerRow, handleAnswerFie
         <label>{id + 1} </label>
       </td>
       <td>
-        <textarea rows="3" cols="50" class="form-control" defaultValue={typeof answerRow === "String" ? answerRow : ''} onKeyUp={(event) => handleKeyUp(event.target.value)}></textarea>
+        <textarea rows="3" cols="50" className="form-control" defaultValue={typeof answerRow === "String" ? answerRow : ''} onKeyUp={(event) => handleKeyUp(event.target.value)}></textarea>
       </td>
       <td>
-        <label class="customcheck ml-4 mb-3">
+        <label className="customcheck ml-4 mb-3">
           <input type="checkbox" />
-          <span class="checkmark"></span>
+          <span className="checkmark"></span>
         </label>
       </td>
       <td>
-        <div class="actionset">
+        <div className="actionset">
           <label>
-            <a class="action_label5" href="add-Review.html">
+            <a className="action_label5" href="add-Review.html">
               Upload <FeatherIcon icon="edit" />
             </a>
           </label>
         </div>
       </td>
       <td>
-        <div class="actionset">
+        <div className="actionset">
           <label>
             <a
               href="#"
-              class="action_label4 trash"
+              className="action_label4 trash"
               data-toggle="modal"
               data-target="#delete"
               onClick={handleDeleteAnswer}

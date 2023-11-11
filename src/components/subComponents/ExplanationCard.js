@@ -3,18 +3,18 @@ import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 
 const ExplanationCard = () => {
   return (
-    <div class="col-xl-12 col-sm-12 col-12 mt-5">
-      <div class="card">
-        <div class="card-header">
-          <div class="card-titles nested-card-title">Explanation</div>
+    <div className="col-xl-12 col-sm-12 col-12 mt-5">
+      <div className="card">
+        <div className="card-header">
+          <div className="card-titles nested-card-title">Explanation</div>
         </div>
-        <div class="card-body">
-          <div class="form-group">
-            <textarea rows="3" cols="50" class="form-control"></textarea>
+        <div className="card-body">
+          <div className="form-group">
+            <textarea rows="3" cols="50" className="form-control"></textarea>
           </div>
-          <div class="actionset">
+          <div className="actionset">
             <label>
-              <a class="action_label5" href="add-Review.html">
+              <a className="action_label5" href="add-Review.html">
                 Upload Image
                 <FeatherIcon icon="edit" />
               </a>

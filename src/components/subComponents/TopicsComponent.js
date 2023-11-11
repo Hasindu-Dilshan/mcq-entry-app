@@ -1,7 +1,17 @@
 import { useEffect, useState } from "react";
 import { getTopics } from "../../helpers/user-agent";
+import { connect } from "react-redux";
+import { TOPIC_CHOOSE } from "../../constants/actionTypes";
 
-const TopicsComponent = () => {
+const mapDispatchToProps = (dispatch) => ({
+  onTopicChange: (topicId, topicName) =>
+    dispatch({
+      type: TOPIC_CHOOSE,
+      payload: { topicId, topicName },
+    }),
+});
+
+const TopicsComponent = (props) => {
 
   const [topics, setTopics] = useState([]);
 
@@ -13,11 +23,20 @@ const TopicsComponent = () => {
     fetchTopics();
   }, []);
 
+  function onSelectChange(event) {
+    const selectedOption = event.target.options[event.target.selectedIndex];
+
+    const topicId = selectedOption.getAttribute('value');
+    const topicName = selectedOption.innerHTML;
+    
+    props.onTopicChange(topicId, topicName);
+  }
+
   return (
     <div className="form-group">
       <div className="dropdown">
 
-        <select className="select" disabled={topics.length === 0} defaultValue={ "default" } >
+        <select className="select" disabled={topics.length === 0} defaultValue={ "default" } onChange={onSelectChange}>
 
           <option value="default" disabled>
             { topics.length > 0 ? 'Choose Topic' : 'Fetching Data ...' }
@@ -36,4 +55,4 @@ const TopicsComponent = () => {
   );
 };
 
-export default TopicsComponent;
+export default connect(null, mapDispatchToProps)(TopicsComponent);

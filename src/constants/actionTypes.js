@@ -1,6 +1,7 @@
 export const LOGIN = 'LOGIN';
 export const SYLLABUS_CHOOSE = 'SYLLABUS_CHOOSE';
 export const TOPIC_CHOOSE = 'TOPIC_CHOOSE';
+export const TOPIC_CHOOSE_CLEAR = 'TOPIC_CHOOSE_CLEAR';
 
 
 
