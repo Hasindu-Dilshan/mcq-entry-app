@@ -1,5 +1,5 @@
 {
-    "syllabi": [
+    "subject_years": [
         {
             "subjectName": "භෞතික විද්‍යාව",
             "subjectID": 1,
@@ -10,7 +10,7 @@
             ]
         },
         {
-            "subject": "රසායන විද්‍යාව",
+            "subjectName": "රසායන විද්‍යාව",
             "subjectID": 2,
             "years": [
                 2003,
@@ -19,7 +19,7 @@
             ]
         },
         {
-            "subject": "ජීව විද්‍යාව",
+            "subjectName": "ජීව විද්‍යාව",
             "subjectID": 3,
             "years": [
                 2003,

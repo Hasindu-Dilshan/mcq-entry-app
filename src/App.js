@@ -2,7 +2,6 @@ import { connect } from "react-redux";
 import { APP_LOAD, REDIRECT } from "./constants/actionTypes";
 
 import { store } from "./store";
-import agent from "./agent";
 import { routes } from "./routes";
 
 // import logo from './logo.svg';
@@ -34,11 +33,11 @@ function App() {
   
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/test" element={<TestAPIs />} />
-      {/* <Route path="/" element={<HomeLayout />}>
+      {/* <Route path="/login" element={<Login />} />
+      <Route path="/test" element={<TestAPIs />} /> */}
+      <Route path="/" element={<HomeLayout />}>
         {routes}
-      </Route> */}
+      </Route>
       
     </Routes>
   );

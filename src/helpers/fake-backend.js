@@ -1,6 +1,7 @@
 export { fakeBackend };
 
-const { users } = require('./data');
+const { users, syllabi } = require('./data');
+
 
 async function fakeBackend() {
     console.log('====Starting fake-backend====');
@@ -17,6 +18,8 @@ async function fakeBackend() {
                         return authenticate();
                     case url.endsWith('/users') && opts.method === 'GET':
                         return getUsers();
+                    case url.endsWith('/syllabi') && opts.method === 'GET':
+                        return getSyllabi();
                     default:
                         // pass through any requests not handled above
                         return realFetch(url, opts)
@@ -45,6 +48,10 @@ async function fakeBackend() {
             function getUsers() {
                 if (!isAuthenticated()) return unauthorized();
                 return ok(users);
+            }
+
+            function getSyllabi() {
+                return ok(syllabi);
             }
 
             // helper functions

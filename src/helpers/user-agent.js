@@ -1,6 +1,16 @@
 import { store } from '../store';
 
-export const fetchWrapper = {
+export const getAllSyllabi = async () => {
+    const subjectYearContainer = await fetchWrapper.get(`${process.env.REACT_APP_API_URL}/syllabi`);
+
+    const subjectYearCombinations = subjectYearContainer.subject_years.map(subject_year => subject_year.years.map(year => `${subject_year.subjectName} ${year} ${subjectYearContainer.endsWith}`));
+    const syllabiArray = subjectYearCombinations.flat();
+
+    return syllabiArray;
+}
+
+
+const fetchWrapper = {
     get: request('GET'),
     post: request('POST'),
     put: request('PUT'),
