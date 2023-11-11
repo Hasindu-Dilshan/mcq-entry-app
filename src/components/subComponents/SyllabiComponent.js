@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAllSyllabi } from "../../helpers/user-agent";
+import { getAllSyllabi, getTopics } from "../../helpers/user-agent";
 import { getUniqueIndex } from "../../helpers/itemKeyCounter";
 import { connect } from "react-redux";
 import { SYLLABUS_CHOOSE } from "../../constants/actionTypes";
@@ -12,6 +12,12 @@ const mapDispatchToProps = (dispatch) => ({
       payload: { subjectId, subjectName, syllabusUpdatedYear },
     }),
 });
+
+async function fetchTopics(subjectId, syllabusUpdatedYear) {
+  const fetchedTopics =  await getTopics(subjectId, syllabusUpdatedYear);
+
+  return fetchedTopics;
+}
 
 const SyllabiComponent = (props) => {
   const [subjectYearContainer, setSubjectYearContainer] = useState([]);
@@ -26,16 +32,20 @@ const SyllabiComponent = (props) => {
     }
 
     fetchSyllabi();
+
   }, []);
 
-  function onSelectChange(event) {
+  async function onSelectChange(event) {
     const selectedOption = event.target.options[event.target.selectedIndex];
   
-    const subjectId = selectedOption.getAttribute('subjectid');
+    const subjectId = Number(selectedOption.getAttribute('subjectid'));
     const subjectName = selectedOption.getAttribute('subjectname');
-    const syllabusUpdatedYear = selectedOption.getAttribute('syllabusupdatedyear');
-    
+    const syllabusUpdatedYear = Number(selectedOption.getAttribute('syllabusupdatedyear'));
+
     props.onSyllabusChange(subjectId, subjectName, syllabusUpdatedYear);
+
+    const topics = await fetchTopics(subjectId, syllabusUpdatedYear);
+    props.setTopics(topics);
   }
 
   return (
