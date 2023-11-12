@@ -1,22 +1,37 @@
 import { useEffect, useState } from "react";
-import { getAllSyllabi, getTopics } from "../../helpers/user-agent";
+import { getAllSyllabi } from "../../helpers/user-agent";
 import { getUniqueIndex } from "../../helpers/itemKeyCounter";
 import { connect } from "react-redux";
-import { SYLLABUS_CHOOSE } from "../../constants/actionTypes";
+import { 
+  SYLLABUS_CHOOSE, 
+  SYLLABI_FETCH_REQUEST, 
+  SYLLABI_FETCH_SUCCESS 
+} from "../../constants/actionTypes";
 
+const mapStateToProps = (state) => {
+  return {
+    isFetchingSyllabi: state.topic.isFetchingSyllabi,
+  }
+}
 
 const mapDispatchToProps = (dispatch) => ({
-  onSyllabusChange: (subjectId, subjectName, syllabusUpdatedYear) =>
+  dispatchSyllabusChange: (subjectId, subjectName, syllabusUpdatedYear) =>
     dispatch({
       type: SYLLABUS_CHOOSE,
       payload: { subjectId, subjectName, syllabusUpdatedYear },
     }),
+  dispatchSyllabiRequest: () =>
+    dispatch({
+      type: SYLLABI_FETCH_REQUEST
+    }),
+  dispatchSyllabiSuccess: () =>
+    dispatch({
+      type: SYLLABI_FETCH_SUCCESS
+    })
 });
 
-async function fetchTopics(subjectId, syllabusUpdatedYear) {
-  const fetchedTopics =  await getTopics(subjectId, syllabusUpdatedYear);
-
-  return fetchedTopics;
+function getPersistedValue() {
+  
 }
 
 const SyllabiComponent = (props) => {
@@ -25,7 +40,9 @@ const SyllabiComponent = (props) => {
 
   useEffect(() => {
     async function fetchSyllabi() {
+      props.dispatchSyllabiRequest();
       const data = await getAllSyllabi();
+      props.dispatchSyllabiSuccess();
 
       setSubjectYearContainer(data.subject_years);
       setTitle(data.title);
@@ -35,25 +52,24 @@ const SyllabiComponent = (props) => {
 
   }, []);
 
-  async function onSelectChange(event) {
+
+
+  async function onSyllabusChange(event) {
     const selectedOption = event.target.options[event.target.selectedIndex];
   
     const subjectId = Number(selectedOption.getAttribute('subjectid'));
     const subjectName = selectedOption.getAttribute('subjectname');
     const syllabusUpdatedYear = Number(selectedOption.getAttribute('syllabusupdatedyear'));
 
-    props.onSyllabusChange(subjectId, subjectName, syllabusUpdatedYear);
-
-    const topics = await fetchTopics(subjectId, syllabusUpdatedYear);
-    props.setTopics(topics);
+    props.dispatchSyllabusChange(subjectId, subjectName, syllabusUpdatedYear);
   }
 
   return (
     <div className="form-group">
       <div className="dropdown">
-        <select className="select" disabled={subjectYearContainer.length === 0} defaultValue={ "default" } onChange={onSelectChange}>
+        <select className="select" disabled={props.isFetchingSyllabi} defaultValue={ "default" } onChange={onSyllabusChange}>
           <option value="default" disabled>
-            { subjectYearContainer.length !== 0 ? "Choose Syllabus" : "Fetching Data ..." }
+            { !props.isFetchingSyllabi ? "Choose Syllabus" : "Fetching Syllabi..." }
           </option>
 
           {
@@ -79,4 +95,4 @@ const SyllabiComponent = (props) => {
   );
 };
 
-export default connect(null, mapDispatchToProps)(SyllabiComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(SyllabiComponent);

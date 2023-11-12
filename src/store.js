@@ -2,7 +2,7 @@ import { applyMiddleware, legacy_createStore as createStore, compose } from 'red
 import { createLogger } from 'redux-logger';
 
 import { promiseMiddleware, localStorageMiddleware } from './middleware';
-import reducer from './reducer'
+import rootReducer from './reducer'
 
 import storageSession from 'redux-persist/lib/storage/session';
 import { persistReducer, persistStore } from 'redux-persist';
@@ -12,7 +12,7 @@ const persistConfig = {
     storage: storageSession,
 }
   
-const persistedReducer = persistReducer(persistConfig, reducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const getMiddleware = () => {
     if (process.env.NODE_ENV === 'production') {
@@ -40,8 +40,3 @@ export const store = createStore(
 )
 
 export const persistor = persistStore(store);
-
-// export const store = createStore(
-//     reducer,
-//     composedEnhancers
-//   )

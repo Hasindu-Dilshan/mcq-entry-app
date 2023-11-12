@@ -5,8 +5,6 @@ const baseUrl = process.env.REACT_APP_API_URL;
 export const getAllSyllabi = async () => {
     const subjectYearContainer = await fetchWrapper.get(`${baseUrl}/syllabi`);
 
-    
-
     return subjectYearContainer;
 }
 
@@ -25,9 +23,6 @@ const fetchWrapper = {
 
 function request(method) {
     return (url, body) => {
-        // console.log('========body=====');
-        // console.log(body);
-        // console.log('========body=====');
         const requestOptions = {
             method,
             headers: authHeader(url)

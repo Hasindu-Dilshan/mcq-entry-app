@@ -1,29 +1,54 @@
 import { connect } from "react-redux";
-import { TOPIC_CHOOSE } from "../../constants/actionTypes";
-import { useEffect } from "react";
+import { 
+  TOPIC_CHOOSE,
+  TOPICS_FETCH_REQUEST, 
+  TOPICS_FETCH_SUCCESS
+} from "../../constants/actionTypes";
+import { useEffect, useState } from "react";
+import { getTopics } from "../../helpers/user-agent";
+
+const mapStateToProps = (state) => {
+  return {
+    subjectId: state.topic.subjectId,
+    syllabusUpdatedYear: state.topic.syllabusUpdatedYear,
+    isFetchingTopics: state.topic.isFetchingTopics,
+    topicId: state.topic.topicId
+  };
+};
 
 const mapDispatchToProps = (dispatch) => ({
-  onTopicChange: (topicId, topicName) =>
+  dispatchTopicChange: (topicId, topicName) =>
     dispatch({
       type: TOPIC_CHOOSE,
       payload: { topicId, topicName },
     }),
+  dispatchTopicsRequest: () =>
+    dispatch({
+      type: TOPICS_FETCH_REQUEST
+    }),
+  dispatchTopicsSuccess: () =>
+    dispatch({
+      type: TOPICS_FETCH_SUCCESS
+    })
 });
 
 const TopicsComponent = (props) => {
 
+  const [topics, setTopics] = useState([]);
 
-  // useEffect(() => {
-  //   async function fetchTopics() {
-  //     setTopics( await getTopics(1,2012));
-  //   }
+  useEffect(() => {
+    async function fetchTopics(subjectId, syllabusUpdatedYear) {
+      props.dispatchTopicsRequest();
+      const topics = await getTopics(subjectId, syllabusUpdatedYear);
+      props.dispatchTopicsSuccess();
 
-  //   fetchTopics();
-  // }, []);
+      setTopics(topics);
+    }
 
-  // useEffect (() => {
-  //   console.log(props.topics)
-  // }, [props.topics])
+    if(props.subjectId && props.syllabusUpdatedYear)
+      fetchTopics(props.subjectId, props.syllabusUpdatedYear);
+
+  }, [props.subjectId, props.syllabusUpdatedYear]);
 
   function onSelectChange(event) {
     const selectedOption = event.target.options[event.target.selectedIndex];
@@ -31,29 +56,36 @@ const TopicsComponent = (props) => {
     const topicId = selectedOption.getAttribute('value');
     const topicName = selectedOption.innerHTML;
     
-    props.onTopicChange(topicId, topicName);
+    props.dispatchTopicChange(topicId, topicName);
   }
 
   return (
     <div className="form-group">
       <div className="dropdown">
 
-        <select className="select" disabled={props.topics?.length === 0} defaultValue={ "default" } onChange={onSelectChange}>
+        <select className="select" disabled={!(props.subjectId && !props.isFetchingTopics)} defaultValue={ props.topicId || "default" } onChange={onSelectChange}>
 
           <option value="default" disabled>
             { 
-              props?.topics?.length !==0 ? 
-                'Choose Topic' 
-                : 'Fetching Data ...' 
+              !props.isFetchingTopics ? (
+                  'Choose Topic' 
+              ) : "Fetching Topics..."
             }
           </option>
 
           {
-            props?.topics?.map((topic, index) => (
-              <option key={index} value={index}>{topic}</option>
-            ))
+            Array.isArray(topics) ? (
+                topics.map((topic, index) => (
+                  <option key={index} value={index}>
+                    {topic}
+                  </option>
+                )
+              )
+            ) : (
+              <option value="loading">Loading...</option>
+            )
           }
-
+          
         </select>
 
       </div>
@@ -61,4 +93,4 @@ const TopicsComponent = (props) => {
   );
 };
 
-export default connect(null, mapDispatchToProps)(TopicsComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(TopicsComponent);

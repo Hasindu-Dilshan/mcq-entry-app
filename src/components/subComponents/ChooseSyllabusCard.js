@@ -3,9 +3,7 @@ import FeatherIcon from "feather-icons-react";
 import SyllabiComponent from "./SyllabiComponent";
 import TopicsComponent from "./TopicsComponent";
 
-const ChooseSyllabusCard = () => {
-
-  const [topics, setTopics] = useState([]);
+const ChooseSyllabusCard = (props) => {
   
   return (
     <div className="row">
@@ -16,8 +14,10 @@ const ChooseSyllabusCard = () => {
           </div>
           <div className="card-body">
             <div className="form-creation">
-              <SyllabiComponent setTopics={setTopics} />
-              <TopicsComponent topics={topics} />
+
+              <SyllabiComponent />
+              <TopicsComponent />
+              
               <div className="form-group">
                 <div className="head-link-set">
                   <a className="btn-add" href="add-employee.html">
