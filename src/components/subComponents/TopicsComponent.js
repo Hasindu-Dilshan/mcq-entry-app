@@ -74,16 +74,14 @@ const TopicsComponent = (props) => {
           </option>
 
           {
-            Array.isArray(topics) ? (
+             (
                 topics.map((topic, index) => (
                   <option key={index} value={index}>
                     {topic}
                   </option>
                 )
               )
-            ) : (
-              <option value="loading">Loading...</option>
-            )
+            ) 
           }
           
         </select>

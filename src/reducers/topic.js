@@ -13,6 +13,7 @@ const defaultStae = {
     syllabusUpdatedYear: null,
     topicId: null,
     topicName: null,
+    subjectYearIndex: null,
     isFetchingSyllabi: false,
     isFetchingTopics: false,
 }
@@ -25,6 +26,7 @@ export default (state = defaultStae, action) => {
                 subjectId: action.payload.subjectId, 
                 subjectName: action.payload.subjectName, 
                 syllabusUpdatedYear: action.payload.syllabusUpdatedYear,
+                subjectYearIndex: action.payload.subjectYearIndex,
                 topicId: null,
                 topicName: null
             };
