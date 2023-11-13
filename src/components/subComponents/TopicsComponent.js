@@ -1,8 +1,8 @@
 import { connect } from "react-redux";
-import { 
+import {
   TOPIC_CHOOSE,
-  TOPICS_FETCH_REQUEST, 
-  TOPICS_FETCH_SUCCESS
+  TOPICS_FETCH_REQUEST,
+  TOPICS_FETCH_SUCCESS,
 } from "../../constants/actionTypes";
 import { useEffect, useState } from "react";
 import { getTopics } from "../../helpers/user-agent";
@@ -12,7 +12,7 @@ const mapStateToProps = (state) => {
     subjectId: state.topic.subjectId,
     syllabusUpdatedYear: state.topic.syllabusUpdatedYear,
     isFetchingTopics: state.topic.isFetchingTopics,
-    topicId: state.topic.topicId
+    topicId: state.topic.topicId,
   };
 };
 
@@ -24,16 +24,15 @@ const mapDispatchToProps = (dispatch) => ({
     }),
   dispatchTopicsRequest: () =>
     dispatch({
-      type: TOPICS_FETCH_REQUEST
+      type: TOPICS_FETCH_REQUEST,
     }),
   dispatchTopicsSuccess: () =>
     dispatch({
-      type: TOPICS_FETCH_SUCCESS
-    })
+      type: TOPICS_FETCH_SUCCESS,
+    }),
 });
 
 const TopicsComponent = (props) => {
-
   const [topics, setTopics] = useState([]);
 
   useEffect(() => {
@@ -45,47 +44,38 @@ const TopicsComponent = (props) => {
       setTopics(topics);
     }
 
-    if(props.subjectId && props.syllabusUpdatedYear)
+    if (props.subjectId && props.syllabusUpdatedYear)
       fetchTopics(props.subjectId, props.syllabusUpdatedYear);
-
   }, [props.subjectId, props.syllabusUpdatedYear]);
 
   function onSelectChange(event) {
     const selectedOption = event.target.options[event.target.selectedIndex];
 
-    const topicId = selectedOption.getAttribute('value');
+    const topicId = selectedOption.getAttribute("value");
     const topicName = selectedOption.innerHTML;
-    
+
     props.dispatchTopicChange(topicId, topicName);
   }
 
   return (
     <div className="form-group">
       <div className="dropdown">
-
-        <select className="select" disabled={!(props.subjectId && !props.isFetchingTopics)} defaultValue={ props.topicId || "default" } onChange={onSelectChange}>
-
+        <select
+          className="select"
+          disabled={!(props.subjectId && !props.isFetchingTopics)}
+          defaultValue={"default"}
+          onChange={onSelectChange}
+        >
           <option value="default" disabled>
-            { 
-              !props.isFetchingTopics ? (
-                  'Choose Topic' 
-              ) : "Fetching Topics..."
-            }
+            {!props.isFetchingTopics ? "Choose Topic" : "Fetching Topics..."}
           </option>
 
-          {
-             (
-                topics.map((topic, index) => (
-                  <option key={index} value={index}>
-                    {topic}
-                  </option>
-                )
-              )
-            ) 
-          }
-          
+          {topics.map((topic, index) => (
+            <option key={index} value={index}>
+              {topic}
+            </option>
+          ))}
         </select>
-
       </div>
     </div>
   );

@@ -8,6 +8,6 @@ const ChooseSyllabus = () => {
       <ChooseSyllabusCard />
     </>
   );
-}
+};
 
 export default ChooseSyllabus;
