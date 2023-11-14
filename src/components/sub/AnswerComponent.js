@@ -1,13 +1,39 @@
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
+import { useRef, useState } from "react";
 
 const AnswerComponent = ({ id, answerRow, handleDeleteAnswerRow, handleAnswerFieldChange }) => {
 
-  function handleDeleteAnswer(event) {
+  const [isChecked, setIsChecked] = useState(false);
+
+  const answerTextRef = useRef(null);
+  const answerCorrectRef = useRef(null);
+
+  function handleDeleteAnswer() {
     handleDeleteAnswerRow(answerRow.key);
   }
 
-  function handleKeyUp(text) {
-    handleAnswerFieldChange(answerRow.key, text);
+  function updateAnswerFields() {
+    const text = answerTextRef.current.value;
+    const correct = answerCorrectRef.current.checked;
+    const key = answerRow.key;
+
+    const answer = {
+      text,
+      correct,
+      key
+    }
+
+    handleAnswerFieldChange(answer);
+  }
+
+  function handleKeyUp() {
+    updateAnswerFields();
+  }
+
+  function handleToggle() {
+    setIsChecked(!isChecked);
+    
+    updateAnswerFields();
   }
 
   return (
@@ -16,11 +42,11 @@ const AnswerComponent = ({ id, answerRow, handleDeleteAnswerRow, handleAnswerFie
         <label>{id + 1} </label>
       </td>
       <td>
-        <textarea rows="3" cols="50" className="form-control" defaultValue={typeof answerRow === "String" ? answerRow : ''} onKeyUp={(event) => handleKeyUp(event.target.value)}></textarea>
+        <textarea ref={answerTextRef} rows="3" cols="50" className="form-control" defaultValue={typeof answerRow === "String" ? answerRow : ''} onKeyUp={handleKeyUp}></textarea>
       </td>
       <td>
         <label className="customcheck ml-4 mb-3">
-          <input type="checkbox" />
+          <input ref={answerCorrectRef} checked={isChecked} onChange={handleToggle} type="checkbox" />
           <span className="checkmark"></span>
         </label>
       </td>

@@ -1,6 +1,6 @@
-import Dashboard from "../components/mainComponents/Dashboard";
-import ChooseSyllabus from "../components/mainComponents/ChooseSyllabus";
-import AddQuestions from "../components/mainComponents/AddQuestions";
+import Dashboard from "../components/main/Dashboard";
+import ChooseSyllabus from "../components/main/ChooseSyllabus";
+import AddQuestions from "../components/main/AddQuestions";
 import TestAPIs from "../components/test/TestAPIs";
 
 const appRoutes = [

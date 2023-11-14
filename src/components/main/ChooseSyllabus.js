@@ -1,5 +1,5 @@
-import BreadcrumbNavigation from "../subComponents/BreadcrumbNavigation";
-import ChooseSyllabusCard from "../subComponents/ChooseSyllabusCard";
+import BreadcrumbNavigation from "../sub/BreadcrumbNavigation";
+import ChooseSyllabusCard from "../sub/ChooseSyllabusCard";
 
 const ChooseSyllabus = () => {
 

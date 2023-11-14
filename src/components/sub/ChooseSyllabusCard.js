@@ -1,6 +1,7 @@
 import FeatherIcon from "feather-icons-react";
 import SyllabiComponent from "./SyllabiComponent";
 import TopicsComponent from "./TopicsComponent";
+import { Link } from "react-router-dom";
 
 const ChooseSyllabusCard = () => {
   
@@ -19,9 +20,9 @@ const ChooseSyllabusCard = () => {
               
               <div className="form-group">
                 <div className="head-link-set">
-                  <a className="btn-add" href="add-employee.html">
+                  <Link className="btn-add" to="/addquestions">
                     <FeatherIcon icon="plus" /> Add Questions
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

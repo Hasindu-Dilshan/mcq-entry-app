@@ -14,6 +14,7 @@ const defaultStae = {
     topicId: null,
     topicName: null,
     subjectYearIndex: null,
+    title: null,
     isFetchingSyllabi: false,
     isFetchingTopics: false,
 }
@@ -27,6 +28,7 @@ export default (state = defaultStae, action) => {
                 subjectName: action.payload.subjectName, 
                 syllabusUpdatedYear: action.payload.syllabusUpdatedYear,
                 subjectYearIndex: action.payload.subjectYearIndex,
+                title: action.payload.title,
                 topicId: null,
                 topicName: null
             };

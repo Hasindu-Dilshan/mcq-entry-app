@@ -22,6 +22,8 @@ async function fakeBackend() {
                         return getSyllabi();
                     case url.endsWith('/topics') && opts.method === 'POST':
                         return getTopics(opts.body);
+                    case url.endsWith('/submit') && opts.method === 'POST':
+                        return createQuestion(opts.body);
                     default:
                         // pass through any requests not handled above
                         return realFetch(url, opts)
@@ -62,6 +64,10 @@ async function fakeBackend() {
                 const topics = syllabus_topics.filter(syllabus_topic => syllabus_topic.subjectID === subjectId && syllabus_topic.syllabusUpdatedYear === syllabusUpdatedYear)[0].topics;
                 
                 return ok(topics);
+            }
+
+            function createQuestion(body) {
+                console.log(body);
             }
 
             // helper functions

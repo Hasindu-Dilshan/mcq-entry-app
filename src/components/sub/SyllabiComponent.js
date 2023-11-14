@@ -20,7 +20,8 @@ const mapDispatchToProps = (dispatch) => ({
     subjectId,
     subjectName,
     syllabusUpdatedYear,
-    subjectYearIndex
+    subjectYearIndex,
+    title
   ) =>
     dispatch({
       type: SYLLABUS_CHOOSE,
@@ -29,6 +30,7 @@ const mapDispatchToProps = (dispatch) => ({
         subjectName,
         syllabusUpdatedYear,
         subjectYearIndex,
+        title,
       },
     }),
   dispatchSyllabiRequest: () =>
@@ -41,7 +43,7 @@ const mapDispatchToProps = (dispatch) => ({
     }),
 });
 
-const onSyllabusChange = async (event, dispatchSyllabusChange) => {
+const onSyllabusChange = async (event, title, dispatchSyllabusChange) => {
   const selectedOption = event.target.options[event.target.selectedIndex];
 
   const subjectId = Number(selectedOption.getAttribute("subjectid"));
@@ -55,7 +57,8 @@ const onSyllabusChange = async (event, dispatchSyllabusChange) => {
     subjectId,
     subjectName,
     syllabusUpdatedYear,
-    subjectYearIndex
+    subjectYearIndex,
+    title
   );
 };
 
@@ -103,7 +106,7 @@ const SyllabiComponent = ({
           className="select"
           disabled={isFetchingSyllabi}
           defaultValue={"default"}
-          onChange={(event) => onSyllabusChange(event, dispatchSyllabusChange)}
+          onChange={(event) => onSyllabusChange(event, title, dispatchSyllabusChange)}
         >
           <option value={"default"} disabled>
             {!isFetchingSyllabi ? "Choose Syllabus" : "Fetching Syllabi..."}

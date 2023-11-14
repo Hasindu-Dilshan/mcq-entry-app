@@ -1,5 +1,5 @@
-import BreadcrumbNavigation from "../subComponents/BreadcrumbNavigation";
-import AddQuestionCard from "../subComponents/AddQuestionCard";
+import BreadcrumbNavigation from "../sub/BreadcrumbNavigation";
+import AddQuestionCard from "../sub/AddQuestionCard";
 
 const AddQuestions = () => {
 

@@ -14,6 +14,10 @@ export const getTopics = async (subjectId, syllabusUpdatedYear) => {
     return topics;
 }
 
+export const submitQuestion = async(question) => {
+    const response = await fetchWrapper.post(`${baseUrl}/submit`, question);
+}
+
 const fetchWrapper = {
     get: request('GET'),
     post: request('POST'),

@@ -1,5 +1,5 @@
-import Header from "../components/subComponents/Header";
-import SideNavigation from "../components/subComponents/SideNavigation";
+import Header from "../components/sub/Header";
+import SideNavigation from "../components/sub/SideNavigation";
 import { Outlet } from "react-router-dom";
 
 const HomeLayout = () => {

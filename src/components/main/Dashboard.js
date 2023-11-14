@@ -1,5 +1,5 @@
-import WelcomeBanner from "../subComponents/WelcomeBanner";
-import BreadcrumbNavigation from "../subComponents/BreadcrumbNavigation";
+import WelcomeBanner from "../sub/WelcomeBanner";
+import BreadcrumbNavigation from "../sub/BreadcrumbNavigation";
 
 const Dashboard =  () => {
   
