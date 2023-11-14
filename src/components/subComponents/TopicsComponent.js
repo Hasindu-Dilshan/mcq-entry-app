@@ -32,42 +32,47 @@ const mapDispatchToProps = (dispatch) => ({
     }),
 });
 
-const TopicsComponent = (props) => {
+const onSelectChange = (event, dispatchTopicChange) => {
+  const selectedOption = event.target.options[event.target.selectedIndex];
+
+  const topicId = selectedOption.getAttribute("value");
+  const topicName = selectedOption.innerHTML;
+
+  dispatchTopicChange(topicId, topicName);
+}
+
+const TopicsComponent = ({ subjectId, syllabusUpdatedYear, isFetchingTopics, dispatchTopicChangem, dispatchTopicsRequest, dispatchTopicChange, dispatchTopicsSuccess }) => {
+  
   const [topics, setTopics] = useState([]);
+
+    useEffect(() => {
+      console.log('TopicsComponent');
+    }, [])
 
   useEffect(() => {
     async function fetchTopics(subjectId, syllabusUpdatedYear) {
-      props.dispatchTopicsRequest();
+      dispatchTopicsRequest();
       const topics = await getTopics(subjectId, syllabusUpdatedYear);
-      props.dispatchTopicsSuccess();
+      dispatchTopicsSuccess();
 
       setTopics(topics);
     }
 
-    if (props.subjectId && props.syllabusUpdatedYear)
-      fetchTopics(props.subjectId, props.syllabusUpdatedYear);
-  }, [props.subjectId, props.syllabusUpdatedYear]);
-
-  function onSelectChange(event) {
-    const selectedOption = event.target.options[event.target.selectedIndex];
-
-    const topicId = selectedOption.getAttribute("value");
-    const topicName = selectedOption.innerHTML;
-
-    props.dispatchTopicChange(topicId, topicName);
-  }
+    if (subjectId && syllabusUpdatedYear)
+      fetchTopics(subjectId, syllabusUpdatedYear);
+  }, [subjectId, syllabusUpdatedYear]);
 
   return (
     <div className="form-group">
       <div className="dropdown">
         <select
           className="select"
-          disabled={!(props.subjectId && !props.isFetchingTopics)}
+          disabled={!(subjectId && !isFetchingTopics)}
           defaultValue={"default"}
-          onChange={onSelectChange}
+          onChange={(event) => onSelectChange(event, dispatchTopicChange)}
         >
           <option value="default" disabled>
-            {!props.isFetchingTopics ? "Choose Topic" : "Fetching Topics..."}
+            {!isFetchingTopics ? "Choose Topic" : "Fetching Topics..."}
           </option>
 
           {topics.map((topic, index) => (

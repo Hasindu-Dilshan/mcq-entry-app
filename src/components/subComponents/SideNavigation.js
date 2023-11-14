@@ -1,8 +1,8 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import appRoutes from "../../routes/appRoutes";
 
 const SideNavigation = () => {
+
   return (
     <div className="sidebar" id="sidebar">
       <div className="sidebar-inner slimscroll">

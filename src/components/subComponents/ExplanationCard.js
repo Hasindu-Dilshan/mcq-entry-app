@@ -1,7 +1,7 @@
-import React from "react";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 
 const ExplanationCard = () => {
+  
   return (
     <div className="col-xl-12 col-sm-12 col-12 mt-5">
       <div className="card">

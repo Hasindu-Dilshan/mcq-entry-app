@@ -11,6 +11,7 @@ import HomeLayout from "./layout/HomeLayout";
 import Login from "./components/auth/Login";
 import { history } from "./helpers";
 import TestAPIs from "./components/test/TestAPIs";
+import { useEffect } from "react";
 
 const mapStateToProps = (state) => {
   return {
@@ -27,7 +28,8 @@ const mapDispatchToProps = (dispatch) => ({
   onRedirect: () => dispatch({ type: REDIRECT }),
 });
 
-function App() {
+const App = () => {
+
   history.navigate = useNavigate();
   history.location = useLocation();
   

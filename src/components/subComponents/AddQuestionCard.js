@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 const AddQuestionCard = () => {
 
   const [keyCount, setkeyCount] = useState(0);
-
   const [answerRows, setAnswerRows] = useState([{answer: undefined, key: keyCount}]);
 
   // Do the initial keyCount increment
@@ -97,9 +96,6 @@ const AddQuestionCard = () => {
                 <a onClick={handleAddAnswer} href="#" className="btn btn-apply">
                   <FeatherIcon icon="plus" /> Add Answer
                 </a>
-                {/* <a href="#" className="btn btn-apply">
-                  <FeatherIcon icon="plus" /> Add Answer
-                </a> */}
               </div>
             </div>
           </div>

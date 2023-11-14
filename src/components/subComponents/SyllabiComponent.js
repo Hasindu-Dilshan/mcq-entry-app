@@ -11,6 +11,7 @@ import {
 const mapStateToProps = (state) => {
   return {
     isFetchingSyllabi: state.topic.isFetchingSyllabi,
+    subjectYearIndex: state.topic.subjectYearIndex,
   };
 };
 
@@ -40,28 +41,53 @@ const mapDispatchToProps = (dispatch) => ({
     }),
 });
 
-const SyllabiComponent = (props) => {
-  const [subjectYearList, setSubjectYearList] = useState([{}]);
+const onSyllabusChange = async (event, dispatchSyllabusChange) => {
+  const selectedOption = event.target.options[event.target.selectedIndex];
+
+  const subjectId = Number(selectedOption.getAttribute("subjectid"));
+  const subjectName = selectedOption.getAttribute("subjectname");
+  const subjectYearIndex = Number(selectedOption.getAttribute("value"));
+  const syllabusUpdatedYear = Number(
+    selectedOption.getAttribute("syllabusupdatedyear")
+  );
+
+  dispatchSyllabusChange(
+    subjectId,
+    subjectName,
+    syllabusUpdatedYear,
+    subjectYearIndex
+  );
+};
+
+const getSubjectYearArray = (data) =>
+  data.subjectYears.map((subjectYear) =>
+    subjectYear.syllabusUpdatedYears.map((syllabusUpdatedYear) => {
+      return {
+        subjectName: subjectYear.subjectName,
+        subjectId: subjectYear.subjectId,
+        syllabusUpdatedYear,
+        key: getUniqueId(),
+      };
+    })
+  ).flat();
+
+const SyllabiComponent = ({
+  dispatchSyllabiRequest,
+  dispatchSyllabiSuccess,
+  subjectYearIndex,
+  isFetchingSyllabi,
+  dispatchSyllabusChange,
+}) => {
+  const [subjectYearList, setSubjectYearList] = useState([]);
   const [title, setTitle] = useState("");
 
   useEffect(() => {
     async function fetchSyllabi() {
-      props.dispatchSyllabiRequest();
+      dispatchSyllabiRequest();
       const data = await getAllSyllabi();
-      props.dispatchSyllabiSuccess();
+      dispatchSyllabiSuccess();
 
-      const subjectYearArray = data.subjectYears
-        .map((subjectYear) =>
-          subjectYear.syllabusUpdatedYears.map((syllabusUpdatedYear) => {
-            return {
-              subjectName: subjectYear.subjectName,
-              subjectId: subjectYear.subjectId,
-              syllabusUpdatedYear,
-              key: getUniqueId(),
-            };
-          })
-        )
-        .flat();
+      const subjectYearArray = getSubjectYearArray(data);
 
       setTitle(data.title);
       setSubjectYearList(subjectYearArray);
@@ -70,37 +96,17 @@ const SyllabiComponent = (props) => {
     fetchSyllabi();
   }, []);
 
-  async function onSyllabusChange(event) {
-    const selectedOption = event.target.options[event.target.selectedIndex];
-
-    const subjectId = Number(selectedOption.getAttribute("subjectid"));
-    const subjectName = selectedOption.getAttribute("subjectname");
-    const subjectYearIndex = Number(selectedOption.getAttribute("value"));
-    const syllabusUpdatedYear = Number(
-      selectedOption.getAttribute("syllabusupdatedyear")
-    );
-
-    props.dispatchSyllabusChange(
-      subjectId,
-      subjectName,
-      syllabusUpdatedYear,
-      subjectYearIndex
-    );
-  }
-
   return (
     <div className="form-group">
       <div className="dropdown">
         <select
           className="select"
-          disabled={props.isFetchingSyllabi}
+          disabled={isFetchingSyllabi}
           defaultValue={"default"}
-          onChange={onSyllabusChange}
+          onChange={(event) => onSyllabusChange(event, dispatchSyllabusChange)}
         >
-          <option value="default" disabled>
-            {!props.isFetchingSyllabi
-              ? "Choose Syllabus"
-              : "Fetching Syllabi..."}
+          <option value={"default"} disabled>
+            {!isFetchingSyllabi ? "Choose Syllabus" : "Fetching Syllabi..."}
           </option>
 
           {subjectYearList.map((subjectYear) => (
@@ -120,7 +126,4 @@ const SyllabiComponent = (props) => {
   );
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SyllabiComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(SyllabiComponent);

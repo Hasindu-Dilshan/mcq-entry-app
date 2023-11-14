@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
 import FeatherIcon from "feather-icons-react";
 import SyllabiComponent from "./SyllabiComponent";
 import TopicsComponent from "./TopicsComponent";
 
-const ChooseSyllabusCard = (props) => {
+const ChooseSyllabusCard = () => {
   
   return (
     <div className="row">
