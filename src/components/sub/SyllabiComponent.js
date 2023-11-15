@@ -86,11 +86,14 @@ const SyllabiComponent = ({
 
   useEffect(() => {
     async function fetchSyllabi() {
+      
       dispatchSyllabiRequest();
       const data = await getAllSyllabi();
       dispatchSyllabiSuccess();
-
+  
       const subjectYearArray = getSubjectYearArray(data);
+
+      // console.log(subjectYearArray);
 
       setTitle(data.title);
       setSubjectYearList(subjectYearArray);
@@ -106,7 +109,7 @@ const SyllabiComponent = ({
           className="select"
           disabled={isFetchingSyllabi}
           defaultValue={"default"}
-          onChange={(event) => onSyllabusChange(event, title, dispatchSyllabusChange)}
+          onChange={(event) => {onSyllabusChange(event, title, dispatchSyllabusChange)}}
         >
           <option value={"default"} disabled>
             {!isFetchingSyllabi ? "Choose Syllabus" : "Fetching Syllabi..."}

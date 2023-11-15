@@ -41,13 +41,9 @@ const onSelectChange = (event, dispatchTopicChange) => {
   dispatchTopicChange(topicId, topicName);
 }
 
-const TopicsComponent = ({ subjectId, syllabusUpdatedYear, isFetchingTopics, dispatchTopicChangem, dispatchTopicsRequest, dispatchTopicChange, dispatchTopicsSuccess }) => {
+const TopicsComponent = ({ subjectId, syllabusUpdatedYear, isFetchingTopics, dispatchTopicsRequest, dispatchTopicChange, dispatchTopicsSuccess }) => {
   
   const [topics, setTopics] = useState([]);
-
-    useEffect(() => {
-      console.log('TopicsComponent');
-    }, [])
 
   useEffect(() => {
     async function fetchTopics(subjectId, syllabusUpdatedYear) {
