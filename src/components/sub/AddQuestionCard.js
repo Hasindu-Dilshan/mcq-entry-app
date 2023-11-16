@@ -16,13 +16,11 @@ const mapStateToProps = (state) => {
   }
 }
 
-
-
-// const AddQuestionCard = ( ) => {
 const AddQuestionCard = ({ subjectName, syllabusUpdatedYear, title, topicName }) => {
 
   const [keyCount, setkeyCount] = useState(0);
-  const [answerRows, setAnswerRows] = useState([{answer: undefined, correct: false, key: keyCount}]);
+  // const [answerRows, setAnswerRows] = useState([{answer: undefined, correct: false, key: keyCount}]);
+  const [answerRows, setAnswerRows] = useState([]);
 
   const yearInputRef = useRef(null);
   const questionIdInputRef = useRef(null);
@@ -30,16 +28,18 @@ const AddQuestionCard = ({ subjectName, syllabusUpdatedYear, title, topicName })
 
   // Do the initial keyCount increment
   useEffect(() => {
-    incrementAndGetId()
+    // getIdAndIncrement()
   }, [])
 
   function handleAddAnswer(event) {
-    event.preventDefault();
-    setAnswerRows([...answerRows, {answer: undefined,  correct: false, key: incrementAndGetId()}]);
+    if(event)
+      event.preventDefault();
+    setAnswerRows([...answerRows, {answer: undefined,  correct: false, key: getIdAndIncrement()}]);
   }
 
-  function incrementAndGetId() {
-    setkeyCount((prevkeyCount) => prevkeyCount + 1);
+  // returns previous keyCount
+  function getIdAndIncrement() {
+    setkeyCount(keyCount + 1);
     return keyCount;
   }
 
@@ -62,7 +62,7 @@ const AddQuestionCard = ({ subjectName, syllabusUpdatedYear, title, topicName })
     setAnswerRows(newAnswerRows);
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
     const year = yearInputRef.current.value;
@@ -76,7 +76,9 @@ const AddQuestionCard = ({ subjectName, syllabusUpdatedYear, title, topicName })
       answerRows
     };
 
-    // submitQuestion()
+    const response = await submitQuestion(question);
+
+    console.log(response);
   }
 
   return (
@@ -131,7 +133,7 @@ const AddQuestionCard = ({ subjectName, syllabusUpdatedYear, title, topicName })
             </div>
           </div>
 
-          <AnswersCard answerRows={answerRows} handleDeleteAnswerRow={handleDeleteAnswerRow} handleAnswerFieldChange={handleAnswerFieldChange} />
+          <AnswersCard handleAddAnswer={handleAddAnswer} answerRows={answerRows} handleDeleteAnswerRow={handleDeleteAnswerRow} handleAnswerFieldChange={handleAnswerFieldChange} />
 
           <div className="col-xl-12 col-sm-12 col-12">
             <div className="form-group">
@@ -148,7 +150,7 @@ const AddQuestionCard = ({ subjectName, syllabusUpdatedYear, title, topicName })
           <div className="col-xl-12 col-sm-12 col-12">
             <div className="form-group">
               <div className="form-btn">
-                <Link onClick={(event) => handleSubmit(event)} href="#" className="btn btn-addmembers">
+                <Link onClick={handleSubmit} href="#" className="btn btn-addmembers">
                   <FeatherIcon icon="send" /> Submit
                 </Link>
               </div>

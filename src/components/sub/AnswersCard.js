@@ -1,6 +1,10 @@
+import { useEffect } from "react";
 import AnswerComponent from "./AnswerComponent";
 
-const AnswersCard = ({ answerRows, handleDeleteAnswerRow, handleAnswerFieldChange }) => {
+const AnswersCard = ({ handleAddAnswer, answerRows, handleDeleteAnswerRow, handleAnswerFieldChange }) => {
+  useEffect(() => {
+    handleAddAnswer();
+  }, [])
   
   return (
     <div className="col-xl-12 col-sm-12 col-12 mt-5">

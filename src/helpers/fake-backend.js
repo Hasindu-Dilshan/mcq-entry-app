@@ -9,7 +9,7 @@ async function fakeBackend() {
     let realFetch = window.fetch;
     window.fetch = function (url, opts) {
         return new Promise((resolve, reject) => {
-            const serverResponseTime = 4000;
+            const serverResponseTime = 1150;
             setTimeout(handleRoute, serverResponseTime);
 
             function handleRoute() {
@@ -67,7 +67,7 @@ async function fakeBackend() {
             }
 
             function createQuestion(body) {
-                console.log(body);
+                return ok(body);
             }
 
             // helper functions

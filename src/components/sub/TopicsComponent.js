@@ -41,9 +41,10 @@ const onSelectChange = (event, dispatchTopicChange) => {
   dispatchTopicChange(topicId, topicName);
 }
 
-const TopicsComponent = ({ subjectId, syllabusUpdatedYear, isFetchingTopics, dispatchTopicsRequest, dispatchTopicChange, dispatchTopicsSuccess }) => {
+const TopicsComponent = ({ subjectId, syllabusUpdatedYear, isFetchingTopics, topicId, dispatchTopicsRequest, dispatchTopicChange, dispatchTopicsSuccess }) => {
   
   const [topics, setTopics] = useState([]);
+  const [defaultOption, setDefaultOption] = useState("default");
 
   useEffect(() => {
     async function fetchTopics(subjectId, syllabusUpdatedYear) {
@@ -54,8 +55,11 @@ const TopicsComponent = ({ subjectId, syllabusUpdatedYear, isFetchingTopics, dis
       setTopics(topicsArray);
     }
 
-    if (subjectId && syllabusUpdatedYear)
+    if (subjectId && syllabusUpdatedYear) {
       fetchTopics(subjectId, syllabusUpdatedYear);
+      setDefaultOption(2);
+    }
+    
   }, [subjectId, syllabusUpdatedYear]);
 
   return (
@@ -64,7 +68,7 @@ const TopicsComponent = ({ subjectId, syllabusUpdatedYear, isFetchingTopics, dis
         <select
           className="select"
           disabled={!(subjectId && !isFetchingTopics)}
-          defaultValue={"default"}
+          defaultValue={defaultOption}
           onChange={(event) => onSelectChange(event, dispatchTopicChange)}
         >
           <option value="default" disabled>
@@ -73,7 +77,7 @@ const TopicsComponent = ({ subjectId, syllabusUpdatedYear, isFetchingTopics, dis
 
           {topics.map((topic, index) => (
             <option key={index} value={index}>
-              {topic}
+              {topic} 
             </option>
           ))}
         </select>

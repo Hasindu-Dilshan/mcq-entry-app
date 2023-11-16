@@ -10,6 +10,7 @@ import {
 const mapStateToProps = (state) => {
   return {
     isFetchingSyllabi: state.topic.isFetchingSyllabi,
+    subjectId: state.topic.subjectId
   };
 };
 
@@ -65,7 +66,8 @@ const getSubjectYearArray = (data) =>
         syllabusUpdatedYear,
       };
     })
-  ).flat().map((subjectYear, index) => ({...subjectYear, key: index}));
+  ).flat().map((subjectYear, index) => 
+      ({...subjectYear, key: index}));
 
 const SyllabiComponent = ({
   dispatchSyllabiRequest,
@@ -75,6 +77,7 @@ const SyllabiComponent = ({
 }) => {
   const [subjectYearList, setSubjectYearList] = useState([]);
   const [title, setTitle] = useState("");
+  const [defaultOption, setDefault] = useState("default");
 
   useEffect(() => {
     async function fetchSyllabi() {
@@ -98,7 +101,7 @@ const SyllabiComponent = ({
         <select
           className="select"
           disabled={isFetchingSyllabi}
-          defaultValue={"default"}
+          defaultValue={defaultOption}
           onChange={(event) => {onSyllabusChange(event, title, dispatchSyllabusChange)}}
         >
           <option value={"default"} disabled>
