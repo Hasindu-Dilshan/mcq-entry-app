@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { getAllSyllabi } from "../../helpers/user-agent";
-import { getUniqueId } from "../../utils/getUniqueId";
 import { connect } from "react-redux";
 import {
   SYLLABUS_CHOOSE,
@@ -69,10 +68,9 @@ const getSubjectYearArray = (data) =>
         subjectName: subjectYear.subjectName,
         subjectId: subjectYear.subjectId,
         syllabusUpdatedYear,
-        key: getUniqueId(),
       };
     })
-  ).flat();
+  ).flat().map((subjectYear, index) => ({...subjectYear, key: index}));
 
 const SyllabiComponent = ({
   dispatchSyllabiRequest,

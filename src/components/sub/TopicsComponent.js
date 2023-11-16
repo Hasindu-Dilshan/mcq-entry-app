@@ -48,10 +48,10 @@ const TopicsComponent = ({ subjectId, syllabusUpdatedYear, isFetchingTopics, dis
   useEffect(() => {
     async function fetchTopics(subjectId, syllabusUpdatedYear) {
       dispatchTopicsRequest();
-      const topics = await getTopics(subjectId, syllabusUpdatedYear);
+      const topicsArray = await getTopics(subjectId, syllabusUpdatedYear);
       dispatchTopicsSuccess();
 
-      setTopics(topics);
+      setTopics(topicsArray);
     }
 
     if (subjectId && syllabusUpdatedYear)
