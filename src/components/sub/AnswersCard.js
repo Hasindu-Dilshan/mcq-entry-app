@@ -3,8 +3,10 @@ import AnswerComponent from "./AnswerComponent";
 
 const AnswersCard = ({ handleAddAnswer, answerRows, handleDeleteAnswerRow, handleAnswerFieldChange }) => {
   useEffect(() => {
-    handleAddAnswer();
-  }, [])
+    if(answerRows.length === 0) {
+      handleAddAnswer();
+    }
+  }, [answerRows])
   
   return (
     <div className="col-xl-12 col-sm-12 col-12 mt-5">

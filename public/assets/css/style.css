@@ -5112,6 +5112,21 @@ a.btn-addmembers:hover {
     color: #FF8D07;
     border: 1px solid #FF8D07;
 }
+a.btn-addmembers-disabled {
+    background: var(--secondary);
+    color: #fff;
+    padding: 10px 25px;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 10px;
+    border: 1px solid var(--secondary);
+    display: inline-block;
+}
+
+a.btn-addmembers-disabled:hover {
+	color: #fff
+}
+
 .employee-contents ul li {
     display: flex;
     align-items: center;
