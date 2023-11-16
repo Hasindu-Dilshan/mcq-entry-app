@@ -42,7 +42,7 @@ const AnswerComponent = ({ id, answerRow, handleDeleteAnswerRow, handleAnswerFie
         <label>{id + 1} </label>
       </td>
       <td>
-        <textarea ref={answerTextRef} rows="3" cols="50" className="form-control" defaultValue={typeof answerRow === "String" ? answerRow : ''} onKeyUp={handleKeyUp}></textarea>
+        <textarea ref={answerTextRef} rows="3" cols="50" className="form-control" defaultValue={typeof answerRow === "string" ? answerRow : ''} onKeyUp={handleKeyUp}></textarea>
       </td>
       <td>
         <label className="customcheck ml-4 mb-3">

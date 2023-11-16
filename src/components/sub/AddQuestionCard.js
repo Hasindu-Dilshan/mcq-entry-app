@@ -59,6 +59,7 @@ const AddQuestionCard = ({ subjectName, syllabusUpdatedYear, title, topicName })
         newAnswerRows[i].correct = correct;
       }
     }
+
     setAnswerRows(newAnswerRows);
   }
 
@@ -68,12 +69,18 @@ const AddQuestionCard = ({ subjectName, syllabusUpdatedYear, title, topicName })
     const year = yearInputRef.current.value;
     const questionId = questionIdInputRef.current.value;
     const questionText = questionInputRef.current.value;
+    
+    const answers = answerRows.map((answerRow, index) => {
+      const {key, ...answerRowWithoutKey} = answerRow;
+      answerRowWithoutKey.id = index + 1;
+      return answerRowWithoutKey;
+    });
 
     const question = {
       year,
       questionId,
       questionText,
-      answerRows
+      answers
     };
 
     const response = await submitQuestion(question);
