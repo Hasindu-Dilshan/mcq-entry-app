@@ -61,7 +61,7 @@ async function fakeBackend() {
             function getTopics(body) {
                 const {subjectId, syllabusUpdatedYear} = JSON.parse(body);
 
-                const topics = syllabus_topics.filter(syllabus_topic => syllabus_topic.subjectID === subjectId && syllabus_topic.syllabusUpdatedYear === syllabusUpdatedYear)[0].topics;
+                const topics = syllabus_topics.filter(syllabus_topic => syllabus_topic.subjectId === subjectId && syllabus_topic.syllabusUpdatedYear === syllabusUpdatedYear)[0].topics;
                 
                 return ok(topics);
             }

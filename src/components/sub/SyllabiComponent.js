@@ -10,7 +10,6 @@ import {
 const mapStateToProps = (state) => {
   return {
     isFetchingSyllabi: state.topic.isFetchingSyllabi,
-    subjectYearIndex: state.topic.subjectYearIndex,
   };
 };
 
@@ -19,7 +18,6 @@ const mapDispatchToProps = (dispatch) => ({
     subjectId,
     subjectName,
     syllabusUpdatedYear,
-    subjectYearIndex,
     title
   ) =>
     dispatch({
@@ -28,7 +26,6 @@ const mapDispatchToProps = (dispatch) => ({
         subjectId,
         subjectName,
         syllabusUpdatedYear,
-        subjectYearIndex,
         title,
       },
     }),
@@ -45,9 +42,8 @@ const mapDispatchToProps = (dispatch) => ({
 const onSyllabusChange = async (event, title, dispatchSyllabusChange) => {
   const selectedOption = event.target.options[event.target.selectedIndex];
 
-  const subjectId = Number(selectedOption.getAttribute("subjectid"));
+  const subjectId = selectedOption.getAttribute("subjectid");
   const subjectName = selectedOption.getAttribute("subjectname");
-  const subjectYearIndex = Number(selectedOption.getAttribute("value"));
   const syllabusUpdatedYear = Number(
     selectedOption.getAttribute("syllabusupdatedyear")
   );
@@ -56,7 +52,6 @@ const onSyllabusChange = async (event, title, dispatchSyllabusChange) => {
     subjectId,
     subjectName,
     syllabusUpdatedYear,
-    subjectYearIndex,
     title
   );
 };
@@ -75,7 +70,6 @@ const getSubjectYearArray = (data) =>
 const SyllabiComponent = ({
   dispatchSyllabiRequest,
   dispatchSyllabiSuccess,
-  subjectYearIndex,
   isFetchingSyllabi,
   dispatchSyllabusChange,
 }) => {
@@ -90,8 +84,6 @@ const SyllabiComponent = ({
       dispatchSyllabiSuccess();
   
       const subjectYearArray = getSubjectYearArray(data);
-
-      // console.log(subjectYearArray);
 
       setTitle(data.title);
       setSubjectYearList(subjectYearArray);

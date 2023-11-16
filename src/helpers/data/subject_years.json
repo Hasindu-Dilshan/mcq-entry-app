@@ -2,7 +2,7 @@
     "subjectYears": [
         {
             "subjectName": "භෞතික විද්‍යාව",
-            "subjectId": 1,
+            "subjectId": "1",
             "syllabusUpdatedYears": [
                 2003,
                 2012,
@@ -11,7 +11,7 @@
         },
         {
             "subjectName": "රසායන විද්‍යාව",
-            "subjectId": 2,
+            "subjectId": "2",
             "syllabusUpdatedYears": [
                 2003,
                 2012,
@@ -20,7 +20,7 @@
         },
         {
             "subjectName": "ජීව විද්‍යාව",
-            "subjectId": 3,
+            "subjectId": "3",
             "syllabusUpdatedYears": [
                 2003,
                 2012,

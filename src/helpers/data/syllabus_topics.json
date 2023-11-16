@@ -1,6 +1,6 @@
 [
     {
-        "subjectID": 1,
+        "subjectId": "1",
         "syllabusUpdatedYear": 2003,
         "topics": [
             "මිනුම",
@@ -17,7 +17,7 @@
         ]
     },
     {
-        "subjectID": 1,
+        "subjectId": "1",
         "syllabusUpdatedYear": 2012,
         "topics": [
             "ධාරා විද්‍යුතය",
@@ -27,14 +27,14 @@
         ]
     },
     {
-        "subjectID": 1,
+        "subjectId": "1",
         "syllabusUpdatedYear": 2019,
         "topics": [
             "පදාර්ථ හා විකිරණ"
         ]
     },
     {
-        "subjectID": 2,
+        "subjectId": "2",
         "syllabusUpdatedYear": 2003,
         "topics": [
             "මිනුම",
@@ -51,7 +51,7 @@
         ]
     },
     {
-        "subjectID": 2,
+        "subjectId": "2",
         "syllabusUpdatedYear": 2012,
         "topics": [
             "ධාරා විද්‍යුතය",
@@ -61,14 +61,14 @@
         ]
     },
     {
-        "subjectID": 2,
+        "subjectId": "2",
         "syllabusUpdatedYear": 2019,
         "topics": [
             "පදාර්ථ හා විකිරණ"
         ]
     },
     {
-        "subjectID": 3,
+        "subjectId": "3",
         "syllabusUpdatedYear": 2003,
         "topics": [
             "මිනුම",
@@ -85,7 +85,7 @@
         ]
     },
     {
-        "subjectID": 3,
+        "subjectId": "3",
         "syllabusUpdatedYear": 2012,
         "topics": [
             "ධාරා විද්‍යුතය",
@@ -95,7 +95,7 @@
         ]
     },
     {
-        "subjectID": 3,
+        "subjectId": "3",
         "syllabusUpdatedYear": 2019,
         "topics": [
             "පදාර්ථ හා විකිරණ"
