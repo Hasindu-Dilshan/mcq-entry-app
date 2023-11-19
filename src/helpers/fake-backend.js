@@ -4,7 +4,6 @@ const { users, syllabi, syllabus_topics } = require('./data');
 
 
 async function fakeBackend() {
-    console.log('====Starting fake-backend====');
 
     let realFetch = window.fetch;
     window.fetch = function (url, opts) {

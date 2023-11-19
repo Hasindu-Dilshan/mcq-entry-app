@@ -1,17 +1,13 @@
 import { connect } from "react-redux";
 import { APP_LOAD, REDIRECT } from "./constants/actionTypes";
 
-import { store } from "./store";
 import { routes } from "./routes";
 
 // import logo from './logo.svg';
 import "./App.css";
-import { BrowserRouter, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import HomeLayout from "./layout/HomeLayout";
-import Login from "./components/auth/Login";
 import { history } from "./helpers";
-import TestAPIs from "./components/test/TestAPIs";
-import { useEffect } from "react";
 
 const mapStateToProps = (state) => {
   return {
