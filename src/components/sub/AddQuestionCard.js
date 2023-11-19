@@ -117,7 +117,7 @@ const AddQuestionCard = ({ subjectId, topicId, subjectName, syllabusUpdatedYear,
   }
 
   return (
-    <div className="card">
+    <div className="card" id="add-question-card">
       <div className="card-header">
         <h3 className="card-titles">{subjectName} {syllabusUpdatedYear} {title}</h3>
       </div>
@@ -129,7 +129,7 @@ const AddQuestionCard = ({ subjectId, topicId, subjectName, syllabusUpdatedYear,
         <div className="form-creation">
           <div className="col-xl-6 col-sm-6 col-12">
             <div className="form-group">
-              <label htmlFor="year" style={{ fontSize: 18, fontWeight: 600 }}>
+              <label htmlFor="year">
                 Year <span className="mandatory">*</span>
               </label>
               <input
@@ -145,7 +145,7 @@ const AddQuestionCard = ({ subjectId, topicId, subjectName, syllabusUpdatedYear,
 
           <div className="col-xl-6 col-sm-6 col-12">
             <div className="form-group">
-              <label htmlFor="questionId" style={{ fontSize: 18, fontWeight: 600 }}>
+              <label htmlFor="questionId">
                 Question ID <span className="mandatory">*</span>
               </label>
               <input
@@ -161,7 +161,7 @@ const AddQuestionCard = ({ subjectId, topicId, subjectName, syllabusUpdatedYear,
 
           <div className="col-xl-12 col-sm-12 col-12">
             <div className="form-group">
-              <label htmlFor="question"  style={{ fontSize: 18, fontWeight: 600 }}>
+              <label htmlFor="question">
                 Question <span className="mandatory">*</span>
               </label>
               <textarea id="question" ref={questionInputRef} rows="2" cols="50" className="form-control"></textarea>

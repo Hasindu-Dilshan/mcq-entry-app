@@ -261,6 +261,15 @@ a.action_label5 {
     font-size: 12px;
     display: block;
 }
+a.action_label5:hover {
+	color: #eee;
+    border: 1px solid #2F47BA;
+	background-color: #2F47BA;
+    padding: 7px 15px;
+    border-radius: 5px;
+    font-size: 12px;
+    display: block;
+}
 .table-selects.inactive {
     color: #FF8D07;
     border-color: #FF8D07;
@@ -383,6 +392,16 @@ a.action_label3 {
 a.action_label4 {
     font-size: 12px;
     color: #DC3545;
+    border: 1px solid #DC3545;
+	display: block;
+    padding: 7px 15px;
+    border-radius: 5px;
+}
+
+a.action_label4:hover {
+    font-size: 12px;
+    color: #eee;
+	background-color: #DC3545;
     border: 1px solid #DC3545;
 	display: block;
     padding: 7px 15px;

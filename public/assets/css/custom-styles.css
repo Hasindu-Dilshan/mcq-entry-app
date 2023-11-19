@@ -14,6 +14,11 @@
 	font-size: 18px !important;
 }
 
+#add-question-card label {
+	font-size: 18px;
+	font-weight: 600;
+}
+
 /* The customcheck */
 .customcheck {
     display: block;
@@ -47,12 +52,17 @@
 }
 
 /* On mouse-over, add a grey background color */
-.customcheck:hover input ~ .checkmark {
+tr:hover input ~ .checkmark {
+    background-color: #fff;
+}
+
+/* On mouse-over, add a grey background color */
+tr .customcheck:hover input ~ .checkmark {
     background-color: #ccc;
 }
 
 /* When the checkbox is checked, add a blue background */
-.customcheck input:checked ~ .checkmark {
+tr .customcheck input:checked ~ .checkmark {
     background-color: #02cf32;
     border-radius: 5px;
 }
@@ -116,6 +126,10 @@
 	color: var(--nav-favicon-blue);
 }
 
+textarea {
+    padding: 14px !important;
+}
+
 @media (max-width: 575.98px) {
     .form-creation {
         padding: 0px;
@@ -123,107 +137,13 @@
     .card-body {
 		padding: 0 rem;
 	}
+	.card-titles {
+		font-weight: bold !important;
+		font-size: 20px !important;	
+	}
+	.card-sub-titles {
+		font-weight: bold !important;
+		font-size: 20px !important;
+	}
 
-    
-    
-	.card {
-		margin-bottom: 0.9375rem;
-	}
-	.page-wrapper > .content {
-		padding: 0.9375rem 0.9375rem 0;
-	}
-	.chat-window {
-		margin-bottom: 0.9375rem;
-	}
-	
-	.head-link-set ul {
-		display: block;
-	}
-	.card-header {
-		padding: .75rem 1.25rem;
-	}
-	.card-footer {
-		padding: .75rem 1.25rem;
-	}
-	.page-header {
-		margin-bottom: 0.9375rem;
-	}
-	.sidebar-menu ul {
-		padding: 25px 0 0;
-	}
-	.pagination-lg .page-link {
-		font-size: 1.2rem;
-		padding: 0.5rem 0.625rem;
-	}
-	.head-link-set {
-		display: inline-block;
-		align-items: center;
-		justify-content: normal;
-		width: 100%;
-	}
-	.card-body-inner ul li {
-		margin: 0 0 15px;
-	}			
-	a.btn-add {
-		width: 100%;
-	}
-	.invoice-details {
-		float: left;
-		text-align: left;
-	}
-	.fc-toolbar .fc-right {
-		display: inline-block;
-		float: none;
-		margin: 10px auto 0;
-		width: 100%;
-		clear: both;
-	}
-	a.btn-dash{
-		margin-bottom: 15px;
-	}
-	.fc-toolbar .fc-left {
-		float: none;
-		margin: 0 auto;
-		width: 100%;
-	}
-	.fc-toolbar .fc-center {
-		display: inline-block;
-		width: 100%;
-		margin-top: 15px;
-		text-align: center;
-	}
-	.fc-toolbar .fc-center h2 {
-		width: 100%;
-	}
-	
-	.chat-window .chat-cont-right .chat-header .media .media-body {
-		display: none;
-	}
-	.chat-window .chat-cont-left .chat-users-list a.media .media-body > div:first-child .user-name,
-	.chat-window .chat-cont-left .chat-users-list a.media .media-body > div:first-child .user-last-chat {
-		max-width: 160px;
-	}
-	.page-header .breadcrumb {
-		display: none;
-	}
-	.form-week li {
-		margin: 1px;
-	}
-	.btn-apply {
-		padding: 10px ;
-		font-size: 14px;
-	}
-	.user-menu {
-		display: none !important;
-	}
-	.mobile-user-menu {
-		display: block;
-	}
-	.checkworking ul,
-	.form-week ul	 {
-		flex-wrap: wrap;
-	}
-	.card-body .default-set ul{
-		display: block !important	;
-	}
 }
