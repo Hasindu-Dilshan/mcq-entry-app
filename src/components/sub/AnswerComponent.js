@@ -42,18 +42,32 @@ const AnswerComponent = ({ id, answerRow, handleDeleteAnswerRow, handleAnswerFie
         <label>{id + 1} </label>
       </td>
       <td>
-        <textarea ref={answerTextRef} rows="3" cols="50" className="form-control" defaultValue={typeof answerRow === "string" ? answerRow : ''} onKeyUp={handleKeyUp}></textarea>
+        <textarea 
+          ref={answerTextRef} 
+          rows="3" 
+          cols="50" 
+          className="form-control" 
+          defaultValue={
+            typeof answerRow === "string" ? answerRow : ''
+          } 
+          onKeyUp={handleKeyUp}
+        ></textarea>
       </td>
       <td>
         <label className="customcheck ml-4 mb-3">
-          <input ref={answerCorrectRef} checked={isChecked} onChange={handleToggle} type="checkbox" />
+          <input 
+            ref={answerCorrectRef} 
+            checked={isChecked} 
+            onChange={handleToggle} 
+            type="checkbox" 
+          />
           <span className="checkmark"></span>
         </label>
       </td>
       <td>
         <div className="actionset">
           <label>
-            <a className="action_label5" href="add-Review.html">
+            <a onClick={(event) => {event.preventDefault()}}className="action_label5">
               Upload <FeatherIcon icon="edit" />
             </a>
           </label>

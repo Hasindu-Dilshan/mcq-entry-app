@@ -18,6 +18,14 @@
 	font-size: 18px;
 	font-weight: 600;
 }
+#add-question-card .card {
+    overflow-x: auto; /* Add horizontal scroll when content overflows */
+}
+
+.table-responsive {
+    min-width: 700px; /* Set the fixed width of the table as needed */
+    table-layout: fixed;
+}
 
 /* The customcheck */
 .customcheck {
