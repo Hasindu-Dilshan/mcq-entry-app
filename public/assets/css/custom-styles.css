@@ -142,6 +142,12 @@ textarea {
     .form-creation {
         padding: 0px;
     }
+     .form-creation > * {
+        padding: 0px;
+    }
+    .card-header {
+        padding: 15px !important;
+    }
     .card-body {
 		padding: 0 rem;
 	}
@@ -151,7 +157,12 @@ textarea {
 	}
 	.card-sub-titles {
 		font-weight: bold !important;
-		font-size: 20px !important;
+		font-size: 18px !important;
 	}
+
+    .table-responsive tr td:first-child, 
+    .table-responsive tr th:first-child {
+        padding-left: 15px;
+    }
 
 }

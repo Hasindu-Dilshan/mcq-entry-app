@@ -1,7 +1,12 @@
 import { useEffect } from "react";
 import AnswerComponent from "./AnswerComponent";
 
-const AnswersCard = ({ handleAddAnswer, answerRows, handleDeleteAnswerRow, handleAnswerFieldChange }) => {
+const AnswersCard = ({ 
+  handleAddAnswer, 
+  answerRows, 
+  handleDeleteAnswerRow, 
+  handleAnswerFieldChange 
+}) => {
   useEffect(() => {
     if(answerRows.length === 0) {
       handleAddAnswer();

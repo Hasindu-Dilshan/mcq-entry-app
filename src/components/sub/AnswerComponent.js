@@ -1,7 +1,12 @@
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import { useRef, useState } from "react";
 
-const AnswerComponent = ({ id, answerRow, handleDeleteAnswerRow, handleAnswerFieldChange }) => {
+const AnswerComponent = ({ 
+  id, 
+  answerRow, 
+  handleDeleteAnswerRow, 
+  handleAnswerFieldChange 
+}) => {
 
   const [isChecked, setIsChecked] = useState(false);
 

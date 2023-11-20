@@ -6969,6 +6969,6 @@ label.logo-upload {
 		width: auto;
 		padding: 10px;
 		margin: 0;
-		font-size: 12px;
+		/* font-size: 12px; */
 	}
 }

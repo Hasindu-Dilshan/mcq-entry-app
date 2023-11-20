@@ -117,7 +117,7 @@ const AddQuestionCard = ({ subjectId, topicId, subjectName, syllabusUpdatedYear,
   }
 
   return (
-    <div className="card" id="add-question-card">
+    <div className="card">
       <div className="card-header">
         <h3 className="card-titles">{subjectName} {syllabusUpdatedYear} {title}</h3>
       </div>
