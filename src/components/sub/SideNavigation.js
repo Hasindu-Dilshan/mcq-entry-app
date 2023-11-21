@@ -49,7 +49,7 @@ const SideNavigation = () => {
                 </div>
               </div>
 
-              <ul>
+              <ul class="app-routes">
                 {appRoutes.map((route, index) => {
                   return (
                     route.sidebarProps &&
