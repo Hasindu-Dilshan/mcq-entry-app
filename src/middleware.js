@@ -54,7 +54,7 @@ const localStorageMiddleware = store => next => action => {
         agent.setToken(action.user.token);
       }
     } else if (action.type === LOGOUT) {
-      window.localStorage.setItem('jwt', '');
+      window.localStorage.removeItem('jwt');
       agent.setToken(null);
     }
   

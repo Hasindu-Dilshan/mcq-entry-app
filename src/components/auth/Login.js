@@ -15,10 +15,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   dispatchOnSubmit: (user) =>
   {
-    dispatch({
-      type: "LOGIN",
-      user,
-    })
+    dispatch({type: "LOGIN", user})
   },
 });
 

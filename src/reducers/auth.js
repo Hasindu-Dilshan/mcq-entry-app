@@ -1,5 +1,5 @@
 import {
-    LOGIN,
+    LOGIN, LOGOUT,
 } from '../constants/actionTypes';
 
 const initialState = {
@@ -14,6 +14,8 @@ export default (state = initialState, action) => {
     switch(action.type) {
         case LOGIN:
             return {...state, ...action.user};
+        case LOGOUT:
+            return {...state, ...initialState };
         default:
             return state;
     }

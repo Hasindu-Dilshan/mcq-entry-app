@@ -13,14 +13,18 @@ const Dashboard =  ({ role }) => {
   const [userRole, setUserRole] = useState(null);
 
   useEffect(() => {
-    
-      setUserRole( role.charAt(0).toUpperCase() + role.slice(1) );
+      if(role) {
+        setUserRole( role.charAt(0).toUpperCase() + role.slice(1) );
+      }
+      else {
+        setUserRole(null);
+      }
   }, [role]);
   
   return (
       <>
-        <WelcomeBanner userRole={userRole} />
         <BreadcrumbNavigation userRole={userRole} />
+        <WelcomeBanner userRole={userRole} />
       </>
   );
 }

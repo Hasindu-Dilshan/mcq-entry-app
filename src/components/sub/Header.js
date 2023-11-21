@@ -1,7 +1,18 @@
 import { Link } from "react-router-dom";
 import FeatherIcon from "feather-icons-react";
+import { LOGOUT } from "../../constants/actionTypes";
+import { connect } from "react-redux";
 
-const Header = () => {
+const mapDispatchToProps = (dispatch) => ({
+  dispatchLogout: () =>
+    dispatch({ type: LOGOUT }),
+});
+
+const Header = ({ dispatchLogout }) => {
+
+  function handleLogout() {
+    dispatchLogout();
+  }
 
   return (
     <div className="header">
@@ -100,7 +111,7 @@ const Header = () => {
             <Link className="dropdown-item" to="settings.html">
               <i data-feather="settings" className="mr-1"></i> Settings
             </Link>
-            <Link className="dropdown-item" to="login.html">
+            <Link className="dropdown-item" onClick={handleLogout} to="">
               <i data-feather="log-out" className="mr-1"></i> Logout
             </Link>
           </div>
@@ -131,4 +142,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default connect(null, mapDispatchToProps)(Header);
