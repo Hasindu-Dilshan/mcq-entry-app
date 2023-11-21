@@ -25,7 +25,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const App = () => {
-
   history.navigate = useNavigate();
   history.location = useLocation();
   

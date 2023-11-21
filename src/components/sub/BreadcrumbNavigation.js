@@ -1,5 +1,5 @@
 
-const BreadcrumbNavigation = () => {
+const BreadcrumbNavigation = ({ userRole }) => {
 
   return (
     <div className="row mb-4">
@@ -18,7 +18,7 @@ const BreadcrumbNavigation = () => {
             </li>
             <li className="breadcrumb-item active">Dashboard</li>
           </ul>
-          <h3>Admin Dashboard</h3>
+          <h3>{userRole} Dashboard</h3>
         </div>
       </div>
     </div>

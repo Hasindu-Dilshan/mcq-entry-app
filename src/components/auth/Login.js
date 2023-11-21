@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { history } from "../../helpers";
+import { history, login } from "../../helpers";
 
 const mapStateToProps = (state) => {
   return {
@@ -13,19 +13,36 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onSubmit: (email, password) =>
+  dispatchOnSubmit: (user) =>
+  {
     dispatch({
       type: "LOGIN",
-      payload: { user: { email: email, password: password, token: "jwt" } },
-    }),
+      user,
+    })
+  },
 });
 
 function Login(props) {
+
+  async function onSubmit(event) {
+    event.preventDefault();
+
+    const user = await login(email, password);
+  
+    if(user) {
+      props.dispatchOnSubmit(user);
+    }
+    else {
+      alert('Wrong credentials')
+    }
+    
+  }
+  
   useEffect(() => {
     if (props.auth?.email) {
-      history.navigate("/test");
+      history.navigate("/dashboard");
     }
-  }, []);
+  }, [props.auth?.email]);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -56,10 +73,7 @@ function Login(props) {
                   <h1>Login</h1>
                   <p className="account-subtitle">Access to our dashboard</p>
                   <form
-                    onSubmit={(event) => {
-                      event.preventDefault();
-                      props.onSubmit(email, password);
-                    }}
+                    onSubmit={onSubmit}
                   >
                     <div className="form-group">
                       <label className="form-control-label">Email Address</label>

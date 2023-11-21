@@ -34,10 +34,10 @@ async function fakeBackend() {
             // route functions
 
             function authenticate() {
-                const { username, password } = body();
-                const user = users['users'].find(x => x.username === username && x.password === password);
+                const { email, password } = body();
+                const user = users.find(x => x.email === email && x.password === password);
 
-                if (!user) return error('Username or password is incorrect');
+                if (!user) return error('email or password is incorrect');
 
                 return ok({
                     _id: user._id,
@@ -88,7 +88,7 @@ async function fakeBackend() {
             }
 
             function body() {
-                return opts.body && JSON.parse(opts.body);    
+                return opts.body && JSON.parse(opts.body);
             }
         });
     }

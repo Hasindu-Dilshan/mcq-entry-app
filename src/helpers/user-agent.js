@@ -20,6 +20,12 @@ export const submitQuestion = async(question) => {
     return response;
 }
 
+export const login = async(email, password) => {
+    const response = await fetchWrapper.post(`${baseUrl}/login`, {email, password});
+
+    return response; // response: jwt
+}
+
 const fetchWrapper = {
     get: request('GET'),
     post: request('POST'),

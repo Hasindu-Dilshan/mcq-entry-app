@@ -2,10 +2,18 @@ import {
     LOGIN,
 } from '../constants/actionTypes';
 
-export default (state = {}, action) => {
+const initialState = {
+    email: null,
+    _id: null,
+    name: null,
+    role: null,
+    token: null,
+}
+
+export default (state = initialState, action) => {
     switch(action.type) {
         case LOGIN:
-            return {...state, email: action.payload.user.email};
+            return {...state, ...action.user};
         default:
             return state;
     }
