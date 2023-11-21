@@ -1,6 +1,6 @@
 [
-    {"_id": 1, "name": "David Jones", "email": "davidjones10@gmail.com", "password": "david123", "role": "admin"},
-    {"_id": 2, "name": "Jach Priboi", "email": "pribio10@gmail.com", "password": "123", "role": "user"},
-    {"_id": 3, "name": "Rebecca Anya", "email": "anya10@gmail.com", "password": "123", "role": "user"},
-    {"_id": 3, "name": "Rebecca Anya", "email": "a@g", "password": "a", "role": "user"}
+    {"_id": 1, "name": "David Jones", "email": "davidjones10@gmail.com", "password": "david123", "role": "admin", "token": "fake-jwt-1"},
+    {"_id": 2, "name": "Jach Priboi", "email": "pribio10@gmail.com", "password": "123", "role": "user", "token": "fake-jwt-2"},
+    {"_id": 3, "name": "Rebecca Anya", "email": "anya10@gmail.com", "password": "123", "role": "user", "token": "fake-jwt-3"},
+    {"_id": 3, "name": "Rebecca Anya", "email": "a@g", "password": "a", "role": "user", "token": "fake-jwt-4"}
 ]

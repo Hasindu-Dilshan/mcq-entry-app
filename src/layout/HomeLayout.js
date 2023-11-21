@@ -1,9 +1,41 @@
+import { useEffect } from "react";
 import Header from "../components/sub/Header";
 import SideNavigation from "../components/sub/SideNavigation";
 import { Outlet } from "react-router-dom";
+import { connect } from "react-redux";
+import { getProfile, history } from "../helpers";
 
-const HomeLayout = () => {
-  
+const mapDispatchToProps = (dispatch) => ({
+  dispatchProfile: (user) => {
+    dispatch({ type: "LOGIN", user });
+  },
+});
+
+const mapStateToProps = (state) => ({
+  token: state.auth.token,
+});
+
+const HomeLayout = ({ token, dispatchProfile }) => {
+  useEffect(() => {
+    async function checkToken() {
+      if (!token) {
+        const retrievedToken = localStorage.getItem("jwt");
+        if (!retrievedToken) {
+          history.navigate("/auth/login");
+        } else {
+          const user = await getProfile(retrievedToken);
+          if (user) {
+            dispatchProfile(user);
+          } else {
+            alert("Wrong credentials");
+          }
+        }
+      }
+    }
+
+    checkToken();
+  }, [token]);
+
   return (
     <div className="main-wrapper">
       <Header />
@@ -19,4 +51,4 @@ const HomeLayout = () => {
   );
 };
 
-export default HomeLayout;
+export default connect(mapStateToProps, mapDispatchToProps)(HomeLayout);

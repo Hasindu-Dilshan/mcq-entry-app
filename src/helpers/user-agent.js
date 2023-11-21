@@ -9,7 +9,7 @@ export const getAllSyllabi = async () => {
 }
 
 export const getTopics = async (subjectId, syllabusUpdatedYear) => {
-    const topics = await fetchWrapper.post(`${baseUrl}/topics`, {subjectId, syllabusUpdatedYear});
+    const topics = await fetchWrapper.get(`${baseUrl}/topics`, {subjectId, syllabusUpdatedYear});
 
     return topics;
 }
@@ -24,6 +24,12 @@ export const login = async(email, password) => {
     const response = await fetchWrapper.post(`${baseUrl}/login`, {email, password});
 
     return response; // response: jwt
+}
+
+export const getProfile = async (token) => {
+    const topics = await fetchWrapper.get(`${baseUrl}/profile`, {token});
+
+    return topics;
 }
 
 const fetchWrapper = {

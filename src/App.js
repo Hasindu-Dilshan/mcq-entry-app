@@ -8,6 +8,8 @@ import "./App.css";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import HomeLayout from "./layout/HomeLayout";
 import { history } from "./helpers";
+import Login from "./components/auth/Login";
+import AuthLayout from "./layout/AuthLayout";
 
 const mapStateToProps = (state) => {
   return {
@@ -30,10 +32,11 @@ const App = () => {
   
   return (
     <Routes>
-      {/* <Route path="/login" element={<Login />} />
-      <Route path="/test" element={<TestAPIs />} /> */}
       <Route path="/" element={<HomeLayout />}>
         {routes}
+      </Route>
+      <Route path="/auth/" element={<AuthLayout />}>
+        <Route path="login/" element={<Login />} />
       </Route>
       
     </Routes>

@@ -19,10 +19,12 @@ async function fakeBackend() {
                         return getUsers();
                     case url.endsWith('/syllabi') && opts.method === 'GET':
                         return getSyllabi();
-                    case url.endsWith('/topics') && opts.method === 'POST':
+                    case url.endsWith('/topics') && opts.method === 'GET':
                         return getTopics(opts.body);
                     case url.endsWith('/submit') && opts.method === 'POST':
                         return createQuestion(opts.body);
+                    case url.endsWith('/profile') && opts.method === 'GET':
+                        return getUserProfile(opts.body);
                     default:
                         // pass through any requests not handled above
                         return realFetch(url, opts)
@@ -44,7 +46,7 @@ async function fakeBackend() {
                     name: user.name,
                     email: user.email,
                     role: user.role,
-                    token: 'fake-jwt-token'
+                    token: user.token
                 });
             }
 
@@ -59,7 +61,6 @@ async function fakeBackend() {
 
             function getTopics(body) {
                 const {subjectId, syllabusUpdatedYear} = JSON.parse(body);
-
                 const topics = syllabus_topics.filter(syllabus_topic => syllabus_topic.subjectId === subjectId && syllabus_topic.syllabusUpdatedYear === syllabusUpdatedYear)[0].topics;
                 
                 return ok(topics);
@@ -67,6 +68,14 @@ async function fakeBackend() {
 
             function createQuestion(body) {
                 return ok(body);
+            }
+            
+            function getUserProfile() {
+                const { token } = body();
+
+                const user = users.find(x => x.token === token);
+                delete user.password;
+                return ok(user);
             }
 
             // helper functions

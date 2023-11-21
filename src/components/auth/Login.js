@@ -61,7 +61,7 @@ function Login(props) {
           <div className="container">
             <img
               className="img-fluid logo-dark mb-2"
-              src="assets/img/logo.png"
+              src="/assets/img/logo.png"
               alt="Logo"
             />
             <div className="loginbox">
