@@ -64,14 +64,14 @@ const AddQuestionCard = ({ subjectId, topicId, subjectName, syllabusUpdatedYear,
 
     let newAnswerRows = [...answerRows];
 
-    for(let i = 0; i < answerRows.length; i++) {
-      if(newAnswerRows[i].key === key) {
-        newAnswerRows[i].answer = text;
-        newAnswerRows[i].correct = correct;
-      }
-    }
+    const index = newAnswerRows.findIndex(answerRow => answerRow.key === key);
 
-    setAnswerRows(newAnswerRows);
+    if (index !== -1) {
+      newAnswerRows[index].answer = text;
+      newAnswerRows[index].correct = correct;
+      setAnswerRows(newAnswerRows);
+    }
+    
   }
 
   async function handleSubmit() {

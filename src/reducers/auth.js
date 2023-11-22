@@ -8,6 +8,7 @@ const initialState = {
     name: null,
     role: null,
     token: null,
+    avatar: null,
 }
 
 export default (state = initialState, action) => {

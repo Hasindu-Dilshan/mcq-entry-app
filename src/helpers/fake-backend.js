@@ -46,7 +46,8 @@ async function fakeBackend() {
                     name: user.name,
                     email: user.email,
                     role: user.role,
-                    token: user.token
+                    token: user.token,
+                    avatar: user.avatar
                 });
             }
 

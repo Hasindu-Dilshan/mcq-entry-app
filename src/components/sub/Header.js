@@ -3,12 +3,19 @@ import FeatherIcon from "feather-icons-react";
 import { LOGOUT } from "../../constants/actionTypes";
 import { connect } from "react-redux";
 
-const mapDispatchToProps = (dispatch) => ({
+const mapStateToProps = state => ({
+  name: state.auth.name,
+  avatar: state.auth.avatar
+})
+
+const mapDispatchToProps = dispatch => ({
   dispatchLogout: () =>
     dispatch({ type: LOGOUT }),
 });
 
-const Header = ({ dispatchLogout }) => {
+const Header = ({ name, avatar, dispatchLogout }) => {
+
+  const avatarPath = `/assets/img/profiles/${avatar}`;
 
   function handleLogout() {
     dispatchLogout();
@@ -99,10 +106,10 @@ const Header = ({ dispatchLogout }) => {
             data-toggle="dropdown"
           >
             <span className="user-img">
-              <img src="/assets/img/profile.jpg" alt="" />
+              <img src={avatarPath} alt="" />
               <span className="status online"></span>
             </span>
-            <span>Kavin Hansen</span>
+            <span>{name}</span>
           </Link>
           <div className="dropdown-menu">
             <Link className="dropdown-item" to="profile.html">
@@ -142,4 +149,4 @@ const Header = ({ dispatchLogout }) => {
   );
 };
 
-export default connect(null, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -1,8 +1,6 @@
 import Dashboard from "../components/main/Dashboard";
 import ChooseSyllabus from "../components/main/ChooseSyllabus";
 import AddQuestions from "../components/main/AddQuestions";
-import TestAPIs from "../components/test/TestAPIs";
-import Login from "../components/auth/Login";
 
 const appRoutes = [
   {
@@ -36,25 +34,6 @@ const appRoutes = [
       alt: "sidebar_img"
     },
   },
-  {
-    path: "/login",
-    element: <Login />,
-    // state: "add_questions",
-    sidebarProps: {
-      display: "Add Questions",
-      img: "leave.svg",
-      alt: "sidebar_img"
-    },
-  },
-
-
-
-  {
-    path: "/test",
-    element: <TestAPIs />,
-    // state: "TestAPIs",
-  },
-  
 ];
 
 export default appRoutes;
