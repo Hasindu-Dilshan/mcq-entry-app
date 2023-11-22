@@ -4,6 +4,7 @@ import SideNavigation from "../components/sub/SideNavigation";
 import { Outlet } from "react-router-dom";
 import { connect } from "react-redux";
 import { getProfile, history } from "../helpers";
+import ImageUploadModal from "../components/sub/ImageUploadModal";
 
 const mapDispatchToProps = (dispatch) => ({
   dispatchProfile: (user) => {
@@ -47,6 +48,9 @@ const HomeLayout = ({ token, dispatchProfile }) => {
           <Outlet />
         </div>
       </div>
+
+      <ImageUploadModal />
+
     </div>
   );
 };
