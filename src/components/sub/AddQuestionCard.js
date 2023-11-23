@@ -8,9 +8,7 @@ import { submitQuestion } from "../../helpers/user-agent";
 import { useRef } from "react";
 import { QUESTION_SUBMIT_START, QUESTION_SUBMIT_SUCCESSFUL } from "../../constants/actionTypes";
 
-const mapStateToProps = (state) => {
-
-  return {
+const mapStateToProps = (state) => ({
     subjectId: state.topic.subjectId,
     topicId: state.topic.topicId,
     subjectName: state.topic.subjectName,
@@ -18,8 +16,7 @@ const mapStateToProps = (state) => {
     topicName: state.topic.topicName,
     title: state.topic.title,
     isSubmitting: state.question.isSubmitting,
-  }
-}
+})
 
 const mapDispatchToProps = (dispatch) => ({
 
@@ -33,7 +30,7 @@ const AddQuestionCard = ({ subjectId, topicId, subjectName, syllabusUpdatedYear,
 
   const [keyCount, setkeyCount] = useState(0);
   const [answerRows, setAnswerRows] = useState([]);
-
+  const [explanationImages, setExplanationImages] = useState(null);
 
   const yearInputRef = useRef(null);
   const questionIdInputRef = useRef(null);
@@ -180,7 +177,7 @@ const AddQuestionCard = ({ subjectId, topicId, subjectName, syllabusUpdatedYear,
             </div>
           </div>
 
-          <ExplanationCard />
+          <ExplanationCard setExplanationImages={setExplanationImages}/>
 
           <div className="col-xl-12 col-sm-12 col-12">
             <div className="form-group">

@@ -3,7 +3,7 @@ const ImageUploadModal = () => {
     <div class="customize_popup">
       <div
         class="modal fade"
-        id="edit_workings"
+        id="upload-image"
         tabindex="-1"
         aria-labelledby="staticBackd"
         aria-hidden="true"
@@ -12,7 +12,7 @@ const ImageUploadModal = () => {
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="staticBackd">
-                Edit Working Week
+                Upload Image
               </h5>
               <button
                 type="button"
@@ -26,7 +26,7 @@ const ImageUploadModal = () => {
             <div class="modal-body">
               <div class=" col-md-12 p-0">
                 <div class="checkworking">
-                  <ul>
+                  {/* <ul>
                     <li>
                       <input type="checkbox" id="mon" checked />
                       <label for="mon">Mon</label>
@@ -55,7 +55,18 @@ const ImageUploadModal = () => {
                       <input type="checkbox" id="sun" />
                       <label for="sun">Sun</label>
                     </li>
-                  </ul>
+                  </ul> */}
+
+                  <input accept="image/*" type='file' id="imgInp" onChange={event => {
+                    const imgInp = document.getElementById("imgInp");
+                    const blah = document.getElementById("blah");
+                    const [file] = imgInp.files
+                    if (file) {
+                      blah.src = URL.createObjectURL(file)
+                    }
+                  }} />
+                  <img id="blah" src="#" alt="your image" />
+
                 </div>
               </div>
             </div>

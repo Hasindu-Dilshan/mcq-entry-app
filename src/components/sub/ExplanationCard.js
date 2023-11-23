@@ -1,7 +1,6 @@
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
-import ImageUploadModal from "./ImageUploadModal";
 
-const ExplanationCard = () => {
+const ExplanationCard = ({setExplanationImages}) => {
   
   return (
     <>
@@ -16,7 +15,7 @@ const ExplanationCard = () => {
             </div>
             <div className="actionset">
               <label>
-                <a className="action_label5" data-toggle="modal" data-target="#edit_workings">
+                <a className="action_label5" data-toggle="modal" data-target="#upload-image">
                   Upload 
                   <FeatherIcon icon="edit" />
                 </a>
@@ -25,7 +24,6 @@ const ExplanationCard = () => {
           </div>
         </div>
       </div>
-      <ImageUploadModal />
     </>
     
   );
