@@ -46,7 +46,7 @@ const ImageUploadModal = ({explanationImage, setExplanationImage, multipleImages
                         }
                       }} />
 
-                      <p>2</p>
+                      <p>Sample name</p>
                   </div>
                   
                   

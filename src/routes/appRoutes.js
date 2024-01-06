@@ -10,7 +10,7 @@ const appRoutes = [
     // state: "dashboared",
     sidebarProps: {
       display: "Dashboard",
-      img: "home.svg",
+      img: "dashboard.svg",
       alt: "sidebar_img",
     },
   },
@@ -20,7 +20,7 @@ const appRoutes = [
     // state: "choose_syllabus",
     sidebarProps: {
       display: "Choose Syllabus",
-      img: "employee.svg",
+      img: "choosesyllabus.svg",
       alt: "sidebar_img",
     },
   },
@@ -30,7 +30,7 @@ const appRoutes = [
     // state: "add_questions",
     sidebarProps: {
       display: "Add Questions",
-      img: "leave.svg",
+      img: "addquestions.svg",
       alt: "sidebar_img"
     },
   },

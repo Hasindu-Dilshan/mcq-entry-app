@@ -6,8 +6,8 @@ function ExplanationCard ({explanationImage, setExplanationImage, explanationInp
 
   /**
    * This property is component specific
-   * Example : Explanation card has can have multiple images,
-   * but Answer image can not
+   * Example : Explanation Card component has multiple images,
+   * while Answer Component has only single image
    */
   const multipleImages = false; 
 
