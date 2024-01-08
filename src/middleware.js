@@ -1,5 +1,3 @@
-import agent from './agent';
-
 import {
     ASYNC_START,
     ASYNC_END,
@@ -51,11 +49,9 @@ const localStorageMiddleware = store => next => action => {
       if (!action.error) {
 
         window.localStorage.setItem('jwt', action.user.token);
-        agent.setToken(action.user.token);
       }
     } else if (action.type === LOGOUT) {
       window.localStorage.removeItem('jwt');
-      agent.setToken(null);
     }
   
     next(action);

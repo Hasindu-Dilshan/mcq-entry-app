@@ -8,6 +8,7 @@ const defaultState = {
   appName: 'ZeroCode',
   currentSyllabi_b64: undefined,
   currentTopics_b64: undefined,
+  appLoaded: false,
 };
 
 const common =  (state = defaultState, action) => {
@@ -16,7 +17,6 @@ const common =  (state = defaultState, action) => {
     case APP_LOAD:
       return {
         ...state,
-        token: action.token || null,
         appLoaded: true,
       };
 

@@ -66,9 +66,11 @@ $(document).ready(function() {
         $(".page-wrapper").css("min-height", height);
       }
     });
-    if ($(".select").length > 0) {
-      $(".select").select2({ minimumResultsForSearch: -1, width: "100%" });
-    }
+    /* Commented to fix field duplication error */
+
+    // if ($(".select").length > 0) {
+    //   $(".select").select2({ minimumResultsForSearch: -1, width: "100%" });
+    // }
     if ($(".datetimepicker").length > 0) {
       $(".datetimepicker").datetimepicker({
         format: "DD-MM-YYYY",
