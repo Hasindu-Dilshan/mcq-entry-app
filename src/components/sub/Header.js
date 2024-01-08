@@ -49,7 +49,7 @@ const Header = ({ name, avatar, dispatchLogout }) => {
       </Link>
 
       <ul className="nav user-menu">
-        <li className="nav-item dropdown">
+        {/* <li className="nav-item dropdown">
           <Link
             to="#"
             className="dropdown-toggle nav-link pr-0"
@@ -97,7 +97,7 @@ const Header = ({ name, avatar, dispatchLogout }) => {
               <Link to="activities.html">View all Notifications</Link>
             </div>
           </div>
-        </li>
+        </li> */}
 
         <li className="nav-item dropdown has-arrow main-drop">
           <Link
@@ -112,10 +112,10 @@ const Header = ({ name, avatar, dispatchLogout }) => {
             <span>{name}</span>
           </Link>
           <div className="dropdown-menu">
-            <Link className="dropdown-item" to="profile.html">
+            <Link className="dropdown-item" to="">
               <i data-feather="user" className="mr-1"></i> Profile
             </Link>
-            <Link className="dropdown-item" to="settings.html">
+            <Link className="dropdown-item" to="">
               <i data-feather="settings" className="mr-1"></i> Settings
             </Link>
             <Link className="dropdown-item" onClick={handleLogout} to="">
@@ -134,13 +134,13 @@ const Header = ({ name, avatar, dispatchLogout }) => {
           <i className="fa fa-ellipsis-v"></i>
         </Link>
         <div className="dropdown-menu dropdown-menu-right">
-          <Link className="dropdown-item" to="profile.html">
+          <Link className="dropdown-item" to="">
             My Profile
           </Link>
-          <Link className="dropdown-item" to="settings.html">
+          <Link className="dropdown-item" to="">
             Settings
           </Link>
-          <Link className="dropdown-item" to="login.html">
+          <Link className="dropdown-item" onClick={handleLogout} to="">
             Logout
           </Link>
         </div>

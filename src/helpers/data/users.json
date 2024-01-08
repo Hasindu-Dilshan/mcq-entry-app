@@ -2,5 +2,5 @@
     {"_id": 1, "name": "David Jones", "email": "davidjones10@gmail.com", "password": "david123", "role": "admin", "token": "fake-jwt-1", "avatar": "avatar-02.jpg"},
     {"_id": 2, "name": "Jach Priboi", "email": "priboi10@gmail.com", "password": "123", "role": "user", "token": "fake-jwt-2", "avatar": "avatar-03.jpg"},
     {"_id": 3, "name": "Rebecca Anya", "email": "anya10@gmail.com", "password": "123", "role": "user", "token": "fake-jwt-3", "avatar": "avatar-04.jpg"},
-    {"_id": 3, "name": "Rebecca Anya", "email": "a@g", "password": "a", "role": "user", "token": "fake-jwt-4", "avatar": "avatar-05.jpg"}
+    {"_id": 4, "name": "a", "email": "a@g", "password": "a", "role": "user", "token": "fake-jwt-4", "avatar": "avatar-05.jpg"}
 ]

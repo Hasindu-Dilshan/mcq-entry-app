@@ -1,7 +1,13 @@
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import appRoutes from "../../routes/appRoutes";
 
-const SideNavigation = () => {
+const mapStateToProps = state => ({
+  avatar: state.auth.avatar
+})
+
+const SideNavigation = ({ avatar }) => {
+  const avatarPath = `/assets/img/profiles/${avatar}`;
 
   return (
     <div className="sidebar" id="sidebar">
@@ -24,7 +30,7 @@ const SideNavigation = () => {
                     >
                       <div className="user-avatar d-inline-block mr-3">
                         <img
-                          src="/assets/img/profiles/avatar-18.jpg"
+                          src={avatarPath}
                           alt="user avatar"
                           className="rounded-circle"
                           width="50"
@@ -82,4 +88,4 @@ const SideNavigation = () => {
   );
 };
 
-export default SideNavigation;
+export default connect(mapStateToProps)(SideNavigation);
