@@ -49,7 +49,7 @@ const Header = ({ name, avatar, dispatchLogout }) => {
       </Link>
 
       <ul className="nav user-menu">
-        <li className="nav-item dropdown">
+        {/* <li className="nav-item dropdown">
           <Link
             to="#"
             className="dropdown-toggle nav-link pr-0"
@@ -97,7 +97,7 @@ const Header = ({ name, avatar, dispatchLogout }) => {
               <Link to="activities.html">View all Notifications</Link>
             </div>
           </div>
-        </li>
+        </li> */}
 
         <li className="nav-item dropdown has-arrow main-drop">
           <Link

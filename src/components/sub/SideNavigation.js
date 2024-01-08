@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import appRoutes from "../../routes/appRoutes";
-import { useEffect } from "react";
 
 const mapStateToProps = state => ({
   avatar: state.auth.avatar
