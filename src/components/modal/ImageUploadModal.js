@@ -1,82 +1,66 @@
-const ImageUploadModal = () => {
+import { useState } from "react";
+
+const ImageUploadModal = ({explanationImage, setExplanationImage, multipleImages}) => {
+  const defaultPreview = "/assets/img/default-placeholder.png";
+
+  const [explanationImageUrl, setExplanationImageUrl] = useState(null);
+
   return (
-    <div class="customize_popup">
+    <div className="customize_popup">
       <div
-        class="modal fade"
+        className="modal fade"
         id="upload-image"
         tabindex="-1"
         aria-labelledby="staticBackd"
         aria-hidden="true"
       >
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="staticBackd">
+        <div className="modal-dialog modal-lg modal-dialog-centered">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="staticBackd">
                 Upload Image
               </h5>
               <button
                 type="button"
-                class="close"
+                className="close"
                 data-dismiss="modal"
                 aria-label="Close"
               >
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
-              <div class=" col-md-12 p-0">
-                <div class="checkworking">
-                  {/* <ul>
-                    <li>
-                      <input type="checkbox" id="mon" checked />
-                      <label for="mon">Mon</label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="tue" checked />
-                      <label for="tue">Tue</label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="wed" checked />
-                      <label for="wed">Wed</label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="thur" checked />
-                      <label for="thur">Thur</label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="fri" checked />
-                      <label for="fri">Fri</label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="sat" />
-                      <label for="sat">Sat</label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="sun" />
-                      <label for="sun">Sun</label>
-                    </li>
-                  </ul> */}
+            <div className="modal-body">
+              <div className=" col-md-12 p-0">
+                <div className="checkworking d-flex">
+                  <div className="d-flex flex-column align-content-center flex-wrap">
+                    <input accept="image/*" type='file' id="imgInp" onChange={() => {
+                        
+                        const imgInp = document.getElementById("imgInp");
+                        const [file] = imgInp.files;
 
-                  <input accept="image/*" type='file' id="imgInp" onChange={event => {
-                    const imgInp = document.getElementById("imgInp");
-                    const blah = document.getElementById("blah");
-                    const [file] = imgInp.files
-                    if (file) {
-                      blah.src = URL.createObjectURL(file)
-                    }
-                  }} />
-                  <img id="blah" src="#" alt="your image" />
+                        if (file) {
+                          setExplanationImage(file);
+                          
+                          const previewUrl = URL.createObjectURL(file);
+                          setExplanationImageUrl(previewUrl);
+                        }
+                      }} />
 
+                      <p>Sample name</p>
+                  </div>
+                  
+                  
+                  <img src={explanationImageUrl ? explanationImageUrl : defaultPreview} alt="preview"/>
                 </div>
               </div>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn  btn-primary">
-                Add
+            <div className="modal-footer">
+              <button type="button" className="btn  btn-primary">
+                Save
               </button>
               <button
                 type="button"
-                class="btn btn-secondary"
+                className="btn btn-secondary"
                 data-dismiss="modal"
               >
                 Cancel

@@ -24,17 +24,49 @@ const mapDispatchToProps = (dispatch) => ({
   dispatchQuestionSubmitSuccessful: () => dispatch({type: QUESTION_SUBMIT_SUCCESSFUL})
 })
 
-const AddQuestionCard = ({ subjectId, topicId, subjectName, syllabusUpdatedYear, title, topicName, isSubmitting, dispatchQuestionSubmitStart, dispatchQuestionSubmitSuccessful }) => {
+const convertImageToBase64 = (file) => {
+  return new Promise((resolve, reject) => {
+    if (!file) {
+      reject(new Error('No file provided'));
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      resolve(reader.result.split(',')[1]); // Extracting the base64-encoded part
+    };
+
+    reader.onerror = (error) => {
+      reject(error);
+    };
+
+    reader.readAsDataURL(file);
+  });
+};
+
+const AddQuestionCard = ({ 
+  subjectId, 
+  topicId, 
+  subjectName, 
+  syllabusUpdatedYear, 
+  title, 
+  topicName, 
+  isSubmitting, 
+  dispatchQuestionSubmitStart, 
+  dispatchQuestionSubmitSuccessful 
+}) => {
 
   const initialAnswerRowState = {answer: undefined,  correct: false, key: 0};
 
   const [keyCount, setkeyCount] = useState(0);
   const [answerRows, setAnswerRows] = useState([]);
-  const [explanationImages, setExplanationImages] = useState(null);
+  const [explanationImage, setExplanationImage] = useState(undefined);
 
   const yearInputRef = useRef(null);
   const questionIdInputRef = useRef(null);
   const questionInputRef = useRef(null);
+  const explanationInputRef = useRef(null);
 
   function handleAddAnswer(event) {
 
@@ -79,6 +111,7 @@ const AddQuestionCard = ({ subjectId, topicId, subjectName, syllabusUpdatedYear,
     const year = yearInputRef.current.value;
     const questionId = questionIdInputRef.current.value;
     const questionText = questionInputRef.current.value;
+    const explanationText = explanationInputRef.current.value;
     
     const answers = answerRows.map((answerRow, index) => {
       const {key, ...answerRowWithoutKey} = answerRow;
@@ -93,22 +126,31 @@ const AddQuestionCard = ({ subjectId, topicId, subjectName, syllabusUpdatedYear,
       topicId
     }
 
-    const question = {
+    let question = {
       metaData,
       year,
       questionId,
       questionText,
-      answers
+      answers,
+      explanationText
     };
 
+    if(explanationImage) {
+      const image_b64 = await convertImageToBase64(explanationImage);
+      question = {...question, image_b64};
+    }
+
     dispatchQuestionSubmitStart();
+
     const response = await submitQuestion(question);
-    console.log(response);
+
     dispatchQuestionSubmitSuccessful();
 
     yearInputRef.current.value = '';
     questionIdInputRef.current.value = '';
     questionInputRef.current.value = '';
+    explanationInputRef.current.value = '';
+
 
     setAnswerRows([]);
   }
@@ -177,7 +219,7 @@ const AddQuestionCard = ({ subjectId, topicId, subjectName, syllabusUpdatedYear,
             </div>
           </div>
 
-          <ExplanationCard setExplanationImages={setExplanationImages}/>
+          <ExplanationCard explanationInputRef={explanationInputRef} explanationImage={explanationImage} setExplanationImage={setExplanationImage} />
 
           <div className="col-xl-12 col-sm-12 col-12">
             <div className="form-group">

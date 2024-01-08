@@ -7,31 +7,34 @@ import {
     TOPICS_FETCH_SUCCESS,
 } from '../constants/actionTypes';
 
-const defaultStae = {
-    subjectId: null,
-    subjectName: null,
-    syllabusUpdatedYear: null,
-    topicId: null,
-    topicName: null,
-    title: null,
+const defaultState = {
+    subjectId: undefined,
+    subjectName: undefined,
+    syllabusUpdatedYear: undefined,
+    topicId: undefined,
+    topicName: undefined,
+    title: undefined,
     isFetchingSyllabi: false,
     isFetchingTopics: false,
 }
 
-export default (state = defaultStae, action) => {
+export default (state = defaultState, action) => {
     switch(action.type) {
         case SYLLABUS_CHOOSE:
             return {
-                ...state, 
-                subjectId: action.payload.subjectId, 
-                subjectName: action.payload.subjectName, 
+                ...state,
+                ...defaultState,
+                subjectId: action.payload.subjectId,
+                subjectName: action.payload.subjectName,
                 syllabusUpdatedYear: action.payload.syllabusUpdatedYear,
                 title: action.payload.title,
-                topicId: null,
-                topicName: null
             };
         case TOPIC_CHOOSE:
-            return {...state, topicId: action.payload.topicId, topicName: action.payload.topicName};
+            return {
+                ...state,
+                topicId: action.payload.topicId,
+                topicName: action.payload.topicName
+            };
         case SYLLABI_FETCH_REQUEST:
             return {...state, isFetchingSyllabi: true};
         case SYLLABI_FETCH_SUCCESS:

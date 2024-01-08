@@ -6,9 +6,8 @@ import {
 
 const defaultState = {
   appName: 'ZeroCode',
-  token: null,
-  currentSyllabi_b64: null,
-  currentTopics_b64: null,
+  currentSyllabi_b64: undefined,
+  currentTopics_b64: undefined,
 };
 
 const common =  (state = defaultState, action) => {
