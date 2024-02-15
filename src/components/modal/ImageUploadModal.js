@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-const ImageUploadModal = ({explanationImage, setExplanationImage, multipleImages}) => {
+const ImageUploadModal = ({images, setImages, hasMultipleImages}) => {
   const defaultPreview = "/assets/img/default-placeholder.png";
 
-  const [explanationImageUrl, setExplanationImageUrl] = useState(null);
+  const [imageUrls, setImageUrls] = useState(null);
 
   return (
     <div className="customize_popup">
@@ -33,24 +33,24 @@ const ImageUploadModal = ({explanationImage, setExplanationImage, multipleImages
               <div className=" col-md-12 p-0">
                 <div className="checkworking d-flex">
                   <div className="d-flex flex-column align-content-center flex-wrap">
-                    <input accept="image/*" type='file' id="imgInp" onChange={() => {
+                    <input accept="image/*" type='file' id="imgInp" onChange={(event) => {
                         
-                        const imgInp = document.getElementById("imgInp");
+                        const imgInp = event.target;
                         const [file] = imgInp.files;
 
                         if (file) {
-                          setExplanationImage(file);
-                          
-                          const previewUrl = URL.createObjectURL(file);
-                          setExplanationImageUrl(previewUrl);
+                            setImages(file);
+                            
+                            const previewUrl = URL.createObjectURL(file);
+                            setImageUrls(previewUrl);
                         }
                       }} />
 
                       <p>Sample name</p>
                   </div>
                   
+                  {!hasMultipleImages && <img src={imageUrls ? imageUrls : defaultPreview} alt="preview"/>}
                   
-                  <img src={explanationImageUrl ? explanationImageUrl : defaultPreview} alt="preview"/>
                 </div>
               </div>
             </div>

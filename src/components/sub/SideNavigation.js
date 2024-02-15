@@ -1,13 +1,24 @@
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import appRoutes from "../../routes/appRoutes";
+import { LOGOUT } from "../../constants/actionTypes";
+
 
 const mapStateToProps = state => ({
   avatar: state.auth.avatar
-})
+});
 
-const SideNavigation = ({ avatar }) => {
+const mapDispatchToProps = dispatch => ({
+  dispatchLogout: () =>
+    dispatch({ type: LOGOUT }),
+});
+
+const SideNavigation = ({ avatar, dispatchLogout }) => {
   const avatarPath = `/assets/img/profiles/${avatar}`;
+
+  function handleLogout() {
+    dispatchLogout();
+  }
 
   return (
     <div className="sidebar" id="sidebar">
@@ -74,7 +85,7 @@ const SideNavigation = ({ avatar }) => {
 
               <ul className="logout">
                 <li>
-                  <Link href="profile.html">
+                  <Link onClick={handleLogout} to="">
                     <img src="/assets/img/logout.svg" alt="sidebar_img" />
                     <span>Log out</span>
                   </Link>
@@ -88,4 +99,4 @@ const SideNavigation = ({ avatar }) => {
   );
 };
 
-export default connect(mapStateToProps)(SideNavigation);
+export default connect(mapStateToProps, mapDispatchToProps)(SideNavigation);

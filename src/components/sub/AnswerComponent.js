@@ -72,7 +72,7 @@ const AnswerComponent = ({
       <td>
         <div className="actionset">
           <label>
-            <a onClick={(event) => {event.preventDefault()}}className="action_label5">
+            <a onClick={(event) => {event.preventDefault()}} className="action_label5">
               Upload <FeatherIcon icon="edit" />
             </a>
           </label>
