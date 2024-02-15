@@ -9,7 +9,7 @@ function ExplanationCard ({explanationImage, setExplanationImage, explanationInp
    * Example : Explanation Card component has multiple images,
    * while Answer Component has only single image
    */
-  const multipleImages = false; 
+  const hasMultipleImages = false; 
 
   
   return (
@@ -35,7 +35,7 @@ function ExplanationCard ({explanationImage, setExplanationImage, explanationInp
         </div>
       </div>
 
-      <ImageUploadModal explanationImage={explanationImage} setExplanationImage={setExplanationImage} multipleImages={multipleImages}/>
+      <ImageUploadModal images={explanationImage} setImages={setExplanationImage} hasMultipleImages={hasMultipleImages}/>
     </>
     
   );
