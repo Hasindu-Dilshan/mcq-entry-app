@@ -51,12 +51,16 @@ async function fakeBackend() {
                 });
             }
 
+            // This service should return only relavant fields of users
             function getUsers() {
                 if (!isAuthenticated()) return unauthorized();
                 return ok(users);
             }
 
             function getSyllabi() {
+                // simulate error
+                // return error("Syllabus not found!");
+
                 return ok(syllabi);
             }
 
@@ -64,10 +68,16 @@ async function fakeBackend() {
                 const {subjectId, syllabusUpdatedYear} = JSON.parse(body);
                 const topics = syllabus_topics.filter(syllabus_topic => syllabus_topic.subjectId === subjectId && syllabus_topic.syllabusUpdatedYear === syllabusUpdatedYear)[0].topics;
                 
+                // simulate error
+                // return error("Topics not found!");
+
                 return ok(topics);
             }
 
             function createQuestion(body) {
+                // simulate error
+                // return error("Api not found!");
+
                 return ok(body);
             }
             
@@ -77,6 +87,9 @@ async function fakeBackend() {
                 const user = users.find(x => x.token === token);
                 delete user.password;
                 return ok(user);
+
+                // simulate error
+                // return error("User not found!");
             }
 
             // helper functions
