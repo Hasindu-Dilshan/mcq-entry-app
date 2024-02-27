@@ -32,6 +32,7 @@ const SideNavigation = ({ avatar, dispatchLogout }) => {
                     <span
                       className="lnr lnr-cross text-white"
                       id="mobile_btn_close"
+                      style={{cursor: "pointer"}}
                     >
                       X
                     </span>
@@ -50,7 +51,7 @@ const SideNavigation = ({ avatar, dispatchLogout }) => {
                     </Link>
                   </div>
                 </div>
-                <div className="sidebar-input">
+                {/* <div className="sidebar-input">
                   <div className="top-nav-search">
                     <form>
                       <input
@@ -63,7 +64,7 @@ const SideNavigation = ({ avatar, dispatchLogout }) => {
                       </button>
                     </form>
                   </div>
-                </div>
+                </div> */}
               </div>
 
               <ul class="app-routes">

@@ -6502,7 +6502,6 @@ label.logo-upload {
 	}
 	.login-wrapper .loginbox .login-right {
 		padding: 50px;
-		width: 50%;
 	}
 	.mobile-show {
 		display: block;
@@ -6592,7 +6591,7 @@ label.logo-upload {
 		font-size: 16px;
 	}
 	.user-menu.nav > li > a {
-		padding: 0 0 0 14px;
+		padding: 0 16px;
 	}
 	.user-menu {
 		padding-right: 10px;
@@ -6604,6 +6603,9 @@ label.logo-upload {
 @media (max-width: 767.98px) {
 	body {
 		font-size: 0.9375rem;
+	}
+	.user-menu.nav > li > a {
+		padding: 0;
 	}
 	h1,
 	.h1 {
@@ -6891,7 +6893,7 @@ label.logo-upload {
 	}
 }
 
-@media (max-width:479px){
+@media (max-width: 479px){
 	.page-name {
 		background: #EFEFEF;
 		display: block;
