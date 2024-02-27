@@ -23,12 +23,15 @@ const HomeLayout = ({ token, dispatchProfile }) => {
         if (!retrievedToken) {
           history.navigate("/auth/login");
         } else {
-          const user = await getProfile(retrievedToken);
-          if (user) {
-            dispatchProfile(user);
-          } else {
-            alert("Wrong credentials");
-          }
+
+          await getProfile(retrievedToken)
+                  .then(profile => {
+                    dispatchProfile(profile)
+                  })
+                  .catch(err => {
+                    alert("Invalid jwt");
+                  });
+          
         }
       }
     }

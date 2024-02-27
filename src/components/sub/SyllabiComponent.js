@@ -81,15 +81,19 @@ const SyllabiComponent = ({
 
   useEffect(() => {
     async function fetchSyllabi() {
-      
       dispatchSyllabiRequest();
-      const data = await getAllSyllabi();
-      dispatchSyllabiSuccess();
-  
-      const subjectYearArray = getSubjectYearArray(data);
 
-      setTitle(data.title);
-      setSubjectYearList(subjectYearArray);
+      await getAllSyllabi()
+            .then(data => {
+              dispatchSyllabiSuccess();
+              const subjectYearArray = getSubjectYearArray(data);
+
+              setTitle(data.title);
+              setSubjectYearList(subjectYearArray);
+            }).catch(err => {
+              alert("Syllabus not found");
+            });
+      
     }
 
     fetchSyllabi();

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 import { history, login } from "../../helpers";
 
@@ -21,17 +21,22 @@ const mapDispatchToProps = (dispatch) => ({
 
 function Login(props) {
 
+  const emailInputRef = useRef(null);
+  const passwordInputRef = useRef(null);
+
   async function onSubmit(event) {
     event.preventDefault();
 
-    const user = await login(email, password);
-  
-    if(user) {
-      props.dispatchOnSubmit(user);
-    }
-    else {
-      alert('Wrong credentials')
-    }
+    await login(email, password)
+            .then(user => {
+              props.dispatchOnSubmit(user);
+            })
+            .catch(err => {
+              alert('Wrong credentials');
+              
+              emailInputRef.current.value='';
+              passwordInputRef.current.value='';
+            })
     
   }
   
@@ -75,6 +80,7 @@ function Login(props) {
                     <div className="form-group">
                       <label className="form-control-label">Email Address</label>
                       <input
+                        ref={emailInputRef}
                         onKeyUp={(event) =>
                           handleEmailFieldChange(event.target.value)
                         }
@@ -86,6 +92,7 @@ function Login(props) {
                       <label className="form-control-label">Password</label>
                       <div className="pass-group">
                         <input
+                          ref={passwordInputRef}
                           onKeyUp={(event) =>
                             handlePasswordFieldChange(event.target.value)
                           }

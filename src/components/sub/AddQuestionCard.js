@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { submitQuestion } from "../../helpers/user-agent";
 import { useRef } from "react";
-import { QUESTION_SUBMIT_START, QUESTION_SUBMIT_SUCCESSFUL } from "../../constants/actionTypes";
+import { QUESTION_SUBMIT_START, QUESTION_SUBMIT_END } from "../../constants/actionTypes";
 
 const mapStateToProps = (state) => ({
     subjectId: state.topic.subjectId,
@@ -21,7 +21,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
 
   dispatchQuestionSubmitStart: () => dispatch({type: QUESTION_SUBMIT_START}),
-  dispatchQuestionSubmitSuccessful: () => dispatch({type: QUESTION_SUBMIT_SUCCESSFUL})
+  dispatchQuestionSubmitEnd: () => dispatch({type: QUESTION_SUBMIT_END})
 })
 
 const convertImageToBase64 = (file) => {
@@ -54,7 +54,7 @@ const AddQuestionCard = ({
   topicName, 
   isSubmitting, 
   dispatchQuestionSubmitStart, 
-  dispatchQuestionSubmitSuccessful 
+  dispatchQuestionSubmitEnd 
 }) => {
 
   const initialAnswerRowState = {answer: undefined,  correct: false, key: 0};
@@ -142,17 +142,23 @@ const AddQuestionCard = ({
 
     dispatchQuestionSubmitStart();
 
-    const response = await submitQuestion(question);
+    // const response = await submitQuestion(question);
+    await submitQuestion(question)
+            .then(() => {
+              dispatchQuestionSubmitEnd();
 
-    dispatchQuestionSubmitSuccessful();
+              yearInputRef.current.value = '';
+              questionIdInputRef.current.value = '';
+              questionInputRef.current.value = '';
+              explanationInputRef.current.value = '';
 
-    yearInputRef.current.value = '';
-    questionIdInputRef.current.value = '';
-    questionInputRef.current.value = '';
-    explanationInputRef.current.value = '';
-
-
-    setAnswerRows([]);
+              setAnswerRows([]);
+            })
+            .catch(err => {
+              dispatchQuestionSubmitEnd();
+              alert("Could not submit the question");
+            });
+    
   }
 
   return (

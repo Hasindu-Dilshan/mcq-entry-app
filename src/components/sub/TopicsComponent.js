@@ -41,7 +41,14 @@ const onSelectChange = (event, dispatchTopicChange) => {
   dispatchTopicChange(topicId, topicName);
 }
 
-const TopicsComponent = ({ subjectId, syllabusUpdatedYear, isFetchingTopics, topicId, dispatchTopicsRequest, dispatchTopicChange, dispatchTopicsSuccess }) => {
+const TopicsComponent = ({ 
+  subjectId, 
+  syllabusUpdatedYear, 
+  isFetchingTopics, 
+  dispatchTopicsRequest, 
+  dispatchTopicChange, 
+  dispatchTopicsSuccess 
+}) => {
   
   const [topics, setTopics] = useState([]);
   const [defaultOption, setDefaultOption] = useState("default");
@@ -49,10 +56,17 @@ const TopicsComponent = ({ subjectId, syllabusUpdatedYear, isFetchingTopics, top
   useEffect(() => {
     async function fetchTopics(subjectId, syllabusUpdatedYear) {
       dispatchTopicsRequest();
-      const topicsArray = await getTopics(subjectId, syllabusUpdatedYear);
-      dispatchTopicsSuccess();
 
-      setTopics(topicsArray);
+      await getTopics(subjectId, syllabusUpdatedYear)
+              .then(topicsArray => {
+                dispatchTopicsSuccess();
+
+                setTopics(topicsArray);
+              })
+              .catch(err => {
+                alert("Topics not found");
+              });
+      
     }
 
     if (subjectId && syllabusUpdatedYear) {
