@@ -7,7 +7,7 @@ const appRoutes = [
     index: true,
     path: "/dashboard",
     element: <Dashboard />,
-    // state: "dashboared",
+    state: "Dashboard",
     sidebarProps: {
       display: "Dashboard",
       img: "dashboard.svg",
@@ -17,7 +17,7 @@ const appRoutes = [
   {
     path: "/choosesyllabus",
     element: <ChooseSyllabus />,
-    // state: "choose_syllabus",
+    state: "Choose Syllabus",
     sidebarProps: {
       display: "Choose Syllabus",
       img: "choosesyllabus.svg",
@@ -27,7 +27,7 @@ const appRoutes = [
   {
     path: "/addquestions",
     element: <AddQuestions />,
-    // state: "add_questions",
+    state: "Add Questions",
     sidebarProps: {
       display: "Add Questions",
       img: "addquestions.svg",

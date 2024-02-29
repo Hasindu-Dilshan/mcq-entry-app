@@ -14,6 +14,7 @@ export const TOPICS_FETCH_SUCCESS = "TOPICS_FETCH_SUCCESS";
 export const QUESTION_SUBMIT_START = "QUESTION_SUBMIT_START";
 export const QUESTION_SUBMIT_END = "QUESTION_SUBMIT_END";
 
+export const ROUTE = "ROUTE";
 export const ASYNC_START = "ASYNC_START";
 export const ASYNC_END = "ASYNC_END";
 export const REGISTER = "REGISTER";

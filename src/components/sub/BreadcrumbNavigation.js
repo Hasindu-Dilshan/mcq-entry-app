@@ -1,4 +1,10 @@
-const BreadcrumbNavigation = ({ userRole }) => {
+import { connect } from "react-redux";
+
+const mapStateToProps = (state) => ({
+  routeState: state.common.routeState,
+});
+
+const BreadcrumbNavigation = ({ routeState }) => {
   return (
     <div className="row mb-4">
       <div className="col-xl-6 col-sm-12 col-12">
@@ -14,13 +20,13 @@ const BreadcrumbNavigation = ({ userRole }) => {
                 Home
               </a>
             </li>
-            <li className="breadcrumb-item active">Dashboard</li>
+            <li className="breadcrumb-item active">{routeState}</li>
           </ul>
-          <h3>{userRole} Dashboard</h3>
+          <h3>{routeState}</h3>
         </div>
       </div>
     </div>
   );
 };
 
-export default BreadcrumbNavigation;
+export default connect(mapStateToProps)(BreadcrumbNavigation);

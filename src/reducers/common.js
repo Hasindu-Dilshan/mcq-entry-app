@@ -2,6 +2,7 @@ import {
   APP_LOAD,
   SYLLABI_SAVE_NEW,
   TOPICS_SAVE_NEW,
+  ROUTE,
 } from "../constants/actionTypes";
 
 const defaultState = {
@@ -9,6 +10,7 @@ const defaultState = {
   currentSyllabi_b64: undefined,
   currentTopics_b64: undefined,
   appLoaded: false,
+  routeState: undefined,
 };
 
 const common = (state = defaultState, action) => {
@@ -28,6 +30,11 @@ const common = (state = defaultState, action) => {
       return {
         ...state,
         currentTopics_b64: action.payload,
+      };
+    case ROUTE:
+      return {
+        ...state,
+        routeState: action.payload,
       };
     default:
       return state;
