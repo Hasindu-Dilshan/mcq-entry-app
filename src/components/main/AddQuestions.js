@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { connect } from "react-redux";
 import { ROUTE } from "../../constants/actionTypes";
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   dispatchRouteState: (state) => dispatch({ type: ROUTE, payload: state }),
 });
 
@@ -12,7 +12,7 @@ const AddQuestions = ({ dispatchRouteState }) => {
   useEffect(() => {
     dispatchRouteState("Add Questions");
   }, []);
-  
+
   return (
     <>
       <BreadcrumbNavigation />

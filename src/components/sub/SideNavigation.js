@@ -75,9 +75,7 @@ const SideNavigation = ({ avatar, dispatchLogout, dispatchRouteState }) => {
                   return (
                     route.sidebarProps && (
                       <li key={index}>
-                        <Link
-                          to={route.path}
-                        >
+                        <Link to={route.path}>
                           <img
                             src={`/assets/img/${route.sidebarProps.img}`}
                             alt={route.sidebarProps.alt}

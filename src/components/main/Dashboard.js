@@ -9,10 +9,9 @@ const mapStateToProps = (state) => ({
   role: state.auth.role,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   dispatchRouteState: (state) => dispatch({ type: ROUTE, payload: state }),
 });
-
 
 const Dashboard = ({ role, dispatchRouteState }) => {
   const [userRole, setUserRole] = useState(null);
