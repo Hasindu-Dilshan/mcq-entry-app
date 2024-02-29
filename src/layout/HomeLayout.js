@@ -23,15 +23,13 @@ const HomeLayout = ({ token, dispatchProfile }) => {
         if (!retrievedToken) {
           history.navigate("/auth/login");
         } else {
-
           await getProfile(retrievedToken)
-                  .then(profile => {
-                    dispatchProfile(profile)
-                  })
-                  .catch(err => {
-                    alert("Invalid jwt");
-                  });
-          
+            .then((profile) => {
+              dispatchProfile(profile);
+            })
+            .catch((err) => {
+              alert("Invalid jwt");
+            });
         }
       }
     }

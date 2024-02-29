@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const ImageUploadModal = ({images, setImages, hasMultipleImages}) => {
+const ImageUploadModal = ({ images, setImages, hasMultipleImages }) => {
   const defaultPreview = "/assets/img/default-placeholder.png";
 
   const [imageUrls, setImageUrls] = useState(null);
@@ -33,24 +33,32 @@ const ImageUploadModal = ({images, setImages, hasMultipleImages}) => {
               <div className=" col-md-12 p-0">
                 <div className="checkworking d-flex">
                   <div className="d-flex flex-column align-content-center flex-wrap">
-                    <input accept="image/*" type='file' id="imgInp" onChange={(event) => {
-                        
+                    <input
+                      accept="image/*"
+                      type="file"
+                      id="imgInp"
+                      onChange={(event) => {
                         const imgInp = event.target;
                         const [file] = imgInp.files;
 
                         if (file) {
-                            setImages(file);
-                            
-                            const previewUrl = URL.createObjectURL(file);
-                            setImageUrls(previewUrl);
-                        }
-                      }} />
+                          setImages(file);
 
-                      <p>Sample name</p>
+                          const previewUrl = URL.createObjectURL(file);
+                          setImageUrls(previewUrl);
+                        }
+                      }}
+                    />
+
+                    <p>Sample name</p>
                   </div>
-                  
-                  {!hasMultipleImages && <img src={imageUrls ? imageUrls : defaultPreview} alt="preview"/>}
-                  
+
+                  {!hasMultipleImages && (
+                    <img
+                      src={imageUrls ? imageUrls : defaultPreview}
+                      alt="preview"
+                    />
+                  )}
                 </div>
               </div>
             </div>

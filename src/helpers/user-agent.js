@@ -1,91 +1,97 @@
-import { store } from '../store';
+import { store } from "../store";
 
 const baseUrl = process.env.REACT_APP_API_URL;
 
 export const getAllSyllabi = async () => {
-    const subjectYearContainer = await fetchWrapper.get(`${baseUrl}/syllabi`);
+  const subjectYearContainer = await fetchWrapper.get(`${baseUrl}/syllabi`);
 
-    return subjectYearContainer;
-}
+  return subjectYearContainer;
+};
 
 export const getTopics = async (subjectId, syllabusUpdatedYear) => {
-    const topics = await fetchWrapper.get(`${baseUrl}/topics`, {subjectId, syllabusUpdatedYear});
+  const topics = await fetchWrapper.get(`${baseUrl}/topics`, {
+    subjectId,
+    syllabusUpdatedYear,
+  });
 
-    return topics;
-}
+  return topics;
+};
 
-export const submitQuestion = async(question) => {
-    const response = await fetchWrapper.post(`${baseUrl}/submit`, question);
+export const submitQuestion = async (question) => {
+  const response = await fetchWrapper.post(`${baseUrl}/submit`, question);
 
-    return response;
-}
+  return response;
+};
 
-export const login = async(email, password) => {
-    const response = await fetchWrapper.post(`${baseUrl}/login`, {email, password});
+export const login = async (email, password) => {
+  const response = await fetchWrapper.post(`${baseUrl}/login`, {
+    email,
+    password,
+  });
 
-    return response; // response: jwt
-}
+  return response; // response: jwt
+};
 
 export const getProfile = async (token) => {
-    const topics = await fetchWrapper.get(`${baseUrl}/profile`, {token});
+  const topics = await fetchWrapper.get(`${baseUrl}/profile`, { token });
 
-    return topics;
-}
+  return topics;
+};
 
 const fetchWrapper = {
-    get: request('GET'),
-    post: request('POST'),
-    put: request('PUT'),
-    delete: request('DELETE')
+  get: request("GET"),
+  post: request("POST"),
+  put: request("PUT"),
+  delete: request("DELETE"),
 };
 
 function request(method) {
-    return (url, body) => {
-        const requestOptions = {
-            method,
-            headers: authHeader(url)
-        };
-        if (body) {
-            requestOptions.headers['Content-Type'] = 'application/json';
-            requestOptions.body = JSON.stringify(body);
-        }
-        return fetch(url, requestOptions).then(handleResponse);
+  return (url, body) => {
+    const requestOptions = {
+      method,
+      headers: authHeader(url),
+    };
+    if (body) {
+      requestOptions.headers["Content-Type"] = "application/json";
+      requestOptions.body = JSON.stringify(body);
     }
+    return fetch(url, requestOptions).then(handleResponse);
+  };
 }
 
 // helper functions
 
 function authHeader(url) {
-    // return auth header with jwt if user is logged in and request is to the api url
-    const token = authToken();
-    const isLoggedIn = !!token;
-    const isApiUrl = url.startsWith(process.env.REACT_APP_API_URL);
-    if (isLoggedIn && isApiUrl) {
-        return { Authorization: `Bearer ${token}` };
-    } else {
-        return {};
-    }
+  // return auth header with jwt if user is logged in and request is to the api url
+  const token = authToken();
+  const isLoggedIn = !!token;
+  const isApiUrl = url.startsWith(process.env.REACT_APP_API_URL);
+  if (isLoggedIn && isApiUrl) {
+    return { Authorization: `Bearer ${token}` };
+  } else {
+    return {};
+  }
 }
 
 function authToken() {
-    return store.getState().auth.user?.token;
+  return store.getState().auth.user?.token;
 }
 
 function handleResponse(response) {
-    return response.text().then(text => {
-        const data = text && JSON.parse(text);
+  return response.text().then((text) => {
+    const data = text && JSON.parse(text);
 
-        if (!response.ok) {
-            if ([401, 403].includes(response.status) && authToken()) {
-                // auto logout if 401 Unauthorized or 403 Forbidden response returned from api
-                // const logout = () => store.dispatch(authActions.logout());
-                // logout();
-            }
+    if (!response.ok) {
+      if ([401, 403].includes(response.status) && authToken()) {
+        // auto logout if 401 Unauthorized or 403 Forbidden response returned from api
+        // const logout = () => store.dispatch(authActions.logout());
+        // logout();
+      }
 
-            const error = (data && data.message) || response.statusText;
-            return Promise.reject(error);
-        }
+      const error = (data && data.message) || response.statusText;
+      return Promise.reject(error);
+    }
 
-        return data;
-    });
+    return data;
+  });
 }

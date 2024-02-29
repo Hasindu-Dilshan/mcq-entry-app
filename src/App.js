@@ -11,16 +11,14 @@ import { history } from "./helpers";
 import Login from "./components/auth/Login";
 import AuthLayout from "./layout/AuthLayout";
 
-const mapStateToProps = (state) => {
-  return {
-    appLoaded: state.common.appLoaded,
-    appName: state.common.appName,
-    currentUser: state.common.currentUser,
-    redirectTo: state.common.redirectTo,
-  };
-};
+const mapStateToProps = state => ({
+  appLoaded: state.common.appLoaded,
+  appName: state.common.appName,
+  currentUser: state.common.currentUser,
+  redirectTo: state.common.redirectTo,
+});
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   onLoad: (payload, token) =>
     dispatch({ type: APP_LOAD, payload, token, skipTracking: true }),
   onRedirect: () => dispatch({ type: REDIRECT }),
@@ -29,7 +27,7 @@ const mapDispatchToProps = (dispatch) => ({
 const App = () => {
   history.navigate = useNavigate();
   history.location = useLocation();
-  
+
   return (
     <Routes>
       <Route path="/" element={<HomeLayout />}>
@@ -38,9 +36,8 @@ const App = () => {
       <Route path="/auth/" element={<AuthLayout />}>
         <Route path="login/" element={<Login />} />
       </Route>
-      
     </Routes>
   );
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

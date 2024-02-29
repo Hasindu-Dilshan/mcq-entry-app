@@ -6,35 +6,37 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { submitQuestion } from "../../helpers/user-agent";
 import { useRef } from "react";
-import { QUESTION_SUBMIT_START, QUESTION_SUBMIT_END } from "../../constants/actionTypes";
+import {
+  QUESTION_SUBMIT_START,
+  QUESTION_SUBMIT_END,
+} from "../../constants/actionTypes";
 
 const mapStateToProps = (state) => ({
-    subjectId: state.topic.subjectId,
-    topicId: state.topic.topicId,
-    subjectName: state.topic.subjectName,
-    syllabusUpdatedYear: state.topic.syllabusUpdatedYear,
-    topicName: state.topic.topicName,
-    title: state.topic.title,
-    isSubmitting: state.question.isSubmitting,
-})
+  subjectId: state.topic.subjectId,
+  topicId: state.topic.topicId,
+  subjectName: state.topic.subjectName,
+  syllabusUpdatedYear: state.topic.syllabusUpdatedYear,
+  topicName: state.topic.topicName,
+  title: state.topic.title,
+  isSubmitting: state.question.isSubmitting,
+});
 
 const mapDispatchToProps = (dispatch) => ({
-
-  dispatchQuestionSubmitStart: () => dispatch({type: QUESTION_SUBMIT_START}),
-  dispatchQuestionSubmitEnd: () => dispatch({type: QUESTION_SUBMIT_END})
-})
+  dispatchQuestionSubmitStart: () => dispatch({ type: QUESTION_SUBMIT_START }),
+  dispatchQuestionSubmitEnd: () => dispatch({ type: QUESTION_SUBMIT_END }),
+});
 
 const convertImageToBase64 = (file) => {
   return new Promise((resolve, reject) => {
     if (!file) {
-      reject(new Error('No file provided'));
+      reject(new Error("No file provided"));
       return;
     }
 
     const reader = new FileReader();
 
     reader.onload = () => {
-      resolve(reader.result.split(',')[1]); // Extracting the base64-encoded part
+      resolve(reader.result.split(",")[1]); // Extracting the base64-encoded part
     };
 
     reader.onerror = (error) => {
@@ -45,19 +47,18 @@ const convertImageToBase64 = (file) => {
   });
 };
 
-const AddQuestionCard = ({ 
-  subjectId, 
-  topicId, 
-  subjectName, 
-  syllabusUpdatedYear, 
-  title, 
-  topicName, 
-  isSubmitting, 
-  dispatchQuestionSubmitStart, 
-  dispatchQuestionSubmitEnd 
+const AddQuestionCard = ({
+  subjectId,
+  topicId,
+  subjectName,
+  syllabusUpdatedYear,
+  title,
+  topicName,
+  isSubmitting,
+  dispatchQuestionSubmitStart,
+  dispatchQuestionSubmitEnd,
 }) => {
-
-  const initialAnswerRowState = {answer: undefined,  correct: false, key: 0};
+  const initialAnswerRowState = { answer: undefined, correct: false, key: 0 };
 
   const [keyCount, setkeyCount] = useState(0);
   const [answerRows, setAnswerRows] = useState([]);
@@ -69,52 +70,47 @@ const AddQuestionCard = ({
   const explanationInputRef = useRef(null);
 
   function handleAddAnswer(event) {
-
-    if(event)
-      event.preventDefault();
-    setAnswerRows([...answerRows, {...initialAnswerRowState, key: getIdAndIncrement()}]);
+    if (event) event.preventDefault();
+    setAnswerRows([
+      ...answerRows,
+      { ...initialAnswerRowState, key: getIdAndIncrement() },
+    ]);
   }
 
   // returns previous keyCount
   function getIdAndIncrement() {
-
     setkeyCount(keyCount + 1);
     return keyCount;
   }
 
   function handleDeleteAnswerRow(key) {
-
     setAnswerRows(answerRows.filter((answerRow) => answerRow.key !== key));
   }
 
   function handleAnswerFieldChange(answer) {
-    
-    const {text, correct, key} = answer;
+    const { text, correct, key } = answer;
 
     let newAnswerRows = [...answerRows];
 
-    const index = newAnswerRows.findIndex(answerRow => answerRow.key === key);
+    const index = newAnswerRows.findIndex((answerRow) => answerRow.key === key);
 
     if (index !== -1) {
       newAnswerRows[index].answer = text;
       newAnswerRows[index].correct = correct;
       setAnswerRows(newAnswerRows);
     }
-    
   }
 
   async function handleSubmit() {
-
-    if(isSubmitting)
-      return;
+    if (isSubmitting) return;
 
     const year = yearInputRef.current.value;
     const questionId = questionIdInputRef.current.value;
     const questionText = questionInputRef.current.value;
     const explanationText = explanationInputRef.current.value;
-    
+
     const answers = answerRows.map((answerRow, index) => {
-      const {key, ...answerRowWithoutKey} = answerRow;
+      const { key, ...answerRowWithoutKey } = answerRow;
       answerRowWithoutKey.id = index + 1;
 
       return answerRowWithoutKey;
@@ -123,8 +119,8 @@ const AddQuestionCard = ({
     const metaData = {
       subjectId,
       syllabusUpdatedYear,
-      topicId
-    }
+      topicId,
+    };
 
     let question = {
       metaData,
@@ -132,39 +128,40 @@ const AddQuestionCard = ({
       questionId,
       questionText,
       answers,
-      explanationText
+      explanationText,
     };
 
-    if(explanationImage) {
+    if (explanationImage) {
       const image_b64 = await convertImageToBase64(explanationImage);
-      question = {...question, image_b64};
+      question = { ...question, image_b64 };
     }
 
     dispatchQuestionSubmitStart();
 
     // const response = await submitQuestion(question);
     await submitQuestion(question)
-            .then(() => {
-              dispatchQuestionSubmitEnd();
+      .then(() => {
+        dispatchQuestionSubmitEnd();
 
-              yearInputRef.current.value = '';
-              questionIdInputRef.current.value = '';
-              questionInputRef.current.value = '';
-              explanationInputRef.current.value = '';
+        yearInputRef.current.value = "";
+        questionIdInputRef.current.value = "";
+        questionInputRef.current.value = "";
+        explanationInputRef.current.value = "";
 
-              setAnswerRows([]);
-            })
-            .catch(err => {
-              dispatchQuestionSubmitEnd();
-              alert("Could not submit the question");
-            });
-    
+        setAnswerRows([]);
+      })
+      .catch((err) => {
+        dispatchQuestionSubmitEnd();
+        alert("Could not submit the question");
+      });
   }
 
   return (
     <div className="card">
       <div className="card-header">
-        <h3 className="card-titles">{subjectName} {syllabusUpdatedYear} {title}</h3>
+        <h3 className="card-titles">
+          {subjectName} {syllabusUpdatedYear} {title}
+        </h3>
       </div>
       <div className="card-header">
         <h3 className="card-sub-titles text-muted">{topicName}</h3>
@@ -209,28 +206,55 @@ const AddQuestionCard = ({
               <label htmlFor="question">
                 Question <span className="mandatory">*</span>
               </label>
-              <textarea id="question" ref={questionInputRef} rows="2" cols="50" className="form-control"></textarea>
+              <textarea
+                id="question"
+                ref={questionInputRef}
+                rows="2"
+                cols="50"
+                className="form-control"
+              ></textarea>
             </div>
           </div>
 
-          <AnswersCard handleAddAnswer={handleAddAnswer} answerRows={answerRows} handleDeleteAnswerRow={handleDeleteAnswerRow} handleAnswerFieldChange={handleAnswerFieldChange} />
+          <AnswersCard
+            handleAddAnswer={handleAddAnswer}
+            answerRows={answerRows}
+            handleDeleteAnswerRow={handleDeleteAnswerRow}
+            handleAnswerFieldChange={handleAnswerFieldChange}
+          />
 
           <div className="col-xl-12 col-sm-12 col-12">
             <div className="form-group">
               <div className="form-btn">
-                <Link onClick={handleAddAnswer} to="#" className="btn btn-apply">
+                <Link
+                  onClick={handleAddAnswer}
+                  to="#"
+                  className="btn btn-apply"
+                >
                   <FeatherIcon icon="plus" /> Add Answer
                 </Link>
               </div>
             </div>
           </div>
 
-          <ExplanationCard explanationInputRef={explanationInputRef} explanationImage={explanationImage} setExplanationImage={setExplanationImage} />
+          <ExplanationCard
+            explanationInputRef={explanationInputRef}
+            explanationImage={explanationImage}
+            setExplanationImage={setExplanationImage}
+          />
 
           <div className="col-xl-12 col-sm-12 col-12">
             <div className="form-group">
               <div className="form-btn">
-                <Link onClick={handleSubmit} to="#" className={isSubmitting ? "btn btn-addmembers-disabled" : "btn btn-addmembers" }>
+                <Link
+                  onClick={handleSubmit}
+                  to="#"
+                  className={
+                    isSubmitting
+                      ? "btn btn-addmembers-disabled"
+                      : "btn btn-addmembers"
+                  }
+                >
                   <FeatherIcon icon="send" /> Submit
                 </Link>
               </div>
@@ -242,4 +266,4 @@ const AddQuestionCard = ({
   );
 };
 
-export default connect(mapStateToProps,  mapDispatchToProps)(AddQuestionCard);
+export default connect(mapStateToProps, mapDispatchToProps)(AddQuestionCard);

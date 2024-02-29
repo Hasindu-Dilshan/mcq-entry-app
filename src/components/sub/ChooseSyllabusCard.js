@@ -4,7 +4,6 @@ import TopicsComponent from "./TopicsComponent";
 import { Link } from "react-router-dom";
 
 const ChooseSyllabusCard = () => {
-  
   return (
     <div className="row">
       <div className="col-xl-12 col-sm-12 col-12 mb-4">
@@ -14,10 +13,9 @@ const ChooseSyllabusCard = () => {
           </div>
           <div className="card-body">
             <div className="form-creation">
-
               <SyllabiComponent />
               <TopicsComponent />
-              
+
               <div className="form-group">
                 <div className="head-link-set">
                   <Link className="btn-add" to="/addquestions">

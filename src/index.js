@@ -8,14 +8,14 @@ import { persistor, store } from "./store";
 
 import reportWebVitals from "./reportWebVitals";
 
-// setup fake backend
-import { fakeBackend } from './helpers';
 import { BrowserRouter } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
+import { fakeBackend } from "./helpers";
+
+// setup fake backend
 fakeBackend();
 
 const root = createRoot(document.getElementById("root"));
-
 
 root.render(
   <React.StrictMode>
@@ -27,7 +27,6 @@ root.render(
       </PersistGate>
     </Provider>
   </React.StrictMode>
-  
 );
 
 // If you want to start measuring performance in your app, pass a function

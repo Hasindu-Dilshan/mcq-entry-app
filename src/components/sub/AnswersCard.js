@@ -1,18 +1,18 @@
 import { useEffect } from "react";
 import AnswerComponent from "./AnswerComponent";
 
-const AnswersCard = ({ 
-  handleAddAnswer, 
-  answerRows, 
-  handleDeleteAnswerRow, 
-  handleAnswerFieldChange 
+const AnswersCard = ({
+  handleAddAnswer,
+  answerRows,
+  handleDeleteAnswerRow,
+  handleAnswerFieldChange,
 }) => {
   useEffect(() => {
-    if(answerRows.length === 0) {
+    if (answerRows.length === 0) {
       handleAddAnswer();
     }
-  }, [answerRows])
-  
+  }, [answerRows]);
+
   return (
     <div className="col-xl-12 col-sm-12 col-12 mt-5">
       <div className="card">
@@ -31,11 +31,17 @@ const AnswersCard = ({
               </tr>
             </thead>
             <tbody>
-              {
-                  answerRows.map((answerRow, index) => {
-                    return <AnswerComponent key={ answerRow.key } id={index} answerRow={answerRow} handleDeleteAnswerRow={handleDeleteAnswerRow} handleAnswerFieldChange={handleAnswerFieldChange} />
-                  })
-              }
+              {answerRows.map((answerRow, index) => {
+                return (
+                  <AnswerComponent
+                    key={answerRow.key}
+                    id={index}
+                    answerRow={answerRow}
+                    handleDeleteAnswerRow={handleDeleteAnswerRow}
+                    handleAnswerFieldChange={handleAnswerFieldChange}
+                  />
+                );
+              })}
             </tbody>
           </table>
         </div>

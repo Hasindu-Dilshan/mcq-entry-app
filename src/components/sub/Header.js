@@ -3,18 +3,16 @@ import FeatherIcon from "feather-icons-react";
 import { LOGOUT } from "../../constants/actionTypes";
 import { connect } from "react-redux";
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   name: state.auth.name,
-  avatar: state.auth.avatar
-})
+  avatar: state.auth.avatar,
+});
 
-const mapDispatchToProps = dispatch => ({
-  dispatchLogout: () =>
-    dispatch({ type: LOGOUT }),
+const mapDispatchToProps = (dispatch) => ({
+  dispatchLogout: () => dispatch({ type: LOGOUT }),
 });
 
 const Header = ({ name, avatar, dispatchLogout }) => {
-
   const avatarPath = `/assets/img/profiles/${avatar}`;
 
   function handleLogout() {

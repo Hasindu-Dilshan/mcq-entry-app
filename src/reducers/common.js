@@ -1,19 +1,18 @@
-import { 
+import {
   APP_LOAD,
   SYLLABI_SAVE_NEW,
   TOPICS_SAVE_NEW,
-} from '../constants/actionTypes';
+} from "../constants/actionTypes";
 
 const defaultState = {
-  appName: 'ZeroCode',
+  appName: "ZeroCode",
   currentSyllabi_b64: undefined,
   currentTopics_b64: undefined,
   appLoaded: false,
 };
 
-const common =  (state = defaultState, action) => {
+const common = (state = defaultState, action) => {
   switch (action.type) {
-
     case APP_LOAD:
       return {
         ...state,
@@ -29,7 +28,7 @@ const common =  (state = defaultState, action) => {
       return {
         ...state,
         currentTopics_b64: action.payload,
-      }
+      };
     default:
       return state;
   }

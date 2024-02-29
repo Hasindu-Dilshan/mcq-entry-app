@@ -31,7 +31,7 @@ const appRoutes = [
     sidebarProps: {
       display: "Add Questions",
       img: "addquestions.svg",
-      alt: "sidebar_img"
+      alt: "sidebar_img",
     },
   },
 ];

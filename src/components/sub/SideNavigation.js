@@ -3,14 +3,12 @@ import { connect } from "react-redux";
 import appRoutes from "../../routes/appRoutes";
 import { LOGOUT } from "../../constants/actionTypes";
 
-
-const mapStateToProps = state => ({
-  avatar: state.auth.avatar
+const mapStateToProps = (state) => ({
+  avatar: state.auth.avatar,
 });
 
-const mapDispatchToProps = dispatch => ({
-  dispatchLogout: () =>
-    dispatch({ type: LOGOUT }),
+const mapDispatchToProps = (dispatch) => ({
+  dispatchLogout: () => dispatch({ type: LOGOUT }),
 });
 
 const SideNavigation = ({ avatar, dispatchLogout }) => {
@@ -22,7 +20,15 @@ const SideNavigation = ({ avatar, dispatchLogout }) => {
 
   return (
     <div className="sidebar" id="sidebar">
-      <div class="slimScrollDiv" style={{"position": "relative", "overflow": "hidden", "width": "100%", "height": "172px"}}>
+      <div
+        class="slimScrollDiv"
+        style={{
+          position: "relative",
+          overflow: "hidden",
+          width: "100%",
+          height: "172px",
+        }}
+      >
         <div className="sidebar-inner slimscroll">
           <div className="sidebar-contents">
             <div id="sidebar-menu" className="sidebar-menu">
@@ -32,14 +38,11 @@ const SideNavigation = ({ avatar, dispatchLogout }) => {
                     <span
                       className="lnr lnr-cross text-white"
                       id="mobile_btn_close"
-                      style={{cursor: "pointer"}}
+                      style={{ cursor: "pointer" }}
                     >
                       X
                     </span>
-                    <Link
-                      to="#"
-                      className="d-block menu-style text-white"
-                    >
+                    <Link to="#" className="d-block menu-style text-white">
                       <div className="user-avatar d-inline-block mr-3">
                         <img
                           src={avatarPath}
@@ -70,16 +73,17 @@ const SideNavigation = ({ avatar, dispatchLogout }) => {
               <ul class="app-routes">
                 {appRoutes.map((route, index) => {
                   return (
-                    route.sidebarProps &&
-                    <li key={index}>
-                      <Link to={route.path}>
-                        <img
-                          src={`/assets/img/${route.sidebarProps.img}`}
-                          alt={route.sidebarProps.alt}
-                        />
-                        <span>{route.sidebarProps.display}</span>
-                      </Link>
-                    </li>
+                    route.sidebarProps && (
+                      <li key={index}>
+                        <Link to={route.path}>
+                          <img
+                            src={`/assets/img/${route.sidebarProps.img}`}
+                            alt={route.sidebarProps.alt}
+                          />
+                          <span>{route.sidebarProps.display}</span>
+                        </Link>
+                      </li>
+                    )
                   );
                 })}
               </ul>

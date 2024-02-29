@@ -4,7 +4,7 @@ import {
 } from "../constants/actionTypes";
 
 const defaultState = {
-  isSubmitting: false
+  isSubmitting: false,
 };
 
 export default (state = defaultState, action) => {
@@ -12,13 +12,13 @@ export default (state = defaultState, action) => {
     case QUESTION_SUBMIT_START:
       return {
         ...state,
-        isSubmitting: true
+        isSubmitting: true,
       };
     case QUESTION_SUBMIT_END:
-        return {
-            ...state,
-            isSubmitting: false
-        }
+      return {
+        ...state,
+        isSubmitting: false,
+      };
 
     default:
       return state;

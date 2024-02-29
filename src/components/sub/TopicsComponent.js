@@ -7,14 +7,12 @@ import {
 import { useEffect, useState } from "react";
 import { getTopics } from "../../helpers/user-agent";
 
-const mapStateToProps = (state) => {
-  return {
-    subjectId: state.topic.subjectId,
-    syllabusUpdatedYear: state.topic.syllabusUpdatedYear,
-    isFetchingTopics: state.topic.isFetchingTopics,
-    topicId: state.topic.topicId,
-  };
-};
+const mapStateToProps = (state) => ({
+  subjectId: state.topic.subjectId,
+  syllabusUpdatedYear: state.topic.syllabusUpdatedYear,
+  isFetchingTopics: state.topic.isFetchingTopics,
+  topicId: state.topic.topicId,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   dispatchTopicChange: (topicId, topicName) =>
@@ -39,17 +37,16 @@ const onSelectChange = (event, dispatchTopicChange) => {
   const topicName = selectedOption.innerHTML;
 
   dispatchTopicChange(topicId, topicName);
-}
+};
 
-const TopicsComponent = ({ 
-  subjectId, 
-  syllabusUpdatedYear, 
-  isFetchingTopics, 
-  dispatchTopicsRequest, 
-  dispatchTopicChange, 
-  dispatchTopicsSuccess 
+const TopicsComponent = ({
+  subjectId,
+  syllabusUpdatedYear,
+  isFetchingTopics,
+  dispatchTopicsRequest,
+  dispatchTopicChange,
+  dispatchTopicsSuccess,
 }) => {
-  
   const [topics, setTopics] = useState([]);
   const [defaultOption, setDefaultOption] = useState("default");
 
@@ -58,22 +55,20 @@ const TopicsComponent = ({
       dispatchTopicsRequest();
 
       await getTopics(subjectId, syllabusUpdatedYear)
-              .then(topicsArray => {
-                dispatchTopicsSuccess();
+        .then((topicsArray) => {
+          dispatchTopicsSuccess();
 
-                setTopics(topicsArray);
-              })
-              .catch(err => {
-                alert("Topics not found");
-              });
-      
+          setTopics(topicsArray);
+        })
+        .catch((err) => {
+          alert("Topics not found");
+        });
     }
 
     if (subjectId && syllabusUpdatedYear) {
       fetchTopics(subjectId, syllabusUpdatedYear);
       setDefaultOption(2);
     }
-    
   }, [subjectId, syllabusUpdatedYear]);
 
   return (
@@ -91,7 +86,7 @@ const TopicsComponent = ({
 
           {topics.map((topic, index) => (
             <option key={index} value={index}>
-              {topic} 
+              {topic}
             </option>
           ))}
         </select>

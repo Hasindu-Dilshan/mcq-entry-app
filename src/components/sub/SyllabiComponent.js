@@ -7,12 +7,10 @@ import {
   SYLLABI_FETCH_SUCCESS,
 } from "../../constants/actionTypes";
 
-const mapStateToProps = (state) => {
-  return {
-    isFetchingSyllabi: state.topic.isFetchingSyllabi,
-    subjectId: state.topic.subjectId
-  };
-};
+const mapStateToProps = (state) => ({
+  isFetchingSyllabi: state.topic.isFetchingSyllabi,
+  subjectId: state.topic.subjectId,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   dispatchSyllabusChange: (
@@ -49,25 +47,22 @@ const onSyllabusChange = async (event, title, dispatchSyllabusChange) => {
     selectedOption.getAttribute("syllabusupdatedyear")
   );
 
-  dispatchSyllabusChange(
-    subjectId,
-    subjectName,
-    syllabusUpdatedYear,
-    title
-  );
+  dispatchSyllabusChange(subjectId, subjectName, syllabusUpdatedYear, title);
 };
 
 const getSubjectYearArray = (data) =>
-  data.subjectYears.map((subjectYear) =>
-    subjectYear.syllabusUpdatedYears.map((syllabusUpdatedYear) => {
-      return {
-        subjectName: subjectYear.subjectName,
-        subjectId: subjectYear.subjectId,
-        syllabusUpdatedYear,
-      };
-    })
-  ).flat().map((subjectYear, index) => 
-      ({...subjectYear, key: index}));
+  data.subjectYears
+    .map((subjectYear) =>
+      subjectYear.syllabusUpdatedYears.map((syllabusUpdatedYear) => {
+        return {
+          subjectName: subjectYear.subjectName,
+          subjectId: subjectYear.subjectId,
+          syllabusUpdatedYear,
+        };
+      })
+    )
+    .flat()
+    .map((subjectYear, index) => ({ ...subjectYear, key: index }));
 
 const SyllabiComponent = ({
   dispatchSyllabiRequest,
@@ -84,16 +79,16 @@ const SyllabiComponent = ({
       dispatchSyllabiRequest();
 
       await getAllSyllabi()
-            .then(data => {
-              dispatchSyllabiSuccess();
-              const subjectYearArray = getSubjectYearArray(data);
+        .then((data) => {
+          dispatchSyllabiSuccess();
+          const subjectYearArray = getSubjectYearArray(data);
 
-              setTitle(data.title);
-              setSubjectYearList(subjectYearArray);
-            }).catch(err => {
-              alert("Syllabus not found");
-            });
-      
+          setTitle(data.title);
+          setSubjectYearList(subjectYearArray);
+        })
+        .catch((err) => {
+          alert("Syllabus not found");
+        });
     }
 
     fetchSyllabi();
@@ -106,7 +101,9 @@ const SyllabiComponent = ({
           className="select"
           disabled={isFetchingSyllabi}
           defaultValue={defaultOption}
-          onChange={(event) => {onSyllabusChange(event, title, dispatchSyllabusChange)}}
+          onChange={(event) => {
+            onSyllabusChange(event, title, dispatchSyllabusChange);
+          }}
         >
           <option value={"default"} disabled>
             {!isFetchingSyllabi ? "Choose Syllabus" : "Fetching Syllabi..."}

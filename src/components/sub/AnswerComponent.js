@@ -1,13 +1,12 @@
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import { useRef, useState } from "react";
 
-const AnswerComponent = ({ 
-  id, 
-  answerRow, 
-  handleDeleteAnswerRow, 
-  handleAnswerFieldChange 
+const AnswerComponent = ({
+  id,
+  answerRow,
+  handleDeleteAnswerRow,
+  handleAnswerFieldChange,
 }) => {
-
   const [isChecked, setIsChecked] = useState(false);
 
   const answerTextRef = useRef(null);
@@ -25,8 +24,8 @@ const AnswerComponent = ({
     const answer = {
       text,
       correct,
-      key
-    }
+      key,
+    };
 
     handleAnswerFieldChange(answer);
   }
@@ -37,7 +36,7 @@ const AnswerComponent = ({
 
   function handleToggle() {
     setIsChecked(!isChecked);
-    
+
     updateAnswerFields();
   }
 
@@ -47,24 +46,22 @@ const AnswerComponent = ({
         <label>{id + 1} </label>
       </td>
       <td>
-        <textarea 
-          ref={answerTextRef} 
-          rows="3" 
-          cols="50" 
-          className="form-control" 
-          defaultValue={
-            typeof answerRow === "string" ? answerRow : ''
-          } 
+        <textarea
+          ref={answerTextRef}
+          rows="3"
+          cols="50"
+          className="form-control"
+          defaultValue={typeof answerRow === "string" ? answerRow : ""}
           onKeyUp={handleKeyUp}
         ></textarea>
       </td>
       <td>
         <label className="customcheck ml-4 mb-3">
-          <input 
-            ref={answerCorrectRef} 
-            checked={isChecked} 
-            onChange={handleToggle} 
-            type="checkbox" 
+          <input
+            ref={answerCorrectRef}
+            checked={isChecked}
+            onChange={handleToggle}
+            type="checkbox"
           />
           <span className="checkmark"></span>
         </label>
@@ -72,7 +69,12 @@ const AnswerComponent = ({
       <td>
         <div className="actionset">
           <label>
-            <a onClick={(event) => {event.preventDefault()}} className="action_label5">
+            <a
+              onClick={(event) => {
+                event.preventDefault();
+              }}
+              className="action_label5"
+            >
               Upload <FeatherIcon icon="edit" />
             </a>
           </label>
