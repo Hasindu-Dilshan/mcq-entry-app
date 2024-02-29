@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import appRoutes from "../../routes/appRoutes";
-import { LOGOUT, ROUTE } from "../../constants/actionTypes";
+import { LOGOUT } from "../../constants/actionTypes";
 
 const mapStateToProps = (state) => ({
   avatar: state.auth.avatar,
@@ -9,7 +9,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   dispatchLogout: () => dispatch({ type: LOGOUT }),
-  dispatchRouteState: (state) => dispatch({ type: ROUTE, payload: state }),
 });
 
 const SideNavigation = ({ avatar, dispatchLogout, dispatchRouteState }) => {
@@ -78,7 +77,6 @@ const SideNavigation = ({ avatar, dispatchLogout, dispatchRouteState }) => {
                       <li key={index}>
                         <Link
                           to={route.path}
-                          onClick={() => dispatchRouteState(route.state)}
                         >
                           <img
                             src={`/assets/img/${route.sidebarProps.img}`}

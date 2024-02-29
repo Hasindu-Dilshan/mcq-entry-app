@@ -1,7 +1,18 @@
 import BreadcrumbNavigation from "../sub/BreadcrumbNavigation";
 import AddQuestionCard from "../sub/AddQuestionCard";
+import { useEffect } from "react";
+import { connect } from "react-redux";
+import { ROUTE } from "../../constants/actionTypes";
 
-const AddQuestions = () => {
+const mapDispatchToProps = dispatch => ({
+  dispatchRouteState: (state) => dispatch({ type: ROUTE, payload: state }),
+});
+
+const AddQuestions = ({ dispatchRouteState }) => {
+  useEffect(() => {
+    dispatchRouteState("Add Questions");
+  }, []);
+  
   return (
     <>
       <BreadcrumbNavigation />
@@ -14,4 +25,4 @@ const AddQuestions = () => {
   );
 };
 
-export default AddQuestions;
+export default connect(null, mapDispatchToProps)(AddQuestions);

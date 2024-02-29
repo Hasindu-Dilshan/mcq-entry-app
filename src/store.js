@@ -5,7 +5,7 @@ import {
 } from "redux";
 import { createLogger } from "redux-logger";
 
-import { promiseMiddleware, localStorageMiddleware } from "./middleware";
+import { promiseMiddleware, localStorageMiddleware } from "./middleware/middleware";
 import rootReducer from "./reducers/reducer";
 
 import storageSession from "redux-persist/lib/storage/session";
