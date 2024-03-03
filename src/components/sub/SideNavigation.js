@@ -11,6 +11,28 @@ const mapDispatchToProps = (dispatch) => ({
   dispatchLogout: () => dispatch({ type: LOGOUT }),
 });
 
+const generateLinksToRoutes = (routes) => {
+  
+  return routes.map((route, index) => {
+    return (
+      route.sidebarProps && (
+        <>
+          <li key={index}>
+            <Link to={route.path}>
+              <img
+                src={`/assets/img/${route.sidebarProps.img}`}
+                alt={route.sidebarProps.alt}
+              />
+              <span>{route.sidebarProps.display}</span>
+            </Link>
+          </li>
+          {route.children && generateLinksToRoutes(route.children)}
+        </>
+      )
+    );
+  });
+};
+
 const SideNavigation = ({ avatar, dispatchLogout, dispatchRouteState }) => {
   const avatarPath = `/assets/img/profiles/${avatar}`;
 
@@ -70,23 +92,7 @@ const SideNavigation = ({ avatar, dispatchLogout, dispatchRouteState }) => {
                 </div> */}
               </div>
 
-              <ul class="app-routes">
-                {appRoutes.map((route, index) => {
-                  return (
-                    route.sidebarProps && (
-                      <li key={index}>
-                        <Link to={route.path}>
-                          <img
-                            src={`/assets/img/${route.sidebarProps.img}`}
-                            alt={route.sidebarProps.alt}
-                          />
-                          <span>{route.sidebarProps.display}</span>
-                        </Link>
-                      </li>
-                    )
-                  );
-                })}
-              </ul>
+              <ul class="app-routes">{generateLinksToRoutes(appRoutes)}</ul>
 
               <ul className="logout">
                 <li>

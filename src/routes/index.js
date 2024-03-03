@@ -8,7 +8,7 @@ const generateRoutes = (routes) => {
       <Route index path={route.path} element={route.element} key={index} />
     ) : (
       <Route path={route.path} element={route.element} key={index}>
-        {route.child && generateRoutes(route.child)}
+        {route.children && generateRoutes(route.children)}
       </Route>
     )
   );
