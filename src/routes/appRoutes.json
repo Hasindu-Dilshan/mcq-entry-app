@@ -1,7 +1,7 @@
 [
   {
     "index": "true",
-    "path": "/dashboard/",
+    "path": "dashboard/",
     "element": "Dashboard",
     "state": "Dashboard",
     "sidebarProps": {
@@ -11,10 +11,19 @@
     }
   },
   {
-    "path": "/choosesyllabus/",
-    "element": "ChooseSyllabus",
-    "state": "Choose Syllabus",
+    "path": "questions/",
+    "state": "Questions",
     "children": [
+      {
+        "path": "choosesyllabus/",
+        "element": "ChooseSyllabus",
+        "state": "Choose Syllabus",
+        "sidebarProps": {
+          "display": "Choose Syllabus",
+          "img": "choosesyllabus.svg",
+          "alt": "sidebar_img"
+        }
+      },
       {
         "path": "addquestions/",
         "element": "AddQuestions",
@@ -25,21 +34,6 @@
           "alt": "sidebar_img"
         }
       }
-    ],
-    "sidebarProps": {
-      "display": "Choose Syllabus",
-      "img": "choosesyllabus.svg",
-      "alt": "sidebar_img"
-    }
-  },
-  {
-    "path": "/addquestions/",
-    "element": "AddQuestions",
-    "state": "Add Questions",
-    "sidebarProps": {
-      "display": "Add Questions",
-      "img": "addquestions.svg",
-      "alt": "sidebar_img"
-    }
+    ]
   }
 ]

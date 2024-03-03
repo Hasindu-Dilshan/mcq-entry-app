@@ -18,7 +18,7 @@ const ChooseSyllabusCard = () => {
 
               <div className="form-group">
                 <div className="head-link-set">
-                  <Link className="btn-add" to="/addquestions">
+                  <Link className="btn-add" to="/questions/addquestions">
                     <FeatherIcon icon="plus" /> Add Questions
                   </Link>
                 </div>

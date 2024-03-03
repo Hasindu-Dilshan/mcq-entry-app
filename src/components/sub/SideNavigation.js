@@ -11,24 +11,27 @@ const mapDispatchToProps = (dispatch) => ({
   dispatchLogout: () => dispatch({ type: LOGOUT }),
 });
 
-const generateLinksToRoutes = (routes) => {
-  
+const generateLinksToRoutes = (routes, path = "/") => {
   return routes.map((route, index) => {
-    return (
-      route.sidebarProps && (
-        <>
-          <li key={index}>
-            <Link to={route.path}>
-              <img
-                src={`/assets/img/${route.sidebarProps.img}`}
-                alt={route.sidebarProps.alt}
-              />
-              <span>{route.sidebarProps.display}</span>
-            </Link>
-          </li>
-          {route.children && generateLinksToRoutes(route.children)}
-        </>
-      )
+    return route.sidebarProps ? (
+      <>
+        <li key={index}>
+          <Link to={path + route.path}>
+            <img
+              src={`/assets/img/${route.sidebarProps.img}`}
+              alt={route.sidebarProps.alt}
+            />
+            <span>{route.sidebarProps.display}</span>
+          </Link>
+        </li>
+        {route.children &&
+          generateLinksToRoutes(route.children, path + route.path)}
+      </>
+    ) : (
+      <>
+        {route.children &&
+          generateLinksToRoutes(route.children, path + route.path)}
+      </>
     );
   });
 };

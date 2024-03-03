@@ -2,13 +2,18 @@ import React from "react";
 import appRoutes from "./appRoutes";
 import { Route } from "react-router-dom";
 
-const generateRoutes = (routes) => {
+const generateRoutes = (routes, path = "/") => {
   return routes.map((route, index) =>
     route.index ? (
-      <Route index path={route.path} element={route.element} key={index} />
+      <Route
+        index
+        path={path + route.path}
+        element={route.element}
+        key={index}
+      />
     ) : (
       <Route path={route.path} element={route.element} key={index}>
-        {route.children && generateRoutes(route.children)}
+        {route.children && generateRoutes(route.children, path + route.path)}
       </Route>
     )
   );
