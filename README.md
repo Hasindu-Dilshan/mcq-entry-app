@@ -1,3 +1,10 @@
+# MCQ Data entry project
+
+<img src="./images/login_page.png" width="400" title="hover text">
+<img src="./images/dashboard.png" width="1000" title="hover text">
+<img src="./images/choose_syllabus_page.png" width="1000" title="hover text">
+<img src="./images/add_question_page.png" width="1000" title="hover text">
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
