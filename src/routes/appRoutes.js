@@ -1,9 +1,8 @@
 import Dashboard from "../components/main/Dashboard";
 import ChooseSyllabus from "../components/main/ChooseSyllabus";
 import AddQuestions from "../components/main/AddQuestions";
-import React from "react";
 
-let appRoutes = require("./appRoutes.json");
+const appRoutes = require("./appRoutes.json");
 
 const mapComponentsToRoutes = (routes) => {
   routes = routes.map((route) => {
@@ -20,7 +19,6 @@ const mapComponentsToRoutes = (routes) => {
 };
 
 function getJsxElement(element) {
-
   // break statements are not considered as return statements are used
   switch (element) {
     case "Dashboard":
@@ -33,39 +31,5 @@ function getJsxElement(element) {
       return undefined;
   }
 }
-
-// const appRoutes = [
-//   {
-//     index: true,
-//     path: "/dashboard",
-//     element: <Dashboard />,
-//     state: "Dashboard",
-//     sidebarProps: {
-//       display: "Dashboard",
-//       img: "dashboard.svg",
-//       alt: "sidebar_img",
-//     },
-//   },
-//   {
-//     path: "/choosesyllabus",
-//     element: <ChooseSyllabus />,
-//     state: "Choose Syllabus",
-//     sidebarProps: {
-//       display: "Choose Syllabus",
-//       img: "choosesyllabus.svg",
-//       alt: "sidebar_img",
-//     },
-//   },
-//   {
-//     path: "/addquestions",
-//     element: <AddQuestions />,
-//     state: "Add Questions",
-//     sidebarProps: {
-//       display: "Add Questions",
-//       img: "addquestions.svg",
-//       alt: "sidebar_img",
-//     },
-//   },
-// ];
 
 export default mapComponentsToRoutes(appRoutes);
