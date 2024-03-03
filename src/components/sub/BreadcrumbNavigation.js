@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { history } from "../../helpers";
 
 const appRoutes = require("../../routes/appRoutes.json");
 
@@ -35,7 +35,7 @@ const mapRoutesToStateNames = (
 };
 
 const BreadcrumbNavigation = ({ routeState }) => {
-  const location = useLocation();
+  const location = history.location;
 
   let pathnames = undefined;
   const [activeItemStateName, setActiveItemStateName] = useState(undefined);
@@ -67,7 +67,7 @@ const BreadcrumbNavigation = ({ routeState }) => {
 
             {stateNames &&
               stateNames.map((stateName) => (
-                <li className="breadcrumb-item active">{stateName}</li>
+                <li className="breadcrumb-item">{stateName}</li>
               ))}
 
             {activeItemStateName && (
