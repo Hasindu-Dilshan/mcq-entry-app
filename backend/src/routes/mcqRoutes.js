@@ -1,8 +1,14 @@
 const express = require("express");
 const router = express.Router();
 
-const { getAllSyllabi } = require("../controllers/mcqController");
+const {
+  getAllSubjectYears,
+  createSubjectYears,
+  createSyllabusTopics,
+} = require("../controller/mcqController");
 
-router.route("/syllabi").get(getAllSyllabi);
+router.route("/subjectyears").get(getAllSubjectYears);
+router.route("/subjectyears/new").post(createSubjectYears);
+router.route("/syllabustopoics/new").post(createSyllabusTopics);
 
 module.exports = router;

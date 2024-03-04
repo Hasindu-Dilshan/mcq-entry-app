@@ -3,9 +3,13 @@ const app = express();
 
 app.use(express.json());
 
-// Import all routes
+const errorMiddleware = require("./middleware/errors");
+
 const mcqRoutes = require("./routes/mcqRoutes");
 
-app.use("/api/v1/", mcqRoutes);
+// All routes
+app.use("/api/v1/mcq", mcqRoutes);
+
+app.use(errorMiddleware);
 
 module.exports = app;
