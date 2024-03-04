@@ -3,22 +3,13 @@ import { connect } from "react-redux";
 
 import WelcomeBanner from "../sub/WelcomeBanner";
 import BreadcrumbNavigation from "../sub/BreadcrumbNavigation";
-import { ROUTE } from "../../constants/actionTypes";
 
 const mapStateToProps = (state) => ({
   role: state.auth.role,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  dispatchRouteState: (state) => dispatch({ type: ROUTE, payload: state }),
-});
-
-const Dashboard = ({ role, dispatchRouteState }) => {
+const Dashboard = ({ role }) => {
   const [userRole, setUserRole] = useState(null);
-
-  useEffect(() => {
-    dispatchRouteState("Dashboard");
-  }, []);
 
   useEffect(() => {
     if (role) {
@@ -36,4 +27,4 @@ const Dashboard = ({ role, dispatchRouteState }) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps)(Dashboard);

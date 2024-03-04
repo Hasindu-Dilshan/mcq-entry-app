@@ -1,13 +1,8 @@
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
 import { useEffect, useState } from "react";
 import { history } from "../../helpers";
 
 const appRoutes = require("../../routes/appRoutes.json");
-
-const mapStateToProps = (state) => ({
-  routeState: state.common.routeState,
-});
 
 const mapRoutesToStateNames = (
   allPossibleRoutes = appRoutes,
@@ -34,7 +29,7 @@ const mapRoutesToStateNames = (
   return stateNames;
 };
 
-const BreadcrumbNavigation = ({ routeState }) => {
+const BreadcrumbNavigation = () => {
   const location = history.location;
 
   let pathnames = undefined;
@@ -47,7 +42,7 @@ const BreadcrumbNavigation = ({ routeState }) => {
 
     setActiveItemStateName(stateNames.pop());
     setStateNames(stateNames);
-  }, []);
+  }, [pathnames]);
 
   return (
     <div className="row mb-4">
@@ -74,11 +69,11 @@ const BreadcrumbNavigation = ({ routeState }) => {
               <li className="breadcrumb-item active">{activeItemStateName}</li>
             )}
           </ul>
-          <h3>{routeState}</h3>
+          <h3>{activeItemStateName}</h3>
         </div>
       </div>
     </div>
   );
 };
 
-export default connect(mapStateToProps)(BreadcrumbNavigation);
+export default BreadcrumbNavigation;
