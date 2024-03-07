@@ -17,7 +17,7 @@ exports.createSubjectYears = catchAsyncErrors(async (req, res, next) => {
 exports.getAllSubjectYears = async (req, res, next) => {
   const subjectYears = await SubjectYears.find();
 
-  if (subjectYears)
+  if (!subjectYears)
     return next(new ErrorHandler("subjectYears not found", 404));
 
   res.status(200).json({
