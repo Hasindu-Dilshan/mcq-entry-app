@@ -4,17 +4,20 @@ const ErrorHandler = require("../utils/ErrorHandler");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 
 // Create SubjectYear => /api/v1/mcq/subjectyears/new
-exports.createSubjectYears = catchAsyncErrors(async (req, res, next) => {
-  const subjectYears = await SubjectYears.create(req.body);
+exports.createSubjectYear = catchAsyncErrors(async (req, res, next) => {
+  const subjectYears = await SubjectYears.findOne();
+  subjectYears.subjectYears.push(req.body);
 
-  res.status(201).json({
-    success: true,
-    subjectYears,
+  await subjectYears.save().then((subjectYear) => {
+    res.status(201).json({
+      success: true,
+      subjectYear,
+    });
   });
 });
 
 // Get all SubjectYears => /api/v1/mcq/subjectyears
-exports.getAllSubjectYears = async (req, res, next) => {
+exports.getAllSubjectYears = catchAsyncErrors(async (req, res, next) => {
   const subjectYears = await SubjectYears.find();
 
   if (!subjectYears)
@@ -24,7 +27,7 @@ exports.getAllSubjectYears = async (req, res, next) => {
     success: true,
     subjectYears,
   });
-};
+});
 
 // Create SyllabusTopcics => /api/v1/mcq/syllabustopics/new
 exports.createSyllabusTopics = catchAsyncErrors(async (req, res, next) => {
@@ -36,8 +39,8 @@ exports.createSyllabusTopics = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// Create SyllabusTopics => /api/v1/mcq/syllabustopics
-exports.getAllSubjectTopics = async (req, res, next) => {
+// Get all Syllabustopics => /api/v1/mcq/syllabustopics
+exports.getAllSubjectTopics = catchAsyncErrors(async (req, res, next) => {
   const subjectTopics = await SyllabusTopics.find();
 
   if (!subjectTopics)
@@ -47,4 +50,4 @@ exports.getAllSubjectTopics = async (req, res, next) => {
     success: true,
     subjectTopics,
   });
-};
+});
