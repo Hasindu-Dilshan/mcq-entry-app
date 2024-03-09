@@ -16,7 +16,7 @@ const generateLinksToRoutes = (routes, path = "/") => {
     return route.sidebarProps ? (
       <>
         <li key={index}>
-          <Link to={path + route.path}>
+          <Link to={path + route.path + "/"}>
             <img
               src={`/assets/img/${route.sidebarProps.img}`}
               alt={route.sidebarProps.alt}
@@ -25,12 +25,12 @@ const generateLinksToRoutes = (routes, path = "/") => {
           </Link>
         </li>
         {route.children &&
-          generateLinksToRoutes(route.children, path + route.path)}
+          generateLinksToRoutes(route.children, path + route.path + "/")}
       </>
     ) : (
       <>
         {route.children &&
-          generateLinksToRoutes(route.children, path + route.path)}
+          generateLinksToRoutes(route.children, path + route.path + "/")}
       </>
     );
   });

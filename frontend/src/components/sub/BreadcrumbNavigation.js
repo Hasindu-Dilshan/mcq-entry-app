@@ -1,48 +1,18 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { history } from "../../helpers";
-
-const appRoutes = require("../../routes/appRoutes.json");
-
-const mapRoutesToStateNames = (
-  allPossibleRoutes = appRoutes,
-  routes = [],
-  stateNames = []
-) => {
-  // debugger;
-
-  if (allPossibleRoutes === undefined || routes.length === 0) {
-    return stateNames;
-  }
-
-  const relevantRoute = allPossibleRoutes.find((route) =>
-    route.path.startsWith(routes[0])
-  );
-
-  if (relevantRoute) {
-    stateNames.push(relevantRoute.state);
-    routes.shift();
-
-    mapRoutesToStateNames(relevantRoute.children, routes, stateNames);
-  }
-
-  return stateNames;
-};
+import { routeToDisplayName } from "../../routes/appRoutesConfig";
 
 const BreadcrumbNavigation = () => {
-  const location = history.location;
-
-  let pathnames = undefined;
-  const [activeItemStateName, setActiveItemStateName] = useState(undefined);
-  const [stateNames, setStateNames] = useState(undefined);
+  const location = useLocation();
+  const [activeItemStateName, setActiveItemStateName] = useState("");
+  const [stateNames, setStateNames] = useState([]);
 
   useEffect(() => {
-    pathnames = location.pathname.split("/").filter((x) => x);
-    const stateNames = mapRoutesToStateNames(appRoutes, pathnames, []);
+    const pathnames = location.pathname.split("/").filter((x) => x);
 
-    setActiveItemStateName(stateNames.pop());
-    setStateNames(stateNames);
-  }, [pathnames]);
+    setActiveItemStateName(pathnames[-1]);
+    setStateNames(pathnames);
+  }, [location]);
 
   return (
     <div className="row mb-4">
@@ -60,14 +30,13 @@ const BreadcrumbNavigation = () => {
               </Link>
             </li>
 
-            {stateNames &&
-              stateNames.map((stateName) => (
-                <li className="breadcrumb-item">{stateName}</li>
-              ))}
+            {stateNames.map((stateName) => (
+              <li className="breadcrumb-item">
+                {routeToDisplayName[stateName]}
+              </li>
+            ))}
 
-            {activeItemStateName && (
-              <li className="breadcrumb-item active">{activeItemStateName}</li>
-            )}
+            {<li className="breadcrumb-item active">{activeItemStateName}</li>}
           </ul>
           <h3>{activeItemStateName}</h3>
         </div>

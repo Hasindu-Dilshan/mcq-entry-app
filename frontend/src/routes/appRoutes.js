@@ -2,7 +2,7 @@ import Dashboard from "../components/main/Dashboard";
 import ChooseSyllabus from "../components/main/ChooseSyllabus";
 import AddQuestions from "../components/main/AddQuestions";
 
-const appRoutes = require("./appRoutes.json");
+import appRoutes from "./appRoutesConfig";
 
 const mapComponentsToRoutes = (routes) => {
   routes = routes.map((route) => {
