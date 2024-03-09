@@ -8,9 +8,9 @@ const BreadcrumbNavigation = () => {
   const [stateNames, setStateNames] = useState([]);
 
   useEffect(() => {
-    const pathnames = location.pathname.split("/").filter((x) => x);
+    let pathnames = location.pathname.split("/").filter((x) => x);
 
-    setActiveItemStateName(pathnames[-1]);
+    setActiveItemStateName(pathnames.pop());
     setStateNames(pathnames);
   }, [location]);
 
@@ -36,9 +36,9 @@ const BreadcrumbNavigation = () => {
               </li>
             ))}
 
-            {<li className="breadcrumb-item active">{activeItemStateName}</li>}
+            {<li className="breadcrumb-item active">{routeToDisplayName[activeItemStateName]}</li>}
           </ul>
-          <h3>{activeItemStateName}</h3>
+          <h3>{routeToDisplayName[activeItemStateName]}</h3>
         </div>
       </div>
     </div>
