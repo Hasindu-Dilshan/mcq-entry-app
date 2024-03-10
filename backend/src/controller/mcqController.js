@@ -31,23 +31,23 @@ exports.getAllSubjectYears = catchAsyncErrors(async (req, res, next) => {
 
 // Create SyllabusTopcics => /api/v1/mcq/syllabustopics/new
 exports.createSyllabusTopics = catchAsyncErrors(async (req, res, next) => {
-  const subjectTopics = await SyllabusTopics.create(req.body);
+  const syllabusTopics = await SyllabusTopics.create(req.body);
 
   res.status(201).json({
     success: true,
-    subjectTopics,
+    syllabusTopics,
   });
 });
 
 // Get all Syllabustopics => /api/v1/mcq/syllabustopics
 exports.getAllSubjectTopics = catchAsyncErrors(async (req, res, next) => {
-  const subjectTopics = await SyllabusTopics.find();
+  const syllabusTopics = await SyllabusTopics.find();
 
-  if (!subjectTopics)
+  if (!syllabusTopics)
     return next(new ErrorHandler("subjectYears not found", 404));
 
   res.status(200).json({
     success: true,
-    subjectTopics,
+    syllabusTopics,
   });
 });

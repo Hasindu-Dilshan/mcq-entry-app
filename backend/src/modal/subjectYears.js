@@ -5,13 +5,13 @@ const subjectYearsSchema = new mongoose.Schema({
     {
       subjectName: {
         type: String,
-        required: [true, "Please Enter Subject Name"],
+        required: [true, "Subject Name is required"],
         minLength: [1, "Invalid Subject Name"],
         maxLength: [100, "Invalid Subject Name"],
       },
       subjectId: {
         type: Number,
-        required: [true, "Please Enter Subject ID"],
+        required: [true, "Subject ID is required"],
         min: [1, "Invalid Subject ID"],
         max: [200, "Invalid Subject ID"],
       },
@@ -26,7 +26,7 @@ const subjectYearsSchema = new mongoose.Schema({
   ],
   title: {
     type: String,
-    required: [true, "Please enter title"],
+    required: [true, "title is required"],
   },
 });
 
