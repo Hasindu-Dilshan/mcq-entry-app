@@ -1,0 +1,29 @@
+[
+    {
+        "subjectName": "භෞතික විද්‍යාව",
+        "subjectId": "1",
+        "syllabusUpdatedYears": [
+            2003,
+            2012,
+            2019
+        ]
+    },
+    {
+        "subjectName": "රසායන විද්‍යාව",
+        "subjectId": "2",
+        "syllabusUpdatedYears": [
+            2003,
+            2012,
+            2019
+        ]
+    },
+    {
+        "subjectName": "ජීව විද්‍යාව",
+        "subjectId": "3",
+        "syllabusUpdatedYears": [
+            2003,
+            2012,
+            2019
+        ]
+    }
+]
