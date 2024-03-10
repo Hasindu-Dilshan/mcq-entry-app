@@ -1,5 +1,21 @@
 const mongoose = require("mongoose");
-const initSubjectYearsCollection = require("./dbinit");
+const SubjectYears = require("../src/modal/subjectYears");
+
+const initSubjectYearsCollection = async () => {
+  if (await SubjectYears.findOne()) {
+    return;
+  }
+
+  await SubjectYears.create({
+    title: "විෂය නිර්දේෂය",
+  })
+    .then(() => {
+      console.log("Initializing subjectYears collection success");
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+};
 
 const connectDatabase = async () => {
   await mongoose
