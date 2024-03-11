@@ -10,7 +10,7 @@ const auth = require("./routes/auth");
 
 // All routes
 app.use("/api/v1/mcq", mcq);
-app.use("/api/v1/users", auth);
+app.use("/api/v1/auth", auth);
 
 app.use(errorMiddleware);
 
