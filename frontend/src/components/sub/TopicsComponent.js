@@ -58,7 +58,7 @@ const TopicsComponent = ({
         .then((topicsArray) => {
           dispatchTopicsSuccess();
 
-          setTopics(topicsArray);
+          setTopics(topicsArray.map(topicItem => topicItem.topic));
         })
         .catch((err) => {
           alert("Topics not found");
