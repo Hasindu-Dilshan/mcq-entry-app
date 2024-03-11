@@ -9,7 +9,7 @@ const syllabusTopicsSchema = new mongoose.Schema({
   },
   syllabusUpdatedYear: {
     type: Number,
-    required: [true, "Please Enter Syllabus Updated Year"],
+    required: [true, "Syllabus Updated Year is required"],
     min: [1980, "Invalid Syllabus Updated Year"],
     max: [3000, "Invalid Syllabus Updated Year"],
   },
@@ -17,15 +17,15 @@ const syllabusTopicsSchema = new mongoose.Schema({
     {
       id: {
         type: Number,
-        required: [true, "Please Enter Topic ID"],
+        required: [true, "Topic ID is required"],
         min: [1, "Invalid Topic ID"],
         max: [100, "Invalid Topic ID"],
       },
       topic: {
         type: String,
-        required: [true, "Please Enter Topics"],
+        required: [true, "Topics is required"],
         minLength: [1, "Invalid Topic name"],
-        maxLength: [50, "Invalid Topic name"],
+        maxLength: [50, "Topic name cannot exceed 50 characters"],
       },
     },
   ],
