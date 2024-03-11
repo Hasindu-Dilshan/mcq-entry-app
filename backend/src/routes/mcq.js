@@ -8,7 +8,11 @@ const {
   getAllSyllabusTopics,
 } = require("../controller/mcqController");
 
-router.route("/subjectyears").get(getAllSubjectYears);
+const { isAuthenticatedUser, authorizeRoles } = require("../middleware/auth");
+
+router
+  .route("/subjectyears")
+  .get(isAuthenticatedUser, authorizeRoles("user"), getAllSubjectYears);
 router.route("/subjectyears/new").post(createSubjectYear);
 router.route("/syllabustopoics").get(getAllSyllabusTopics);
 router.route("/syllabustopoics/new").post(createSyllabusTopic);
