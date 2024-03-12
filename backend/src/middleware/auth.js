@@ -8,11 +8,11 @@ const User = require("../modal/user");
 exports.isAuthenticatedUser = catchAsyncErrors(async (req, res, next) => {
   const authHeader = req.headers["authorization"];
 
-  const token = authHeader.split(" ")[1];
-
-  if (!token) {
+  if (!authHeader) {
     return next(new ErrorHandler("Please login to access this resource", 401));
   }
+
+  const token = authHeader?.split(" ")[1];
 
   const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
