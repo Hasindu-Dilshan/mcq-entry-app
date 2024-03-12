@@ -40,14 +40,31 @@ exports.createSyllabusTopics = catchAsyncErrors(async (req, res, next) => {
 });
 
 // Get all Syllabustopics => /api/v1/mcq/syllabustopics
-exports.getAllSubjectTopics = catchAsyncErrors(async (req, res, next) => {
+exports.getAllSyllabustopics = catchAsyncErrors(async (req, res, next) => {
   const syllabusTopics = await SyllabusTopics.find();
 
   if (!syllabusTopics)
-    return next(new ErrorHandler("subjectYears not found", 404));
+    return next(new ErrorHandler("subjectTopics not found", 404));
 
   res.status(200).json({
     success: true,
     syllabusTopics,
+  });
+});
+
+// Get relevant topics => /api/v1/mcq/topics
+exports.getTopicsBySyllabus = catchAsyncErrors(async (req, res, next) => {
+  const { subjectId, syllabusUpdatedYear } = req.body;
+
+  const topics = await SyllabusTopics.findOne({
+    $and: [
+      { subjectId: subjectId },
+      { syllabusUpdatedYear: syllabusUpdatedYear },
+    ],
+  });
+
+  res.status(200).json({
+    success: true,
+    topics,
   });
 });
