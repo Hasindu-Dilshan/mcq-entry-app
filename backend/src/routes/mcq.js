@@ -6,15 +6,15 @@ const {
   createSubjectYear,
   createSyllabusTopic,
   getTopicsBySyllabus,
-  getAllSyllabustopics,
+  getAllSyllabusTopics,
 } = require("../controller/mcqController");
 
 const { isAuthenticatedUser, authorizeRoles } = require("../middleware/auth");
 
 router.route("/subjectyears").get(getAllSubjectYears);
 router.route("/subjectyears/new").post(createSubjectYear);
-router.route("/syllabustopoics").get(getAllSyllabustopics);
-router.route("/syllabustopoics/new").post(createSyllabusTopic);
+router.route("/syllabustopics").get(getAllSyllabusTopics);
+router.route("/syllabustopics/new").post(createSyllabusTopic);
 
 router.route("/topics").get(getTopicsBySyllabus);
 

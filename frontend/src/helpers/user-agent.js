@@ -11,10 +11,9 @@ export const getAllSyllabi = async () => {
 };
 
 export const getTopics = async (subjectId, syllabusUpdatedYear) => {
-  const topics = await fetchWrapper.get(`${baseUrl}/api/v1/mcq/topics`, {
-    subjectId,
-    syllabusUpdatedYear,
-  });
+  const topics = await fetchWrapper.get(
+    `${baseUrl}/api/v1/mcq/topics?subjectId=${subjectId}&syllabusUpdatedYear=${syllabusUpdatedYear}`
+  );
 
   return topics;
 };
@@ -76,7 +75,7 @@ function authHeader(url) {
 }
 
 function authToken() {
-  return store.getState().auth.user?.token;
+  return store.getState().auth?.token;
 }
 
 function handleResponse(response) {

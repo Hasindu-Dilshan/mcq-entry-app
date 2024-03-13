@@ -55,10 +55,10 @@ const TopicsComponent = ({
       dispatchTopicsRequest();
 
       await getTopics(Number(subjectId), syllabusUpdatedYear)
-        .then((topicsArray) => {
+        .then((topicsJSON) => {
           dispatchTopicsSuccess();
 
-          setTopics(topicsArray.map((topicItem) => topicItem.topic));
+          setTopics(topicsJSON.topics.map((topicItem) => topicItem.topic));
         })
         .catch((err) => {
           alert("Topics not found");

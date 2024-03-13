@@ -12,7 +12,7 @@ import { BrowserRouter } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 import { fakeBackend } from "./helpers";
 
-// setup fake backend
+// start fake backend
 // fakeBackend();
 
 const root = createRoot(document.getElementById("root"));

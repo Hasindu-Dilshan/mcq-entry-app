@@ -50,8 +50,8 @@ const onSyllabusChange = async (event, title, dispatchSyllabusChange) => {
   dispatchSyllabusChange(subjectId, subjectName, syllabusUpdatedYear, title);
 };
 
-const getSubjectYearArray = (data) =>
-  data.subjectYears
+const getSubjectYearArray = (syllabiJSON) =>
+  syllabiJSON.subjectYears
     .map((subjectYear) =>
       subjectYear.syllabusUpdatedYears.map((syllabusUpdatedYear) => {
         return {
@@ -79,15 +79,15 @@ const SyllabiComponent = ({
       dispatchSyllabiRequest();
 
       await getAllSyllabi()
-        .then((data) => {
+        .then((syllabiJSON) => {
           dispatchSyllabiSuccess();
-          const subjectYearArray = getSubjectYearArray(data);
+          const subjectYearArray = getSubjectYearArray(syllabiJSON);
 
-          setTitle(data.title);
+          setTitle(syllabiJSON.title);
           setSubjectYearList(subjectYearArray);
         })
         .catch((err) => {
-          alert("Syllabus not found");
+          alert("Syllabi not found");
         });
     }
 
