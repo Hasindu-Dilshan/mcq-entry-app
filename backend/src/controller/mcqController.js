@@ -23,14 +23,15 @@ exports.createSubjectYear = catchAsyncErrors(async (req, res, next) => {
 
 // Get all SubjectYears => /api/v1/mcq/subjectyears
 exports.getAllSubjectYears = catchAsyncErrors(async (req, res, next) => {
-  const subjectYears = await SubjectYears.find();
+  const subjectYears = await SubjectYears.findOne();
 
   if (!subjectYears)
     return next(new ErrorHandler('subjectYears collection not found', 404));
 
   res.status(200).json({
     success: true,
-    subjectYears,
+    subjectYears: subjectYears.subjectYears,
+    title: subjectYears.title
   });
 });
 
@@ -69,7 +70,7 @@ exports.getTopicsBySyllabus = catchAsyncErrors(async (req, res, next) => {
   });
 
   if(!topics) {
-    return  next(new ErrorHandler('Topics for relevant syllabus not found', 404));
+    return  next(new ErrorHandler('Topics for given syllabus not found', 404));
   }
 
   res.status(200).json({

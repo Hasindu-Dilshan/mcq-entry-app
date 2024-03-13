@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 const {
@@ -7,17 +7,15 @@ const {
   createSyllabusTopic,
   getTopicsBySyllabus,
   getAllSyllabustopics,
-} = require('../controller/mcqController');
+} = require("../controller/mcqController");
 
-const { isAuthenticatedUser, authorizeRoles } = require('../middleware/auth');
+const { isAuthenticatedUser, authorizeRoles } = require("../middleware/auth");
 
-router
-  .route('/subjectyears')
-  .get(isAuthenticatedUser, authorizeRoles('user'), getAllSubjectYears);
-router.route('/subjectyears/new').post(createSubjectYear);
-router.route('/syllabustopoics').get(getAllSyllabustopics);
-router.route('/syllabustopoics/new').post(createSyllabusTopic);
+router.route("/subjectyears").get(getAllSubjectYears);
+router.route("/subjectyears/new").post(createSubjectYear);
+router.route("/syllabustopoics").get(getAllSyllabustopics);
+router.route("/syllabustopoics/new").post(createSyllabusTopic);
 
-router.route('/topics').get(getTopicsBySyllabus);
+router.route("/topics").get(getTopicsBySyllabus);
 
 module.exports = router;

@@ -3,13 +3,15 @@ import { store } from "../store";
 const baseUrl = process.env.REACT_APP_API_URL;
 
 export const getAllSyllabi = async () => {
-  const subjectYearContainer = await fetchWrapper.get(`${baseUrl}/syllabi`);
+  const subjectYearContainer = await fetchWrapper.get(
+    `${baseUrl}/api/v1/mcq/subjectyears`
+  );
 
   return subjectYearContainer;
 };
 
 export const getTopics = async (subjectId, syllabusUpdatedYear) => {
-  const topics = await fetchWrapper.get(`${baseUrl}/topics`, {
+  const topics = await fetchWrapper.get(`${baseUrl}/api/v1/mcq/topics`, {
     subjectId,
     syllabusUpdatedYear,
   });
@@ -24,7 +26,7 @@ export const submitQuestion = async (question) => {
 };
 
 export const login = async (email, password) => {
-  const response = await fetchWrapper.post(`${baseUrl}/login`, {
+  const response = await fetchWrapper.post(`${baseUrl}/api/v1/auth/login`, {
     email,
     password,
   });
