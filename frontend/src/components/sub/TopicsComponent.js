@@ -54,11 +54,11 @@ const TopicsComponent = ({
     async function fetchTopics(subjectId, syllabusUpdatedYear) {
       dispatchTopicsRequest();
 
-      await getTopics(subjectId, syllabusUpdatedYear)
-        .then((topicsArray) => {
+      await getTopics(Number(subjectId), syllabusUpdatedYear)
+        .then((topicsJSON) => {
           dispatchTopicsSuccess();
 
-          setTopics(topicsArray);
+          setTopics(topicsJSON.topics.map((topicItem) => topicItem.topic));
         })
         .catch((err) => {
           alert("Topics not found");

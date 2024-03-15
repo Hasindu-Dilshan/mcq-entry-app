@@ -1,20 +1,50 @@
-const express = require("express");
-const router = express.Router();
-
+const express = require('express');
+const roles = require('../../config/roles');
+const { isAuthenticatedUser, authorizeRoles } = require('../middleware/auth');
 const {
   getAllSubjectYears,
   createSubjectYear,
   createSyllabusTopic,
+  getTopicsBySyllabus,
   getAllSyllabusTopics,
-} = require("../controller/mcqController");
+} = require('../controller/mcqController');
 
-const { isAuthenticatedUser, authorizeRoles } = require("../middleware/auth");
+const router = express.Router();
 
 router
-  .route("/subjectyears")
-  .get(isAuthenticatedUser, authorizeRoles("user"), getAllSubjectYears);
-router.route("/subjectyears/new").post(createSubjectYear);
-router.route("/syllabustopoics").get(getAllSyllabusTopics);
-router.route("/syllabustopoics/new").post(createSyllabusTopic);
+  .route('/subjectyears')
+  .get(
+    isAuthenticatedUser,
+    authorizeRoles(roles.USER_ROLE, roles.ADMIN_ROLE),
+    getAllSubjectYears
+  );
+router
+  .route('/subjectyears/new')
+  .post(
+    isAuthenticatedUser,
+    authorizeRoles(roles.ADMIN_ROLE),
+    createSubjectYear
+  );
+router
+  .route('/syllabustopics')
+  .get(
+    isAuthenticatedUser,
+    authorizeRoles(roles.ADMIN_ROLE),
+    getAllSyllabusTopics
+  );
+router
+  .route('/syllabustopics/new')
+  .post(
+    isAuthenticatedUser,
+    authorizeRoles(roles.ADMIN_ROLE),
+    createSyllabusTopic
+  );
+router
+  .route('/topics')
+  .get(
+    isAuthenticatedUser,
+    authorizeRoles(roles.USER_ROLE, roles.ADMIN_ROLE),
+    getTopicsBySyllabus
+  );
 
 module.exports = router;

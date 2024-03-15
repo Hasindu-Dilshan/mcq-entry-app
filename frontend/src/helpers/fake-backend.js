@@ -15,10 +15,10 @@ async function fakeBackend() {
             return authenticate();
           case url.endsWith("/users") && opts.method === "GET":
             return getUsers();
-          case url.endsWith("/syllabi") && opts.method === "GET":
+          case url.endsWith("/subjectyears") && opts.method === "GET":
             return getSyllabi();
-          case url.endsWith("/topics") && opts.method === "GET":
-            return getTopics(opts.body);
+          case /\/topics(\?.*)?$/.test(url) && opts.method === "GET":
+            return getTopics(url);
           case url.endsWith("/submit") && opts.method === "POST":
             return createQuestion(opts.body);
           case url.endsWith("/profile") && opts.method === "GET":
@@ -64,13 +64,16 @@ async function fakeBackend() {
         return ok(syllabi);
       }
 
-      function getTopics(body) {
-        const { subjectId, syllabusUpdatedYear } = JSON.parse(body);
+      function getTopics(url) {
+        let params = new URLSearchParams(url.split("?")[1]);
+        const subjectId = params.get("subjectId");
+        const syllabusUpdatedYear = Number(params.get("syllabusUpdatedYear"));
+
         const topics = syllabus_topics.filter(
           (syllabus_topic) =>
             syllabus_topic.subjectId === subjectId &&
             syllabus_topic.syllabusUpdatedYear === syllabusUpdatedYear
-        )[0].topics;
+        )[0];
 
         // simulate error
         // return error("Topics not found!");

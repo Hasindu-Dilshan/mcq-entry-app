@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const SubjectYears = require("../src/modal/subjectYears");
+const mongoose = require('mongoose');
+const SubjectYears = require('../src/modal/subjectYears');
 
 const initSubjectYearsCollection = async () => {
   if (await SubjectYears.findOne()) {
@@ -7,10 +7,10 @@ const initSubjectYearsCollection = async () => {
   }
 
   await SubjectYears.create({
-    title: "විෂය නිර්දේෂය",
+    title: 'විෂය නිර්දේෂය',
   })
     .then(() => {
-      console.log("Initializing subjectYears collection success");
+      console.log('Initializing subjectYears collection success');
     })
     .catch((e) => {
       console.log(e);
@@ -24,7 +24,6 @@ const connectDatabase = async () => {
       console.log(`MongoDB connected with HOST: ${con.connection.host}`);
       await initSubjectYearsCollection();
     })
-    .catch((e) => console.log(e));
 };
 
 module.exports = connectDatabase;
