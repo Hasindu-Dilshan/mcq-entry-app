@@ -1,6 +1,6 @@
-const catchAsyncErrors = require('../middleware/catchAsyncErrors');
-const User = require('../modal/user');
-const ErrorHandler = require('../utils/ErrorHandler');
+const catchAsyncErrors = require("../middleware/catchAsyncErrors");
+const User = require("../modal/user");
+const ErrorHandler = require("../utils/ErrorHandler");
 
 // Register user => /api/v1/auth/register
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
@@ -11,8 +11,8 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     email,
     password,
     avatar: {
-      public_id: 'sameple_id_str',
-      url: 'sample.url',
+      public_id: "sameple_id_str",
+      url: "sample.url",
     },
   });
 
@@ -30,17 +30,17 @@ exports.login = catchAsyncErrors(async (req, res, next) => {
   const { email, password } = req.body;
 
   // retrieve user with password
-  const user = await User.findOne({ email: email }).select('+password');
+  const user = await User.findOne({ email: email }).select("+password");
 
   if (!user) {
-    return next(new ErrorHandler('Invalid email or password', 401));
+    return next(new ErrorHandler("Invalid email or password", 401));
   }
 
   // check password
   const isPasswordsMatched = await user.comparePasswords(password);
 
   if (!isPasswordsMatched) {
-    return next(new ErrorHandler('Invalid password', 401));
+    return next(new ErrorHandler("Invalid password", 401));
   }
 
   const token = user.getJwt();

@@ -14,15 +14,14 @@ module.exports = (err, req, res, next) => {
   }
 
   if (process.env.NODE_ENV === 'PRODUCTION') {
-
-    let error = {...err};
+    let error = { ...err };
     error.message = err.message;
 
-    if(err.name === 'JsonWebTokenError') {
+    if (err.name === 'JsonWebTokenError') {
       const message = 'Invalid token. Please login.';
       error = new ErrorHandler(message, 401);
     }
-    
+
     res.status(error.statusCode).json({
       success: false,
       message: error.message,
