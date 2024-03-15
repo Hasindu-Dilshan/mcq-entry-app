@@ -1,5 +1,5 @@
 const express = require('express');
-const ROLES = require('../../config/roles');
+const roles = require('../../config/roles');
 const { isAuthenticatedUser, authorizeRoles } = require('../middleware/auth');
 const {
   getAllSubjectYears,
@@ -15,35 +15,35 @@ router
   .route('/subjectyears')
   .get(
     isAuthenticatedUser,
-    authorizeRoles(ROLES.USER_ROLE, ROLES.ADMIN_ROLE),
+    authorizeRoles(roles.USER_ROLE, roles.ADMIN_ROLE),
     getAllSubjectYears
   );
 router
   .route('/subjectyears/new')
   .post(
     isAuthenticatedUser,
-    authorizeRoles(ROLES.ADMIN_ROLE),
+    authorizeRoles(roles.ADMIN_ROLE),
     createSubjectYear
   );
 router
   .route('/syllabustopics')
   .get(
     isAuthenticatedUser,
-    authorizeRoles(ROLES.ADMIN_ROLE),
+    authorizeRoles(roles.ADMIN_ROLE),
     getAllSyllabusTopics
   );
 router
   .route('/syllabustopics/new')
   .post(
     isAuthenticatedUser,
-    authorizeRoles(ROLES.ADMIN_ROLE),
+    authorizeRoles(roles.ADMIN_ROLE),
     createSyllabusTopic
   );
 router
   .route('/topics')
   .get(
     isAuthenticatedUser,
-    authorizeRoles(ROLES.USER_ROLE, ROLES.ADMIN_ROLE),
+    authorizeRoles(roles.USER_ROLE, roles.ADMIN_ROLE),
     getTopicsBySyllabus
   );
 
