@@ -1,14 +1,14 @@
-const SubjectYears = require("../modal/subjectYears");
-const SyllabusTopics = require("../modal/syllabusTopics");
-const ErrorHandler = require("../utils/ErrorHandler");
-const catchAsyncErrors = require("../middleware/catchAsyncErrors");
+const SubjectYears = require('../modal/subjectYears');
+const SyllabusTopics = require('../modal/syllabusTopics');
+const ErrorHandler = require('../utils/ErrorHandler');
+const catchAsyncErrors = require('../middleware/catchAsyncErrors');
 
 // Create SubjectYear => /api/v1/mcq/subjectyears/new
 exports.createSubjectYear = catchAsyncErrors(async (req, res, next) => {
   const subjectYears = await SubjectYears.findOne();
 
   if (!subjectYears) {
-    return next(new ErrorHandler("subjectYears collection not found", 404));
+    return next(new ErrorHandler('subjectYears collection not found', 404));
   }
 
   subjectYears.subjectYears.push(req.body);
@@ -26,7 +26,7 @@ exports.getAllSubjectYears = catchAsyncErrors(async (req, res, next) => {
   const subjectYears = await SubjectYears.findOne();
 
   if (!subjectYears)
-    return next(new ErrorHandler("subjectYears collection not found", 404));
+    return next(new ErrorHandler('subjectYears collection not found', 404));
 
   res.status(200).json({
     success: true,
@@ -50,7 +50,7 @@ exports.getAllSyllabusTopics = catchAsyncErrors(async (req, res, next) => {
   const syllabusTopics = await SyllabusTopics.find();
 
   if (!syllabusTopics)
-    return next(new ErrorHandler("syllabusTopics not found", 404));
+    return next(new ErrorHandler('syllabusTopics not found', 404));
 
   res.status(200).json({
     success: true,
@@ -70,7 +70,7 @@ exports.getTopicsBySyllabus = catchAsyncErrors(async (req, res, next) => {
   });
 
   if (!topics) {
-    return next(new ErrorHandler("Topics for given syllabus not found", 404));
+    return next(new ErrorHandler('Topics for given syllabus not found', 404));
   }
 
   res.status(200).json({

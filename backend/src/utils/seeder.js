@@ -1,13 +1,13 @@
-const dotenv = require("dotenv");
-const connectDatabase = require("../../config/database");
+const dotenv = require('dotenv');
+const connectDatabase = require('../../config/database');
 
-dotenv.config({ path: "config/config.env" });
+dotenv.config({ path: 'config/config.env' });
 
-const SubjectYears = require("../modal/subjectYears");
-const SyllabusTopics = require("../modal/syllabusTopics");
+const SubjectYears = require('../modal/subjectYears');
+const SyllabusTopics = require('../modal/syllabusTopics');
 
-const subject_years = require("../data/subject_years.json");
-const syllabus_topics = require("../data/syllabus_topics.json");
+const subject_years = require('../data/subject_years.json');
+const syllabus_topics = require('../data/syllabus_topics.json');
 
 const seedSubjectYears = async () => {
   await SubjectYears.findOne()
@@ -16,7 +16,7 @@ const seedSubjectYears = async () => {
 
       await subjectYears
         .save()
-        .then(() => console.log("SubjectYears seeding success"))
+        .then(() => console.log('SubjectYears seeding success'))
         .catch((e) => console.log(e));
     })
     .catch((e) => console.log(e));
@@ -25,7 +25,7 @@ const seedSubjectYears = async () => {
 const seedSyllabusTopics = async () => {
   await SyllabusTopics.insertMany(syllabus_topics)
     .then(() => {
-      console.log("SyllabusTopics seeding success");
+      console.log('SyllabusTopics seeding success');
     })
     .catch((e) => console.log(e));
 };
