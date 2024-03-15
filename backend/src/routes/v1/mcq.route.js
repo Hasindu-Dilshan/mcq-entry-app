@@ -1,13 +1,16 @@
 const express = require('express');
-const roles = require('../../config/roles');
-const { isAuthenticatedUser, authorizeRoles } = require('../middleware/auth');
+const roles = require('../../../config/role');
+const {
+  isAuthenticatedUser,
+  authorizeRoles,
+} = require('../../middleware/auth');
 const {
   getAllSubjectYears,
   createSubjectYear,
   createSyllabusTopic,
   getTopicsBySyllabus,
   getAllSyllabusTopics,
-} = require('../controller/mcqController');
+} = require('../../controller/mcq.controller');
 
 const router = express.Router();
 
