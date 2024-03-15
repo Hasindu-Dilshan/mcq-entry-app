@@ -24,7 +24,6 @@ const connectDatabase = async () => {
       console.log(`MongoDB connected with HOST: ${con.connection.host}`);
       await initSubjectYearsCollection();
     })
-    .catch((e) => console.log(e));
 };
 
 module.exports = connectDatabase;
