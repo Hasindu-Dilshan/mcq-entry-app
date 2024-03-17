@@ -8,7 +8,7 @@ const BreadcrumbNavigation = () => {
   const [stateNames, setStateNames] = useState([]);
 
   useEffect(() => {
-    let pathnames = location.pathname.split("/").filter((x) => x);
+    const pathnames = location.pathname.split("/").filter((x) => x);
 
     setActiveItemStateName(pathnames.pop());
     setStateNames(pathnames);

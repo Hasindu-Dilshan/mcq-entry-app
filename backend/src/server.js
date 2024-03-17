@@ -12,12 +12,14 @@ process.on('uncaughtException', (err) => {
 // setup config file
 dotenv.config({ path: 'config/config.env' });
 
-// connect to database
+// connect database
 connectDatabase();
 
-const server = app.listen(process.env.PORT, () => {
+// setup server
+const port = process.env.PORT || 3000;
+const server = app.listen(port, () => {
   console.log(
-    `Server running on PORT: ${process.env.PORT} in ${process.env.NODE_ENV} mode.`
+    `Server running on PORT: ${port} in ${process.env.NODE_ENV} mode.`
   );
 });
 

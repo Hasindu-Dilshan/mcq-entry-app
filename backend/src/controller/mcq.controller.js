@@ -1,3 +1,4 @@
+const { StatusCodes } = require('http-status-codes');
 const SubjectYears = require('../modal/subjectYears');
 const SyllabusTopics = require('../modal/syllabusTopics');
 const ErrorHandler = require('../utils/ErrorHandler');
@@ -8,13 +9,18 @@ exports.createSubjectYear = catchAsyncErrors(async (req, res, next) => {
   const subjectYears = await SubjectYears.findOne();
 
   if (!subjectYears) {
-    return next(new ErrorHandler('subjectYears collection not found', 404));
+    return next(
+      new ErrorHandler(
+        'subjectYears collection not found',
+        StatusCodes.NOT_FOUND
+      )
+    );
   }
 
   subjectYears.subjectYears.push(req.body);
 
   await subjectYears.save().then((subjectYear) => {
-    res.status(201).json({
+    res.status(StatusCodes.CREATED).json({
       success: true,
       subjectYear,
     });
@@ -26,9 +32,14 @@ exports.getAllSubjectYears = catchAsyncErrors(async (req, res, next) => {
   const subjectYears = await SubjectYears.findOne();
 
   if (!subjectYears)
-    return next(new ErrorHandler('subjectYears collection not found', 404));
+    return next(
+      new ErrorHandler(
+        'subjectYears collection not found',
+        StatusCodes.NOT_FOUND
+      )
+    );
 
-  res.status(200).json({
+  res.status(StatusCodes.OK).json({
     success: true,
     subjectYears: subjectYears.subjectYears,
     title: subjectYears.title,
@@ -39,7 +50,7 @@ exports.getAllSubjectYears = catchAsyncErrors(async (req, res, next) => {
 exports.createSyllabusTopic = catchAsyncErrors(async (req, res, next) => {
   const syllabusTopics = await SyllabusTopics.create(req.body);
 
-  res.status(201).json({
+  res.status(StatusCodes.CREATED).json({
     success: true,
     syllabusTopics,
   });
@@ -50,9 +61,11 @@ exports.getAllSyllabusTopics = catchAsyncErrors(async (req, res, next) => {
   const syllabusTopics = await SyllabusTopics.find();
 
   if (!syllabusTopics)
-    return next(new ErrorHandler('syllabusTopics not found', 404));
+    return next(
+      new ErrorHandler('syllabusTopics not found', StatusCodes.NOT_FOUND)
+    );
 
-  res.status(200).json({
+  res.status(StatusCodes.OK).json({
     success: true,
     syllabusTopics,
   });
@@ -70,10 +83,15 @@ exports.getTopicsBySyllabus = catchAsyncErrors(async (req, res, next) => {
   });
 
   if (!topics) {
-    return next(new ErrorHandler('Topics for given syllabus not found', 404));
+    return next(
+      new ErrorHandler(
+        'Topics for given syllabus not found',
+        StatusCodes.NOT_FOUND
+      )
+    );
   }
 
-  res.status(200).json({
+  res.status(StatusCodes.OK).json({
     success: true,
     topics: topics.topics,
   });

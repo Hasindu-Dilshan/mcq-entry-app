@@ -1,3 +1,4 @@
+const { StatusCodes } = require('http-status-codes');
 const catchAsyncErrors = require('../middleware/catchAsyncErrors');
 const User = require('../modal/user');
 const ErrorHandler = require('../utils/ErrorHandler');
@@ -19,7 +20,7 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
   const token = user.getJwt();
 
   // send json web token as the response
-  res.status(201).json({
+  res.status(StatusCodes.CREATED).json({
     success: true,
     token,
   });
@@ -33,14 +34,16 @@ exports.login = catchAsyncErrors(async (req, res, next) => {
   const user = await User.findOne({ email: email }).select('+password');
 
   if (!user) {
-    return next(new ErrorHandler('Invalid email or password', 401));
+    return next(
+      new ErrorHandler('Invalid email or password', StatusCodes.UNAUTHORIZED)
+    );
   }
 
   // check password
   const isPasswordsMatched = await user.comparePasswords(password);
 
   if (!isPasswordsMatched) {
-    return next(new ErrorHandler('Invalid password', 401));
+    return next(new ErrorHandler('Invalid password', StatusCodes.UNAUTHORIZED));
   }
 
   const token = user.getJwt();
