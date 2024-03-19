@@ -12,7 +12,7 @@ const BreadcrumbNavigation = () => {
 
     setActiveItemStateName(pathnames.pop());
     setStateNames(pathnames);
-  }, [location]);
+  }, []);
 
   return (
     <div className="row mb-4">
