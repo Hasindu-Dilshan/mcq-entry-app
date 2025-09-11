@@ -23,6 +23,9 @@ function Login(props) {
   async function onSubmit(event) {
     event.preventDefault();
 
+    const email = emailInputRef.current.value;
+    const password = passwordInputRef.current.value;
+
     await login(email, password)
       .then((user) => {
         props.dispatchOnSubmit(user);
@@ -41,17 +44,6 @@ function Login(props) {
     }
   }, [props.auth?.email]);
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  function handleEmailFieldChange(email) {
-    setEmail(email);
-  }
-
-  function handlePasswordFieldChange(email) {
-    setPassword(email);
-  }
-
   return (
     <>
       {!props.auth.email && (
@@ -67,7 +59,6 @@ function Login(props) {
                 <div className="login-right">
                   <div className="login-right-wrap">
                     <h1>Login</h1>
-                    <p className="account-subtitle">Access to our dashboard</p>
                     <form onSubmit={onSubmit}>
                       <div className="form-group">
                         <label className="form-control-label">
@@ -75,9 +66,6 @@ function Login(props) {
                         </label>
                         <input
                           ref={emailInputRef}
-                          onKeyUp={(event) =>
-                            handleEmailFieldChange(event.target.value)
-                          }
                           type="email"
                           className="form-control"
                         />
@@ -87,9 +75,6 @@ function Login(props) {
                         <div className="pass-group">
                           <input
                             ref={passwordInputRef}
-                            onKeyUp={(event) =>
-                              handlePasswordFieldChange(event.target.value)
-                            }
                             type="password"
                             className="form-control pass-input"
                           />

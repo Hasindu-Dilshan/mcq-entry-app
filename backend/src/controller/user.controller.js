@@ -51,7 +51,10 @@ exports.login = catchAsyncErrors(async (req, res, next) => {
   // send json web token as the response
   res.status(200).json({
     success: true,
+    name: user.name,
     email,
+    role: user.role,
     token,
+    avatar: user.avatar,
   });
 });
