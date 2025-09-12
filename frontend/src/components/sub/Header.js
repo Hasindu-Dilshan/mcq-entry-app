@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import FeatherIcon from "feather-icons-react";
 import { LOGOUT } from "../../constants/actionTypes";
 import { connect } from "react-redux";
 
