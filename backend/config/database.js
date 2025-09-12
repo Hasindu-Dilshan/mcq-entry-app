@@ -19,7 +19,8 @@ const initSubjectYearsCollection = async () => {
 
 const connectDatabase = async () => {
   await mongoose
-    .connect(process.env.DB_LOCAL_URI)
+    // .connect(process.env.DB_LOCAL_URI)
+    .connect(process.env.DB_CLOUD_URI)
     .then(async (con) => {
       console.log(`MongoDB connected with HOST: ${con.connection.host}`);
       await initSubjectYearsCollection();

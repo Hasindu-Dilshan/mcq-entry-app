@@ -13,7 +13,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { fakeBackend } from "./helpers";
 
 // start fake backend
-fakeBackend();
+// fakeBackend();
 
 const root = createRoot(document.getElementById("root"));
 

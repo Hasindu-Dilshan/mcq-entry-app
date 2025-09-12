@@ -11,7 +11,7 @@ const defaultState = {
   appLoaded: false,
 };
 
-const common = (state = defaultState, action) => {
+const commonReducer = (state = defaultState, action) => {
   switch (action.type) {
     case APP_LOAD:
       return {
@@ -34,4 +34,4 @@ const common = (state = defaultState, action) => {
   }
 };
 
-export default common;
+export default commonReducer;

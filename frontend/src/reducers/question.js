@@ -7,7 +7,7 @@ const defaultState = {
   isSubmitting: false,
 };
 
-export default (state = defaultState, action) => {
+const questionReducer = (state = defaultState, action) => {
   switch (action.type) {
     case QUESTION_SUBMIT_START:
       return {
@@ -24,3 +24,5 @@ export default (state = defaultState, action) => {
       return state;
   }
 };
+
+export default questionReducer;

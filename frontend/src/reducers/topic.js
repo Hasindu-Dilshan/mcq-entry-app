@@ -18,7 +18,7 @@ const defaultState = {
   isFetchingTopics: false,
 };
 
-export default (state = defaultState, action) => {
+const topicReducer = (state = defaultState, action) => {
   switch (action.type) {
     case SYLLABUS_CHOOSE:
       return {
@@ -47,3 +47,5 @@ export default (state = defaultState, action) => {
       return state;
   }
 };
+
+export default topicReducer;

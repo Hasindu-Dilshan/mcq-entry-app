@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import FeatherIcon from "feather-icons-react";
 import { LOGOUT } from "../../constants/actionTypes";
 import { connect } from "react-redux";
 
@@ -13,7 +12,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const Header = ({ name, avatar, dispatchLogout }) => {
-  const avatarPath = `/assets/img/profiles/${avatar}`;
+  // const avatarPath = `/assets/img/profiles/${avatar.url}`;
 
   function handleLogout() {
     dispatchLogout();
@@ -104,7 +103,7 @@ const Header = ({ name, avatar, dispatchLogout }) => {
             data-toggle="dropdown"
           >
             <span className="user-img">
-              <img src={avatarPath} alt="" />
+              <img src={avatar?.url} alt="" />
               <span className="status online"></span>
             </span>
             <span>{name}</span>
